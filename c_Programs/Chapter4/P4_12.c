@@ -1,4 +1,19 @@
 /*P4.12 Program to evaluate some expressions*/
+/* Operator precedence: It dictates the order of evaluation of operators in an 
+ *                      expression.
+ * Associativity: It defines the order in which operators of the same precedence 
+ *                are evaluated in an expression. Associativity can be either 
+ *                from left to right or right to left.
+ * Associativity Right-left : ++ --
+ *                            + -
+ *                            ! ~
+ *                            (type)
+ *                            *
+ *                            &
+ *                            sizeof
+ *                            ?: and ( = ,+=, -=,*= ,/=,%=,&=,^=,|=,<<=,>>=)
+ */
+#include<stdio.h>
 int main(void)
 {
 	int a,b,c,d,e,f,g,h,k;
