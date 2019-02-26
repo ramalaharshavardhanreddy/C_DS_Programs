@@ -1,0 +1,1116 @@
+#if 0
+// Write a C program to swap even and odd bits in given number
+#include <stdio.h>
+
+int swapp_even_odd(int);
+
+int main(void)
+{
+    unsigned int num;
+    printf("Enter the Number to swap\n");
+    scanf("%d", &num);
+    printf("Resultant number:%d\n", swapp_even_odd(num));
+}
+
+int swapp_even_odd(int num){
+    unsigned int even_num, odd_num;
+    even_num = num & 0xAAAAAAAA; // Extracting only even bits
+    odd_num = num & 0x55555555; // Extracting only odd bits
+    
+    even_num >>= 1; // Right shifting all even numbers
+    odd_num <<=1; // left shifting all odd numbers
+    
+    return (even_num | odd_num);
+}
+
+#endif
+
+#if 0
+// Fibonacci series recursive function
+
+#include <stdio.h>
+
+int fib(int);
+
+int main(void)
+{
+    int i,n;
+    printf("Enter the elements\n");
+    scanf("%d", &n);
+    for(i=0; i<n; i++)
+        printf("%d\t", fib(i));
+    printf("\n");
+    return 0;
+}
+
+int fib(int a)
+{
+    if(a == 1 | a == 0)
+        return 1;
+    return (fib(a-1) + fib(a-2));
+}
+
+#endif
+
+
+#if 0
+// Programs on with out using main function and without using MACRO's
+#include <stdio.h> 
+#include <stdlib.h> 
+  
+// entry point function 
+int nomain();  
+
+void _start(){ 
+  
+    // calling entry point 
+    nomain();  
+    exit(0); 
+} 
+  
+int nomain() 
+{ 
+    puts("Geeksforgeeks"); 
+    return 0; 
+} 
+
+#endif
+
+#if 0
+// Program on swap a nibble bits
+
+#include <stdio.h>
+
+int main(void)
+{
+    unsigned int val, res, swap;
+    printf("Enter the data to swap nibble\n");
+    scanf("%d", &swap);    
+    res = ((swap & 0x0F) << 4 | (swap & 0xF0) >> 4);
+    printf("Reverse Number is:%u\n", res);
+    return 0;
+}
+
+#endif
+
+
+#if 0
+
+#include <stdio.h>
+
+unsigned int reverseBits(unsigned int num) 
+{ 
+    unsigned int  NO_OF_BITS = sizeof(num) * 8; 
+    unsigned int reverse_num = 0; 
+    int i; 
+    for (i = 0; i < NO_OF_BITS; i++) 
+    { 
+        if((num & (1 << i))) 
+           reverse_num |= 1 << ((NO_OF_BITS - 1) - i);   
+   } 
+    return reverse_num;
+} 
+
+int main() 
+{ 
+    unsigned int x = 0x00000004;  
+    printf("0x%x\n", reverseBits(x)); 
+    return 0;
+}
+
+#endif
+
+#if 0
+// Program to find whether number is powers of 2 or not
+
+#include<stdio.h> 
+#include<stdbool.h> 
+  
+/* Function to check if x is power of 2*/
+bool isPowerOfTwo(int n) 
+{ 
+  if (n == 0) 
+    return 0; 
+  while (n != 1) 
+  { 
+      if (n%2 != 0) 
+         return 0; 
+      n = n/2; 
+  } 
+  return 1; 
+} 
+  
+/*Driver program to test above function*/
+int main() 
+{ 
+  isPowerOfTwo(31)? printf("Yes\n"): printf("No\n"); 
+  isPowerOfTwo(64)? printf("Yes\n"): printf("No\n"); 
+  return 0; 
+} 
+
+#endif
+
+/*
+All power of two numbers have only one bit set. So count the no. of set bits and if you get 1 then number is a power of 2.
+*/
+
+#if 0
+// Sum of two bits can be obtained by performing XOR (^) of the two bits. Carry bit can be obtained by performing AND (&) of two bits, 
+
+#include <stdio.h>
+
+// C Program to add two numbers 
+// without using arithmetic operator 
+// Adding two numbers without using arithmentic operators
+
+int Add(int x, int y) 
+{ 
+    // Iterate till there is no carry   
+    while (y != 0) 
+    { 
+        // carry now contains common  
+        //set bits of x and y 
+        int carry = x & y;   
+    printf("Carry:%d\n", carry);
+  
+        // Sum of bits of x and y where at  
+        //least one of the bits is not set 
+        x = x ^ y;  
+  
+        // Carry is shifted by one so that adding 
+        // it to x gives the required sum 
+        y = carry << 1; 
+    } 
+    return x; 
+} 
+  
+int main() 
+{ 
+    printf("%d\n", Add(15, 32)); 
+    return 0; 
+} 
+
+#endif
+
+#if 0
+
+//Find the Number Occurring Odd Number of Times
+
+/* Solution : The Best Solution is to do bitwise XOR of all the elements. XOR of all elements gives us odd occurring element. Please note that XOR of two elements is 0 if both elements are same and XOR of a number x with 0 is x.
+
+*/
+
+#include <stdio.h>
+
+int odd_occuring_find(int *ptr, int size_arr);
+
+int main(void)
+{
+    int arr[] = {2, 3, 5, 4, 5, 2, 4, 3, 5, 2, 4, 4, 2};
+    int size_arr = sizeof(arr)/sizeof(arr[0]);
+    printf("Odd Occuring Number is:%d\n", odd_occuring_find(arr, size_arr));
+    
+}
+
+int odd_occuring_find(int *ptr, int size_arr)
+{
+    int res=0;
+    for(int i=0; i<size_arr; i++)
+        res = res ^ ptr[i];
+    return res;    
+}
+
+#endif
+
+
+#if 0
+
+/*
+
+Count number of bits to be flipped to convert A into B. 
+
+Given two numbers ‘a’ and b’. Write a program to count number of bits needed to be flipped to convert ‘a’ to ‘b’.
+
+Example :
+
+Input : a = 10, b = 20
+Output : 4
+Binary representation of a is 00001010
+Binary representation of b is 00010100
+We need to flip highlighted four bits in a
+to make it b.
+
+Input : a = 7, b = 10
+Output : 3
+Binary representation of a is 00000111
+Binary representation of b is 00001010
+We need to flip highlighted three bits in a
+to make it b.
+
+
+*/
+#include <stdio.h> 
+  
+// Function that count set bits 
+int countSetBits(int n) 
+{ 
+    int count = 0; 
+    while (n) 
+    { 
+        count += n & 1; 
+        n >>= 1; 
+    } 
+    return count; 
+} 
+  
+// Function that return count of 
+// flipped number 
+int FlippedCount(int a, int b) 
+{ 
+    // Return count of set bits in 
+    // a XOR b 
+    return countSetBits(a^b); 
+} 
+  
+// Driver code 
+int main() 
+{ 
+    int a = 10; 
+    int b = 20; 
+    printf("%d\n", FlippedCount(a, b));
+    return 0; 
+} 
+
+#endif
+
+#if 0
+
+// Find the Greatest common diviser for two numbers
+#include <stdio.h>
+int GCD(int, int);
+
+int main(void)
+{
+    int  a, b;
+    printf("Enter the two Numbers\n");
+    scanf("%d %d", &a, &b);
+    printf("The GCD of two Numbers is:%d\n", GCD(a,b));
+    return 0;
+}
+
+int GCD(int a, int b)
+{
+    if(b==0)
+    return a;
+    GCD(b, a%b);
+}
+
+#endif
+
+#if 0
+
+#include <stdio.h>
+
+void foo(int a)
+{
+    static int var;
+    printf("%d\t", var);
+    var=a;
+}
+
+int main(void)
+{
+    foo(1);
+    foo(2);
+    foo(3);
+    printf("\n");
+    return 0;
+}
+#endif
+
+#if 0
+//How to modify a const variable in C?
+#include<stdio.h> 
+#include<stdlib.h> 
+int main() 
+{ 
+    const int var = 10; 
+  
+    int *ptr = &var; 
+    *ptr = 12; 
+  
+    printf("var = %d\n", var); 
+  
+    return 0; 
+} 
+
+#endif
+
+#if 0
+
+// Check whether product of ‘n’ numbers is even or odd
+
+/*
+    logic:
+        1. Product of two even numbers is is even.
+        2. Product of two odd numbers is odd.
+        3. Product of one even and one odd number is even.
+    logic for code:
+            Check any even numbers is present in the given series of array, if present then product of all numbers is even otherwise odd.
+*/
+
+#include <stdio.h>
+
+int product_array(int *ptr, size_t size);
+
+int main(void)
+{
+        int arr[4]={1,3,5,8};
+        int size = sizeof(arr)/sizeof(arr[0]);
+        if(product_array(arr,size))
+            printf("The Product of all numbers is Even\n");
+        else 
+            printf("The Product of all numbers is odd\n");
+}
+
+int product_array(int *ptr, size_t size)
+{
+    int i;
+    printf("%d\n", size);
+    for(i=0; i<size; i++)
+    {
+        if((ptr[i]&1) == 0)
+            return 1;
+        else
+            return 0;
+    }
+}
+
+#endif
+
+#if 0
+// Program for Sum the digits of a given number
+
+#include <stdio.h>
+
+int sum_of_numbers(int num);
+
+int main(void)
+{
+    int num = 12345;
+    printf("The sum of Numbers is:%d\n", sum_of_numbers(num));
+    return 0;
+}
+
+int sum_of_numbers(int num)
+{
+    int rem, sum=0;
+    while(num)
+    {
+        rem = num%10;
+        sum = sum + rem;
+        num = num/10;
+    }
+    return sum;
+}
+// single line solution : for (sum = 0; n > 0; sum += n % 10, n /= 10);
+#endif
+
+LINUX INTERVIEW QUESTIONS:
+
+
+
+ 1. What are the Linux security modules and why do we need it in Linux?
+
+Linux security module is a framework which allow for security extensions to be plugged in to the kernel, has been used to implement mandatory access control in Linux
+We have different security modules in linux
+Selinux
+AppArmor
+Smack  (Label based MAC)
+Tomoyo (Path based MAC)
+
+2. Suppose we have some process running in the user space, we can get its memory informations some interfaces of proc filesystem. Is there any other ways to get process memory informations apart from proc interfaces?
+
+We can get the memory informations of any particular process running in linux kernel using memory descriptor of that process
+mm_struct (memory descriptor) will be a part of process task_structure(process descriptor). It will have all memory informations with respect to that particular process
+
+3. How user space programs communicates with kernel space? How static and dynamic linking with libc library happens while compiling the normal C program?
+
+4. what is interrupt service routine(ISR)? Name some of the constaints needs to be considered while writing the interrupt handlers?
+An ISR (also called an interrupt handler) is a software process invoked by an interrupt request from a hardware device. It handles the request and sends it to the CPU, interrupting the active process. When the ISR is complete, the process is resumed.
+We need to consider below constaints while writing the ISR
+1. Short CPU hold time
+2. It should not sleep
+3. We should use proper locking mechanism inside interrupt handler
+
+
+5. Bottom half mechanisms in linux? How prioriry handling mechanism has incorporated with those mechanisms
+We have different mechanisms for implementing the bottom half mechanisms in linux
+a. Softirqs
+b. Tasklets
+c. Workqueues
+
+Different softirqs in priority order
+
+enum
+{
+        HI_SOFTIRQ=0,    /* High Priority */
+        TIMER_SOFTIRQ,
+        NET_TX_SOFTIRQ,
+        NET_RX_SOFTIRQ,
+        BLOCK_SOFTIRQ,
+        BLOCK_IOPOLL_SOFTIRQ,
+        TASKLET_SOFTIRQ,
+        SCHED_SOFTIRQ,
+        HRTIMER_SOFTIRQ,
+        RCU_SOFTIRQ,    /* Preferable RCU should always be the last softirq */
+
+        NR_SOFTIRQS
+};
+
+Tasklets are a bottom-half mechanism built on top of softirqs i.e. tasklets are represented by two softirqs: HI_SOFTIRQ and TASKLET_SOFTIRQ. Tasklets are actually run from a softirq. The only real difference in these types is that the HI_SOFTIRQ based tasklets run prior to the TASKLET_SOFTIRQ tasklets. So, tasklet_schedule() basically calls raise_softirq(TASKLET_SOFTIRQ)
+
+
+6. User space memory mapping
+
+
+ 
+
+
+7. function prologue and epilogue
+
+Function prologue typically does the following actions if the architecture has a base pointer (also known as frame pointer) and a stack pointer:
+
+Pushes current base pointer onto the stack, so it can be restored later.
+
+Assigns the value of stack pointer (which is pointed to the saved base pointer) to base pointer so that a new stack frame will be created on top of the old stack frame.
+
+Moves the stack pointer further by decreasing or increasing its value, depending on whether the stack grows down or up. On x86, the stack pointer is decreased to make room for the function's local variables.
+
+Function epilogue reverses the actions of the function prologue and returns control to the calling function. It typically does the following actions (this procedure may differ from one architecture to another):
+
+Drop the stack pointer to the current base pointer, so room reserved in the prologue for local variables is freed.
+
+Pops the base pointer off the stack, so it is restored to its value before the prologue.
+
+Returns to the calling function, by popping the previous frame's program counter off the stack and jumping to it.
+
+
+
+Difference between General Purpose OS(GPOS) and Real Time Operating Systems(RTOS)?
+Volatile keyword in C
+Can we use const with volatile in C?
+Top Half and Bottom Half Mechanisms?
+What are the differences between semaphore and mutex?
+Can we use mutexes inside the interrupt handler?
+Multithreading debugging using gdb.
+Static code analysis tools and tools for memory leak.
+What are the synchronization mechanisms in linux?
+Message passing techniques in linux.
+Multiprocessing and multithreading.
+
+1. Set the bit in memory location" for example if at address 0xffeh2f the 21st bit is 0 then set the 21st bit
+
+
+
+3. Difference between process and thread?
+
+ 
+
+Process is an executable entity in linux.A process has a virtual address space, executable code, open handles to system objects, a security context, a unique process identifier, environment variables, a priority class, minimum and maximum working set sizes, and at least one thread of execution. Each process is started with a single thread, often called the primary thread, but can create additional threads from any of its threads.
+
+ 
+
+Thread is a lightweight process (entity within a process) that can be scheduled for execution. All threads of a process share its virtual address space and system resources. In addition, each thread maintains exception handlers, a scheduling priority, thread local storage, a unique thread identifier, and a set of structures the system will use to save the thread context until it is scheduled. The thread context includes the thread's set of machine registers, the kernel stack, a thread environment block, and a user stack in the address space of the thread's process
+
+ 
+
+ 
+
+5. What is Spinlock and Tasklet in Kernel programming
+
+ 
+
+Spinlock is a synchronization premitive.spinlock is a lock which causes a thread trying to acquire it to simply wait in a loop ("spin") while repeatedly checking if the lock is available. Since the thread remains active but is not performing a useful task, the use of such a lock is a kind of busy waiting. Once acquired, spinlocks will usually be held until they are explicitly released, although in some implementations they may be automatically released if the thread being waited on (that which holds the lock) blocks, or "goes to sleep"
+
+ 
+
+ 
+
+where as Tasklet is a one of the mechanism for implementing the bottom half interrupt handling(deffering mechanism)
+
+ 
+
+Tasklets are a deferral scheme that you can schedule for a registered function to run later. The top half (the interrupt handler) performs a small amount of work, and then schedules the tasklet to execute later at the bottom half. Tasklets are represented by the tasklet_struct structure , which includes the necessary data to manage and maintain the tasklet
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+6. Interrupt handling, top half and bottom half?
+
+ 
+
+Interrupt is a hardware signal which interrupts the normal execution flow of the processor, There will be a atleast one interrupt handler registered with each interrupts in linux. Whenever process recieves the interrupt from a particular source, it will pause the execution of currently running process and excecutes the interrupt handler registered with that particular interrupt.
+
+ 
+
+In linux, interrupt handling process is divided into two halves
+
+Top half  and bottom half
+
+ 
+
+Top half is meant for critical tasks and bottom half is meant for non critical tasks . In the typical scenario, the top half saves device data to a device-specific buffer, schedules its bottom half, and exits: this is very fast. The bottom half then performs whatever other work is required, such as awakening processes, starting up another I/O operation, and so on. This setup permits the top half to service a new interrupt while the bottom half is still working.
+
+ 
+
+The Linux kernel has two different mechanisms that may be used to implement bottom-half processing
+
+Tasklets and Workqueues
+
+ 
+
+ 
+
+7.What if kernel memory stack gets overflow?
+
+The Linux kernel stack has a fixed size. There is no mechanism to prevent the kernel from overflowing the stack.
+
+An overflow in kernel stack is a common bug in the Linux operating system. These bugs are difficult to detect because they are created as a side effect of the code and not as an inherent mistake in the algorithm implementation.
+
+ 
+
+ 
+
+8. Kernel Synchronization
+
+In a shared memory environment, developer must ensure that shared resources are protected from concurrent process. The kernel is no exception. Shared resources require protection from concurrent              access because if multiple threads of execution access and manipulate the data at the same time, the threads may overwrite each other's changes or access data while it is in an inconsistent state. Before going through the kernel synchronization premitives, we must have a knowledge on what is critical section in linux kernel?
+
+ 
+
+Followings are the different synchronization mechanism provided by linux kernel
+
+1. Atomic operations
+
+2. Spinlocks (reader / writer spinlocks)
+
+3. Mutex
+
+4. Semaphores (reader /writer semaphores) 
+5. Completions
+
+ 
+
+ 
+
+9. Device tree in linux kernel?
+
+ 
+
+The core reason for the existence of Device Tree in Linux is to provide a way to describe non-discoverable hardware. This information was previously hard coded in source code.
+
+Device Tree data can be represented in several different formats. It is derived from the device tree format used by Open Firmware to encapsulate platform information. The device tree data is typically created and maintained in a human readable format in .dts source files and .dtsi source include files.
+
+The device tree source is compiled into a binary format contained in a .dtb blob file. The format of the data in the .dtb blob file is commonly referred to as a Flattened Device Tree (FDT). The Linux operating system uses the device tree data to find and register the devices in the system.
+
+ 
+
+The Flattened Device Tree (FDT) is a data structure. Nothing more.
+
+It describes a machine hardware configuration. It is derived from the device tree format used by Open Firmware. The format is expressive and able to describe most board design aspects including:
+
+     the number and type of CPUs
+
+     base addresses and size of RAM
+
+     busses and bridges
+
+     peripheral device connections
+
+     interrupt controllers and IRQ line connections
+
+     pin multiplexing
+
+#include "pxa910.dtsi"
+
+/ {
+
+    compatible = "mrvl,pxa910-dkb", "mrvl,pxa910";
+
+    chosen {
+
+        bootargs = "<boot args here>";
+
+    };
+
+    memory {
+
+        reg = <0x00000000 0x10000000>;
+
+    };
+
+    soc {
+
+        apb@d4000000 {        
+
+ 
+
+            uart1: uart@d4017000 {
+
+            status = "okay";
+
+            };
+
+            twsi1: i2c@d4011000 {
+
+                #address-cells = <1>
+
+                #size-cells = <0>
+
+                status = "okay";
+
+                pmic: 88pm860x@34 {
+
+                    compatible = "marvell,88pm860x";
+
+                    reg = <0x34>;
+
+                    interrupts = <4>;
+
+                    interrupt-parent = <&intc>;
+
+                    interrupt-controller;
+
+                    #interrupt-cells = <1>;
+
+                                                                     }
+
+                                                                   }
+
+               }
+
+ 
+
+10. handling OOPS and Kernel_panic messages
+
+http://opensourceforu.com/2011/01/understanding-a-kernel-oops/
+
+https://sanjeevsharmaengg.wordpress.com/2014/06/23/debugging-analysis-of-kernel-panics-and-kernel-oopses-using-system-map/
+
+
+
+WAP to swap two integer numbers without using third variable.
+
+X= x ^ y
+y= x ^ y
+
+x = x^ y
+
+
+
+WAP to change Uppercase letters to Lowercase letter and viceversa in a given string.
+
+uppercase to lowercase
+
+for(i=0;i<=strlen(str);i++)
+
+       {
+            if(str[i]>=65 && str[i]<=97)
+            {
+                str[i]=str[i]+32;
+            }
+      }
+ASCII value of 'A' is 65 while 'a' is 97. Difference between them is 97 – 65 = 32
+
+So if we will add 32 in the ASCII value of 'A' then it will be 'a' and if will we subtract 32 in ASCII value of 'a' it will be 'A'. It is true for all alphabets
+
+or we can use toupper and tolower library functions
+
+
+WAP to check whether a number is divisible by 4 without using %
+
+
+Write any recursion function.
+
+unsigned long long int factorial(unsigned int i) {
+
+                if(i <= 1) {
+               return 1;
+               }
+                return i * factorial(i - 1);
+    }
+
+    int  main() {
+                 int i = 12;
+             printf("Factorial of %d is %d\n", i, factorial(i));
+                 return 0;
+        }
+
+
+What happens to the following code while executing
+
+int sum(int n){
+
+sum(n-1);
+
+}
+
+It will be resulting in a stack overflow because above recursive function doesn't have termination condition
+
+
+How much will be increased by incrementing integer pointer and function pointer.
+
+Depnding on the Architecture you are working on. If you working on 32 bit architecture, incrementing interger pointer will increment the pointer variable by 4 bytes. If you working on 64 bit architecture, incrementing interger pointer will increment the point variable by 8 bytes.
+
+Incremented value of function pointer depending on what type of function pointer we are
+
+incrementing
+
+
+Write function prototype for a function pointer which will return int, and takes char pointer and int pointer as input.
+
+int (* func_pointer)(char * , int *)
+
+
+What happens to the following code while executing
+
+struct {
+
+int x;
+
+char c;
+
+float f;
+
+}ST;
+
+main(){
+
+ST *tmp = NULL;
+
+tmp->x; // will result in a NULL pointer dereferencing
+
+&(tmp->c);
+
+}
+
+What all are stored in stack.
+
+Stack, where automatic variables are stored, along with information that is saved each time a function is called. Each time a function is called, the address of where to return to and certain information about the caller’s environment, such as some of the machine registers, are saved on the stack. The newly called function then allocates room on the stack for its automatic and temporary variables. This is how recursive functions in C can work. Each time a recursive function calls itself, a new stack frame is used, so one set of variables doesn’t interfere with the variables from another instance of the function
+
+
+Storage classes.Who intializes the static variables with intial value 0.
+
+Storage class specifiers in C 
+auto
+
+register
+
+extern
+
+static
+
+typedef
+
+
+It will be intialized to zero. The initialization is performed only once at the time of memory allocation by the compiler
+
+
+UserSpace memory mapping.
+
+ 
+Synchronization primitives
+
+I have already included the answer for this question in my previous doc shared
+
+
+How to distinguish whether to use semaphore or mutex for a given use case.
+
+Use a semaphore when you (thread) want to sleep till some other thread tells you to wake up. Semaphore 'down' happens in one thread (producer) and semaphore 'up' (for same semaphore) happens in another thread (consumer) e.g.: In producer-consumer problem, producer wants to sleep till at least one buffer slot is empty - only the consumer thread can tell when a buffer slot is empty.
+
+
+Use a mutex when you (thread) want to execute code that should not be executed by any other thread at the same time. Mutex 'down' happens in one thread and mutex 'up' must happen in the same thread later on
+
+
+#include <stdio.h>
+
+
+int factorial(int);
+
+
+int main()
+
+{
+
+int num;
+
+int result;
+
+
+printf("Enter a number to find it's Factorial: ");
+
+scanf("%d", &num);
+
+if (num < 0)
+
+{
+
+printf("Factorial of negative number not possible\n");
+
+}
+
+else
+
+{
+
+result = factorial(num);
+
+printf("The Factorial of %d is %d.\n", num, result);
+
+}
+
+return 0;
+
+}
+
+int factorial(int num)
+
+{
+
+if (num == 0 || num == 1)
+
+{
+
+return 1;
+
+}
+
+else
+
+{
+
+return(num * factorial(num - 1));
+
+}
+
+}
+
+
+
+how much size will allocate in stack if above factorial function called first time.
+
+
+In above factorial function if i remove if else conditions what will happen.
+
+
+In interrupt handler if we increase the code size what will happen.
+
+
+in a process suppose three threads are running, if one thread is crashed the remaing two threads won't have any dependency on crashed thread then what will happen.
+
+
+Synchronization mechanisum questions on mutex,semaphore.
+
+
+int *(*fp) (char *,int); if i increase this function pointer how much size it will increase.
+
+
+if we increase the char pointer and int pointer then how much size will increased.
+
+
+how do you debugg if any crash happens in user space or kernel space.
+
+
+how many cpu registers are their in your project board architecture.
+
+
+Given an 32 bit integer write a code to set the 21st bit of an integer using pointer given an void pointer as a function argument to set the 21st bit.
+
+
+
+1. Regarding ptrs, 
+
+if int *ptr is provided, find the 5th byte using it.
+
+int ptr is provided, set 4th byte's 5th bit. 
+
+2. bootsequence
+
+3. Regarding dynamic library linking. 
+
+
+
+
+
+
+
+1. Write a funcion in c that takes 2 args, 1 int * ptr and 1 offset n and sets nth byte in ptr, will this code work on both little and big endian machines
+
+2. Write a funcion in c that takes 3 args, 1 int * ptr and 1 offset n and 1 bit num m and sets mth bit in nth byte in ptr
+
+3. how to use memcpy to copy 1 array to other in such a way that target array has reversed data as compared to source array
+
+4. Write a program to reverse an arry elements
+
+5. What is DMA and what all to take care to avoid problems of having old data in cache and memory
+
+6. how to achieve synchronisation between 2 processes
+
+7. how to achieve synchronisation between 1 process and ISR
+
+8. How to access same kernel memory from 2 user space process
+
+9. How to write SPI driver in user space
+
+10. how to communicate between user and kernel space
+
+11. previous projects
+
+12. how to map physical address to virtual address in Linux and vice versa
+
+13. where are formal argumens of a function stored
+
+14. can we store some variable in registers
+
+15. if we do malloc, where is this data stored
+
+16. Linux device driver overview
+
+
+
+1. what is system call number and its significance?
+
+2. who loads dynamic library?
+
+3. write a c function to generate 10 mSec delay without using any C-libs,
+
+if CPU clock is 1GHz, no cache, or instruction pipe line.
+
+and 1 clock cycle is required to execute 1 instruction.
+
+4. How many lines will be there in I2C? How a particular device is identified while multiple slave devices are connected. 
+
+5. "echo "Hello world" > out.txt" how internally this command is executed. particularity interested redirection to file part.
+
+6. disadvantages of using too many "volatile" variables in code?  
+
+
+Different between process and thread.
+
+why do we use threads.
+
+advantages and disadvantages of using threads over a process.
+
+What is critical section
+
+Explain what will happen if a scheduler preempted the multi-threaded program.
+
+Why do we set thread attributes instead of default attributes at the time of creating thread.
+
+In what situations we get deadlock.
+
+Is it possible to face deadlock with one process.
+
+What is fork and vfork.
+
+how do you decide how many threads you have to create for one program.
+
+How will you fix if you encountered a synchronization problem in a multi-threaded program.
+
+Is it really benefit that if we use multiple threads rather than a single thread.
+
+when the context switching happens.
+
+difference between a mutex and a semaphore
+
+In single process multiple threads are there, What it can share and not share that threads
+
+
+ different types of Locking mechanism in kernel and how it works.
+
+
+Interrupts and which locking mechanism we can use and why?
+
+
+What are the rules to use spinlocks?
+
+
+
+1) Char array and where it is stored in memory 
+   char a[]="hello";
+   char *p = "world";
+   can *p be changed?
+   a[3]= "world"; print a; whats oputput?
+2) declare pointer to array, array of pointers
+   size of pointer p,*p in each case
+3) Declare Function Pointer taking argument int and returning int
+   declare function returning function pointer 
+4) what is volatile variable, where you have used it.
+5) write a program to detect loop in a linked list
+6) what is Little Endian/Big Eendian , program to detect if system is LE/BE
+7) program to set all 4 power bits (4^0,4^1,4^2, i.e 1st,3rd,5th bits ...) in a integer.
+8) write a program to print all nodes between two leaf nodes in a tree (root node is not given)
+
+OS
+
+1) what is mutex, semaphore, spin lock
+2) race condition example
+3) write a program to print upto 100 all the even number using thread p1, odd number using thread p2.
+4) simulate deadlock situation using two locks and two threads, how to avoid deadlock in that case.
+
+
+1. How to allocate memory in User Space.
+2. malloc memory allocation is contiguous or not?
+3. How physical memory and virtual memory mapping is done?
+4. Write a c code to find factorial of number.
+5. Write a c code to do XOR operation without using XOR operator.
+6. Write a c code to reverse bit stream.
+    Input: 0100 1010
+    Expected output: 0101 0010
+
+
+
+What are ipc mechanisms, explain pipes ?
+
+On C:
+
+struct abc {
+int a =1;
+int *p;
+
+char c;
+}a, b;
+
+What is the size of above structure ? Who will decide the size ? Does it depend on 64/32 bit machine ? What will be the struct abc size on 64 bit and 32 bit machines ?
+How do you copy members of a to b ?
+What is deep copy and shallow copy ?
+How do you allocate memory to pointer p inside the struct ?
+How do you allocate memory to above structure statically and dynamically ?
+
+How do you copy data pointed by a.p to b.p ?
+
+
+char *ch = "something";
+In the above instruction where does the char pointer gets stored and where does that string gets stored ?
+Can I reallocate the char pointer with some other string like this ch = "name"?
+What exactly happens when I reallocate the char pointer like this ch = "name" ?
+In the above case how do you access each charecter using pointer ch ?
+Can you modify any one of the charecter by ch[ ]? if yes how? if no why ?
+
+
