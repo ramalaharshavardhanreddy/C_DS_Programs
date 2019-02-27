@@ -151,11 +151,13 @@ int main()
 #endif
 
 /*
-All power of two numbers have only one bit set. So count the no. of set bits and if you get 1 then number is a power of 2.
+All power of two numbers have only one bit set. So count the no. of set bits and if you get 1 then 
+number is a power of 2.
 */
 
 #if 0
-// Sum of two bits can be obtained by performing XOR (^) of the two bits. Carry bit can be obtained by performing AND (&) of two bits, 
+/* Sum of two bits can be obtained by performing XOR (^) of the two bits. Carry bit can be obtained 
+by performing AND (&) of two bits, */
 
 #include <stdio.h>
 
@@ -196,7 +198,9 @@ int main()
 
 //Find the Number Occurring Odd Number of Times
 
-/* Solution : The Best Solution is to do bitwise XOR of all the elements. XOR of all elements gives us odd occurring element. Please note that XOR of two elements is 0 if both elements are same and XOR of a number x with 0 is x.
+/* Solution : The Best Solution is to do bitwise XOR of all the elements. XOR of all elements gives
+ us odd occurring element. Please note that XOR of two elements is 0 if both elements are same and 
+ XOR of a number x with 0 is x.
 
 */
 
@@ -229,7 +233,8 @@ int odd_occuring_find(int *ptr, int size_arr)
 
 Count number of bits to be flipped to convert A into B. 
 
-Given two numbers ‘a’ and b’. Write a program to count number of bits needed to be flipped to convert ‘a’ to ‘b’.
+Given two numbers ‘a’ and b’. Write a program to count number of bits needed to be flipped to 
+convert ‘a’ to ‘b’.
 
 Example :
 
@@ -356,7 +361,8 @@ int main()
         2. Product of two odd numbers is odd.
         3. Product of one even and one odd number is even.
     logic for code:
-            Check any even numbers is present in the given series of array, if present then product of all numbers is even otherwise odd.
+            Check any even numbers is present in the given series of array, if present then product
+             of all numbers is even otherwise odd.
 */
 
 #include <stdio.h>
@@ -422,22 +428,33 @@ LINUX INTERVIEW QUESTIONS:
 
  1. What are the Linux security modules and why do we need it in Linux?
 
-Linux security module is a framework which allow for security extensions to be plugged in to the kernel, has been used to implement mandatory access control in Linux
+Linux security module is a framework which allow for security extensions to be plugged in to the 
+kernel, has been used to implement mandatory access control in Linux
 We have different security modules in linux
 Selinux
 AppArmor
 Smack  (Label based MAC)
 Tomoyo (Path based MAC)
 
-2. Suppose we have some process running in the user space, we can get its memory informations some interfaces of proc filesystem. Is there any other ways to get process memory informations apart from proc interfaces?
+2. Suppose we have some process running in the user space, we can get its memory informations some 
+interfaces of proc filesystem. Is there any other ways to get process memory informations apart 
+from proc interfaces?
 
-We can get the memory informations of any particular process running in linux kernel using memory descriptor of that process
-mm_struct (memory descriptor) will be a part of process task_structure(process descriptor). It will have all memory informations with respect to that particular process
+We can get the memory informations of any particular process running in linux kernel using memory 
+descriptor of that process
+mm_struct (memory descriptor) will be a part of process task_structure(process descriptor). It will 
+have all memory informations with respect to that particular process
 
-3. How user space programs communicates with kernel space? How static and dynamic linking with libc library happens while compiling the normal C program?
+3. How user space programs communicates with kernel space? How static and dynamic linking with libc 
+library happens while compiling the normal C program?
 
-4. what is interrupt service routine(ISR)? Name some of the constaints needs to be considered while writing the interrupt handlers?
-An ISR (also called an interrupt handler) is a software process invoked by an interrupt request from a hardware device. It handles the request and sends it to the CPU, interrupting the active process. When the ISR is complete, the process is resumed.
+4. what is interrupt service routine(ISR)? Name some of the constaints needs to be considered while 
+writing the interrupt handlers?
+
+An ISR (also called an interrupt handler) is a software process invoked by an interrupt request from 
+a hardware device. It handles the request and sends it to the CPU, interrupting the active process. 
+When the ISR is complete, the process is resumed.
+
 We need to consider below constaints while writing the ISR
 1. Short CPU hold time
 2. It should not sleep
@@ -468,7 +485,10 @@ enum
         NR_SOFTIRQS
 };
 
-Tasklets are a bottom-half mechanism built on top of softirqs i.e. tasklets are represented by two softirqs: HI_SOFTIRQ and TASKLET_SOFTIRQ. Tasklets are actually run from a softirq. The only real difference in these types is that the HI_SOFTIRQ based tasklets run prior to the TASKLET_SOFTIRQ tasklets. So, tasklet_schedule() basically calls raise_softirq(TASKLET_SOFTIRQ)
+Tasklets are a bottom-half mechanism built on top of softirqs i.e. tasklets are represented by two 
+softirqs: HI_SOFTIRQ and TASKLET_SOFTIRQ. Tasklets are actually run from a softirq. The only real 
+difference in these types is that the HI_SOFTIRQ based tasklets run prior to the TASKLET_SOFTIRQ 
+tasklets. So, tasklet_schedule() basically calls raise_softirq(TASKLET_SOFTIRQ)
 
 
 6. User space memory mapping
@@ -479,15 +499,19 @@ Tasklets are a bottom-half mechanism built on top of softirqs i.e. tasklets are 
 
 7. function prologue and epilogue
 
-Function prologue typically does the following actions if the architecture has a base pointer (also known as frame pointer) and a stack pointer:
+Function prologue typically does the following actions if the architecture has a base pointer 
+(also known as frame pointer) and a stack pointer:
 
 Pushes current base pointer onto the stack, so it can be restored later.
 
-Assigns the value of stack pointer (which is pointed to the saved base pointer) to base pointer so that a new stack frame will be created on top of the old stack frame.
+Assigns the value of stack pointer (which is pointed to the saved base pointer) to base pointer 
+so that a new stack frame will be created on top of the old stack frame.
 
-Moves the stack pointer further by decreasing or increasing its value, depending on whether the stack grows down or up. On x86, the stack pointer is decreased to make room for the function's local variables.
+Moves the stack pointer further by decreasing or increasing its value, depending on whether the 
+stack grows down or up. On x86, the stack pointer is decreased to make room for the function's local variables.
 
-Function epilogue reverses the actions of the function prologue and returns control to the calling function. It typically does the following actions (this procedure may differ from one architecture to another):
+Function epilogue reverses the actions of the function prologue and returns control to the calling 
+function. It typically does the following actions (this procedure may differ from one architecture to another):
 
 Drop the stack pointer to the current base pointer, so room reserved in the prologue for local variables is freed.
 
@@ -517,11 +541,20 @@ Multiprocessing and multithreading.
 
  
 
-Process is an executable entity in linux.A process has a virtual address space, executable code, open handles to system objects, a security context, a unique process identifier, environment variables, a priority class, minimum and maximum working set sizes, and at least one thread of execution. Each process is started with a single thread, often called the primary thread, but can create additional threads from any of its threads.
+Process is an executable entity in linux.A process has a virtual address space, executable code, open 
+handles to system objects, a security context, a unique process identifier, environment variables, a 
+priority class, minimum and maximum working set sizes, and at least one thread of execution. Each process 
+is started with a single thread, often called the primary thread, but can create additional threads from 
+any of its threads.
 
  
 
-Thread is a lightweight process (entity within a process) that can be scheduled for execution. All threads of a process share its virtual address space and system resources. In addition, each thread maintains exception handlers, a scheduling priority, thread local storage, a unique thread identifier, and a set of structures the system will use to save the thread context until it is scheduled. The thread context includes the thread's set of machine registers, the kernel stack, a thread environment block, and a user stack in the address space of the thread's process
+Thread is a lightweight process (entity within a process) that can be scheduled for execution. All threads 
+of a process share its virtual address space and system resources. In addition, each thread maintains 
+exception handlers, a scheduling priority, thread local storage, a unique thread identifier, and a set of 
+structures the system will use to save the thread context until it is scheduled. The thread context includes 
+the thread's set of machine registers, the kernel stack, a thread environment block, and a user stack in the 
+address space of the thread's process
 
  
 
@@ -531,7 +564,11 @@ Thread is a lightweight process (entity within a process) that can be scheduled 
 
  
 
-Spinlock is a synchronization premitive.spinlock is a lock which causes a thread trying to acquire it to simply wait in a loop ("spin") while repeatedly checking if the lock is available. Since the thread remains active but is not performing a useful task, the use of such a lock is a kind of busy waiting. Once acquired, spinlocks will usually be held until they are explicitly released, although in some implementations they may be automatically released if the thread being waited on (that which holds the lock) blocks, or "goes to sleep"
+Spinlock is a synchronization premitive.spinlock is a lock which causes a thread trying to acquire it to 
+simply wait in a loop ("spin") while repeatedly checking if the lock is available. Since the thread remains 
+active but is not performing a useful task, the use of such a lock is a kind of busy waiting. Once acquired, 
+spinlocks will usually be held until they are explicitly released, although in some implementations they may 
+be automatically released if the thread being waited on (that which holds the lock) blocks, or "goes to sleep"
 
  
 
@@ -541,7 +578,10 @@ where as Tasklet is a one of the mechanism for implementing the bottom half inte
 
  
 
-Tasklets are a deferral scheme that you can schedule for a registered function to run later. The top half (the interrupt handler) performs a small amount of work, and then schedules the tasklet to execute later at the bottom half. Tasklets are represented by the tasklet_struct structure , which includes the necessary data to manage and maintain the tasklet
+Tasklets are a deferral scheme that you can schedule for a registered function to run later. The top half 
+(the interrupt handler) performs a small amount of work, and then schedules the tasklet to execute later at 
+the bottom half. Tasklets are represented by the tasklet_struct structure , which includes the necessary data 
+to manage and maintain the tasklet
 
  
 
@@ -566,7 +606,10 @@ Tasklets are a deferral scheme that you can schedule for a registered function t
 
  
 
-Interrupt is a hardware signal which interrupts the normal execution flow of the processor, There will be a atleast one interrupt handler registered with each interrupts in linux. Whenever process recieves the interrupt from a particular source, it will pause the execution of currently running process and excecutes the interrupt handler registered with that particular interrupt.
+Interrupt is a hardware signal which interrupts the normal execution flow of the processor, There will be a 
+atleast one interrupt handler registered with each interrupts in linux. Whenever process recieves the interrupt 
+from a particular source, it will pause the execution of currently running process and excecutes the interrupt 
+handler registered with that particular interrupt.
 
  
 
@@ -576,7 +619,11 @@ Top half  and bottom half
 
  
 
-Top half is meant for critical tasks and bottom half is meant for non critical tasks . In the typical scenario, the top half saves device data to a device-specific buffer, schedules its bottom half, and exits: this is very fast. The bottom half then performs whatever other work is required, such as awakening processes, starting up another I/O operation, and so on. This setup permits the top half to service a new interrupt while the bottom half is still working.
+Top half is meant for critical tasks and bottom half is meant for non critical tasks . In the typical scenario, 
+the top half saves device data to a device-specific buffer, schedules its bottom half, and exits: this is very 
+fast. The bottom half then performs whatever other work is required, such as awakening processes, starting up 
+another I/O operation, and so on. This setup permits the top half to service a new interrupt while the bottom 
+half is still working.
 
  
 
@@ -592,7 +639,8 @@ Tasklets and Workqueues
 
 The Linux kernel stack has a fixed size. There is no mechanism to prevent the kernel from overflowing the stack.
 
-An overflow in kernel stack is a common bug in the Linux operating system. These bugs are difficult to detect because they are created as a side effect of the code and not as an inherent mistake in the algorithm implementation.
+An overflow in kernel stack is a common bug in the Linux operating system. These bugs are difficult to detect 
+because they are created as a side effect of the code and not as an inherent mistake in the algorithm implementation.
 
  
 
@@ -600,7 +648,11 @@ An overflow in kernel stack is a common bug in the Linux operating system. These
 
 8. Kernel Synchronization
 
-In a shared memory environment, developer must ensure that shared resources are protected from concurrent process. The kernel is no exception. Shared resources require protection from concurrent              access because if multiple threads of execution access and manipulate the data at the same time, the threads may overwrite each other's changes or access data while it is in an inconsistent state. Before going through the kernel synchronization premitives, we must have a knowledge on what is critical section in linux kernel?
+In a shared memory environment, developer must ensure that shared resources are protected from concurrent process. 
+The kernel is no exception. Shared resources require protection from concurrent access because if multiple threads 
+of execution access and manipulate the data at the same time, the threads may overwrite each other's changes or 
+access data while it is in an inconsistent state. Before going through the kernel synchronization premitives,
+ we must have a knowledge on what is critical section in linux kernel?
 
  
 
@@ -623,29 +675,35 @@ Followings are the different synchronization mechanism provided by linux kernel
 
  
 
-The core reason for the existence of Device Tree in Linux is to provide a way to describe non-discoverable hardware. This information was previously hard coded in source code.
+The core reason for the existence of Device Tree in Linux is to provide a way to describe non-discoverable 
+hardware. This information was previously hard coded in source code.
 
-Device Tree data can be represented in several different formats. It is derived from the device tree format used by Open Firmware to encapsulate platform information. The device tree data is typically created and maintained in a human readable format in .dts source files and .dtsi source include files.
+Device Tree data can be represented in several different formats. It is derived from the device tree format 
+used by Open Firmware to encapsulate platform information. The device tree data is typically created and 
+maintained in a human readable format in .dts source files and .dtsi source include files.
 
-The device tree source is compiled into a binary format contained in a .dtb blob file. The format of the data in the .dtb blob file is commonly referred to as a Flattened Device Tree (FDT). The Linux operating system uses the device tree data to find and register the devices in the system.
+The device tree source is compiled into a binary format contained in a .dtb blob file. The format of the data 
+in the .dtb blob file is commonly referred to as a Flattened Device Tree (FDT). The Linux operating system uses 
+the device tree data to find and register the devices in the system.
 
  
 
 The Flattened Device Tree (FDT) is a data structure. Nothing more.
 
-It describes a machine hardware configuration. It is derived from the device tree format used by Open Firmware. The format is expressive and able to describe most board design aspects including:
+It describes a machine hardware configuration. It is derived from the device tree format used by Open Firmware. 
+The format is expressive and able to describe most board design aspects including:
 
-     the number and type of CPUs
+1.   the number and type of CPUs
 
-     base addresses and size of RAM
+2.    base addresses and size of RAM
 
-     busses and bridges
+3.    busses and bridges
 
-     peripheral device connections
+4.    peripheral device connections
 
-     interrupt controllers and IRQ line connections
+5.    interrupt controllers and IRQ line connections
 
-     pin multiplexing
+6.    pin multiplexing
 
 #include "pxa910.dtsi"
 
@@ -738,7 +796,8 @@ for(i=0;i<=strlen(str);i++)
       }
 ASCII value of 'A' is 65 while 'a' is 97. Difference between them is 97 – 65 = 32
 
-So if we will add 32 in the ASCII value of 'A' then it will be 'a' and if will we subtract 32 in ASCII value of 'a' it will be 'A'. It is true for all alphabets
+So if we will add 32 in the ASCII value of 'A' then it will be 'a' and if will we subtract 32 in ASCII 
+value of 'a' it will be 'A'. It is true for all alphabets
 
 or we can use toupper and tolower library functions
 
@@ -776,14 +835,17 @@ It will be resulting in a stack overflow because above recursive function doesn'
 
 How much will be increased by incrementing integer pointer and function pointer.
 
-Depnding on the Architecture you are working on. If you working on 32 bit architecture, incrementing interger pointer will increment the pointer variable by 4 bytes. If you working on 64 bit architecture, incrementing interger pointer will increment the point variable by 8 bytes.
+Depnding on the Architecture you are working on. If you working on 32 bit architecture, incrementing interger 
+pointer will increment the pointer variable by 4 bytes. If you working on 64 bit architecture, incrementing 
+interger pointer will increment the point variable by 8 bytes.
 
 Incremented value of function pointer depending on what type of function pointer we are
 
 incrementing
 
 
-Write function prototype for a function pointer which will return int, and takes char pointer and int pointer as input.
+Write function prototype for a function pointer which will return int, and takes char pointer and int pointer 
+as input.
 
 int (* func_pointer)(char * , int *)
 
@@ -812,7 +874,12 @@ tmp->x; // will result in a NULL pointer dereferencing
 
 What all are stored in stack.
 
-Stack, where automatic variables are stored, along with information that is saved each time a function is called. Each time a function is called, the address of where to return to and certain information about the caller’s environment, such as some of the machine registers, are saved on the stack. The newly called function then allocates room on the stack for its automatic and temporary variables. This is how recursive functions in C can work. Each time a recursive function calls itself, a new stack frame is used, so one set of variables doesn’t interfere with the variables from another instance of the function
+Stack, where automatic variables are stored, along with information that is saved each time a function is 
+called. Each time a function is called, the address of where to return to and certain information about the 
+caller’s environment, such as some of the machine registers, are saved on the stack. The newly called function 
+then allocates room on the stack for its automatic and temporary variables. This is how recursive functions in 
+C can work. Each time a recursive function calls itself, a new stack frame is used, so one set of variables 
+doesn’t interfere with the variables from another instance of the function
 
 
 Storage classes.Who intializes the static variables with intial value 0.
@@ -842,10 +909,14 @@ I have already included the answer for this question in my previous doc shared
 
 How to distinguish whether to use semaphore or mutex for a given use case.
 
-Use a semaphore when you (thread) want to sleep till some other thread tells you to wake up. Semaphore 'down' happens in one thread (producer) and semaphore 'up' (for same semaphore) happens in another thread (consumer) e.g.: In producer-consumer problem, producer wants to sleep till at least one buffer slot is empty - only the consumer thread can tell when a buffer slot is empty.
+Use a semaphore when you (thread) want to sleep till some other thread tells you to wake up. Semaphore 'down' happens in 
+one thread (producer) and semaphore 'up' (for same semaphore) happens in another thread (consumer) e.g.: In producer-consumer 
+problem, producer wants to sleep till at least one buffer slot is empty - only the consumer thread can tell when a buffer 
+slot is empty.
 
 
-Use a mutex when you (thread) want to execute code that should not be executed by any other thread at the same time. Mutex 'down' happens in one thread and mutex 'up' must happen in the same thread later on
+Use a mutex when you (thread) want to execute code that should not be executed by any other thread at the same time. Mutex 
+'down' happens in one thread and mutex 'up' must happen in the same thread later on
 
 
 #include <stdio.h>
@@ -922,7 +993,8 @@ In above factorial function if i remove if else conditions what will happen.
 In interrupt handler if we increase the code size what will happen.
 
 
-in a process suppose three threads are running, if one thread is crashed the remaing two threads won't have any dependency on crashed thread then what will happen.
+in a process suppose three threads are running, if one thread is crashed the remaing two threads won't have 
+any dependency on crashed thread then what will happen.
 
 
 Synchronization mechanisum questions on mutex,semaphore.
@@ -940,7 +1012,8 @@ how do you debugg if any crash happens in user space or kernel space.
 how many cpu registers are their in your project board architecture.
 
 
-Given an 32 bit integer write a code to set the 21st bit of an integer using pointer given an void pointer as a function argument to set the 21st bit.
+Given an 32 bit integer write a code to set the 21st bit of an integer using pointer given an void pointer as a 
+function argument to set the 21st bit.
 
 
 
@@ -960,11 +1033,14 @@ int ptr is provided, set 4th byte's 5th bit.
 
 
 
-1. Write a funcion in c that takes 2 args, 1 int * ptr and 1 offset n and sets nth byte in ptr, will this code work on both little and big endian machines
+1. Write a funcion in c that takes 2 args, 1 int * ptr and 1 offset n and sets nth byte in ptr, will this code 
+work on both little and big endian machines
 
-2. Write a funcion in c that takes 3 args, 1 int * ptr and 1 offset n and 1 bit num m and sets mth bit in nth byte in ptr
+2. Write a funcion in c that takes 3 args, 1 int * ptr and 1 offset n and 1 bit num m and sets mth bit in nth 
+byte in ptr
 
-3. how to use memcpy to copy 1 array to other in such a way that target array has reversed data as compared to source array
+3. how to use memcpy to copy 1 array to other in such a way that target array has reversed data as compared to
+ source array
 
 4. Write a program to reverse an arry elements
 
@@ -1097,7 +1173,8 @@ int *p;
 char c;
 }a, b;
 
-What is the size of above structure ? Who will decide the size ? Does it depend on 64/32 bit machine ? What will be the struct abc size on 64 bit and 32 bit machines ?
+What is the size of above structure ? Who will decide the size ? Does it depend on 64/32 bit machine ? What
+ will be the struct abc size on 64 bit and 32 bit machines ?
 How do you copy members of a to b ?
 What is deep copy and shallow copy ?
 How do you allocate memory to pointer p inside the struct ?
@@ -1116,21 +1193,27 @@ Can you modify any one of the charecter by ch[ ]? if yes how? if no why ?
 /******************************************* Qcom Reference ******************************/ 
 
 #########################################################
-Local Variables are stored in Stack. Register variables are stored in Register. Global & static variables are stored in data segment. The memory created dynamically are stored in Heap And the C program instructions get stored in code segment and the extern variables also stored in data segment.
+Local Variables are stored in Stack. Register variables are stored in Register. Global & static variables 
+are stored in data segment. The memory created dynamically are stored in Heap And the C program instructions 
+get stored in code segment and the extern variables also stored in data segment.
 constants are often left in ROM
 #########################################################
 
 Static Variable-
 There are 3 main uses for the static.
 1. If you declare within a function: It retains the value between function calls
-2.If it is declared for a function name:By default function is extern..so it will be visible from other files if the function declaration is as static..it is invisible for the outer files
+2.If it is declared for a function name:By default function is extern..so it will be visible from other files 
+if the function declaration is as static..it is invisible for the outer files
  3. Static for global variables:
 
-By default we can use the global variables from outside files If it is static global..that variable is limited to with in the file.
+By default we can use the global variables from outside files If it is static global..that variable is limited 
+to with in the file.
  
 
 if static variable  declared in class-
-static variables are those variables whose values are shared among various instance of an class. For e.g. if you have a static variable "x" in class "A" and you create two instances of A i.e. a1 and a2. In that case a1 and a2 will share the common variable. This means if a2 changes the value of x than this will be changed for a1 as well.
+static variables are those variables whose values are shared among various instance of an class. For e.g. if you 
+have a static variable "x" in class "A" and you create two instances of A i.e. a1 and a2. In that case a1 and a2 
+will share the common variable. This means if a2 changes the value of x than this will be changed for a1 as well.
  
 Class A
 {
@@ -1163,7 +1246,8 @@ Structure
 #########################################################
 
 Union-
-A  union  is a special data type available in C that enables you to store different data types in the same memory location. You can define a union with many members, but only one member can contain a value at any given time.  
+A  union  is a special data type available in C that enables you to store different data types in the same memory 
+location. You can define a union with many members, but only one member can contain a value at any given time.  
 Unions provide an efficient way of using the same memory location for multi-purpose.
 
 union Data
@@ -1173,8 +1257,12 @@ union Data
    char  str[20];
 } data
 
-Now a variable of  Data  type can store an integer, a floating-point number, or a string of characters. This means that a single variable ie. same memory location can be used to store multiple types of data. You can use any built-in or user defined data types inside a union based on your requirement.
-The memory occupied by a union will be large enough to hold the largest member of the union. For example, in above example Data type will occupy 20 bytes of memory space because this is the maximum space which can be occupied by character string. Following is the example which will display total memory size occupied by the above union:
+Now a variable of  Data  type can store an integer, a floating-point number, or a string of characters. This means 
+that a single variable ie. same memory location can be used to store multiple types of data. You can use any built-in 
+or user defined data types inside a union based on your requirement.
+The memory occupied by a union will be large enough to hold the largest member of the union. For example, in above 
+example Data type will occupy 20 bytes of memory space because this is the maximum space which can be occupied by character 
+string. Following is the example which will display total memory size occupied by the above union:
 
 #include <stdio.h>
 #include <string.h>
@@ -1208,15 +1296,18 @@ data.str : C Programming
 #########################################################
 
 What is a structure?
-Ans: Structure constitutes a super data type which represents several different data types in a single unit. A structure can be initialized if it is static or global
+Ans: Structure constitutes a super data type which represents several different data types in a single unit. 
+A structure can be initialized if it is static or global
 
 #########################################################
 
 
 
 What are the differences between structures and union?
-Ans: A structure variable contains each of the named members, and its size is large enough to hold all the members. Structure elements are of same size.
-A union contains one of the named members at a given time and is large enough to hold the largest member. Union element can be of different sizes.
+Ans: A structure variable contains each of the named members, and its size is large enough to hold all the members. 
+Structure elements are of same size.
+A union contains one of the named members at a given time and is large enough to hold the largest member. Union 
+element can be of different sizes.
 #########################################################
 
 
@@ -1264,10 +1355,13 @@ void* calloc (size_t num, size_t size);
 
 
 What are the differences between malloc () and calloc ()?
-Ans: Malloc Calloc 1-Malloc takes one argument Malloc(a);where a number of bytes 2-memory allocated contains garbage values
+Ans: Malloc Calloc 1-Malloc takes one argument Malloc(a);where a number of bytes 2-memory allocated 
+contains garbage values
 1-Calloc takes two arguments Calloc(b,c) where b no of object and c size of object
-2-It initializes the contains of block of memory to zerosMalloc takes one argument, memory allocated contains garbage values.
-It allocates contiguous memory locations. Calloc takes two arguments, memory allocated contains all zeros, and the memory allocated is not contiguous.
+2-It initializes the contains of block of memory to zerosMalloc takes one argument, memory allocated 
+contains garbage values.
+It allocates contiguous memory locations. Calloc takes two arguments, memory allocated contains all 
+zeros, and the memory allocated is not contiguous.
 #########################################################
 
 
@@ -1277,18 +1371,24 @@ void* realloc (void* ptr, size_t size);
 Changes the size of the memory block pointed to by  ptr.
 ptr-Pointer to a memory block previously allocated with  malloc,  calloc  or  realloc.
 
-Alternatively, this can be a  null pointer, in which case a new block is allocated (as if  malloc  was called).
+Alternatively, this can be a  null pointer, in which case a new block is allocated (as if  malloc  
+was called).
 
 size
 New size for the memory block, in bytes.
 size_t  is an unsigned integral type.
 A pointer to the reallocated memory block, which may be either the same as  ptr  or a new location.
 There are several possible outcomes with realloc():
-·	If sufficient space exists to expand the memory block pointed to by ptr, the additional memory is allocated and the function returns ptr.
-·	If sufficient space does not exist to expand the current block in its current location, a new block of the size for size is allocated, and existing data is copied from the old block to the beginning of the new block. The old block is freed, and the function returns a pointer to the new block.
-·	If the ptr argument is NULL, the function acts like malloc(), allocating a block of size bytes and returning a pointer to it.
+·	If sufficient space exists to expand the memory block pointed to by ptr, the additional memory 
+is allocated and the function returns ptr.
+·	If sufficient space does not exist to expand the current block in its current location, a new 
+block of the size for size is allocated, and existing data is copied from the old block to the beginning 
+of the new block. The old block is freed, and the function returns a pointer to the new block.
+·	If the ptr argument is NULL, the function acts like malloc(), allocating a block of size bytes and 
+returning a pointer to it.
 ·	If the argument size is 0, the memory that ptr points to is freed, and the function returns NULL.
-·	If memory is insufficient for the reallocation (either expanding the old block or allocating a new one), the function returns NULL, and the original block is unchanged.
+·	If memory is insufficient for the reallocation (either expanding the old block or allocating a new one), 
+the function returns NULL, and the original block is unchanged.
 
 #########################################################
 
@@ -1296,7 +1396,8 @@ There are several possible outcomes with realloc():
 Free( ) -
 void free (void* ptr);
 Deallocate memory block
-A block of memory previously allocated by a call to  malloc,  calloc  or  realloc  is deallocated, making it available again for further allocations.
+A block of memory previously allocated by a call to  malloc,  calloc  or  realloc  is deallocated, making 
+it available again for further allocations.
 
 If  ptr  does not point to a block of memory allocated with the above functions, it causes  undefined behavior.
 
@@ -1306,14 +1407,16 @@ If  ptr  does not point to a block of memory allocated with the above function
 
 --What are macros? What are its advantages and disadvantages?
 
-Definition:  In  C  and  C++, a Macro is a piece of text that is expanded by the  preprocessor  part of the  compiler. This is used in to expand text before compiling.
+Definition:  In  C  and  C++, a Macro is a piece of text that is expanded by the  preprocessor  part of the  
+compiler. This is used in to expand text before compiling.
 #define VALUE 10
 Everywhere that VALUE is used the number of 10 will be used instead.
 int fred[VALUE];
 This declares an  array  of 10  ints.
 
 
-Macros are abbreviations for lengthy and frequently used statements. When a macro is called the entire code is substituted by a single line though the macro definition is of several lines.
+Macros are abbreviations for lengthy and frequently used statements. When a macro is called the entire code is 
+substituted by a single line though the macro definition is of several lines.
 The advantage of macro is that it reduces the time taken for control transfer as in case of
 function.
 The disadvantage of it is here the entire code is substituted so the program becomes
@@ -1323,14 +1426,17 @@ lengthy if a macro is called several times.
 
 
 Difference between pass by reference and pass by value?
-Ans:  Pass by reference passes a pointer to the value. This allows the callee to modify the variable directly.Pass by value gives a copy of the value to the callee. This allows the callee to modify the value without modifying the variable. (In other words, the callee simply cannot modify the variable, since it lacks a reference to it.)
+Ans:  Pass by reference passes a pointer to the value. This allows the callee to modify the variable directly.
+Pass by value gives a copy of the value to the callee. This allows the callee to modify the value without modifying 
+the variable. (In other words, the callee simply cannot modify the variable, since it lacks a reference to it.)
 
 #########################################################
 
   Difference between arrays and linked list?
 #########################################################
 
-enumerations-  An  enumeration  is a data type consisting of a set of named values that represent integral constants, known as  enumeration constantsEg:
+enumerations-  An  enumeration  is a data type consisting of a set of named values that represent integral constants, 
+known as  enumeration constantsEg:
 enum grain { oats, wheat, barley, corn, rice };
    /*         0      1      2      3     4         */
 
@@ -1346,10 +1452,15 @@ enum grain { oats, wheat=10, barley, corn=20, rice };
 Ans:  If a variable is declared with a register storage class,it is known as register variable.The
 register variable is stored in the cpu register instead of main memory.Frequently used variables
 are declared as register variable as it’s access time is faster.
-Registers are faster than memory to access, so the variables which are most frequently used in a C program can be put in registers using  register  keyword.  The keyword  register  hints to compiler that a given variable can be put in a register.
-It’s compiler’s choice to put it in a register or not. Generally, compilers themselves do optimizations and put the variables in register.
+Registers are faster than memory to access, so the variables which are most frequently used in a C program 
+can be put in registers using  register  keyword.  The keyword  register  hints to compiler that a given 
+variable can be put in a register.
+It’s compiler’s choice to put it in a register or not. Generally, compilers themselves do optimizations and 
+put the variables in register.
 
-1) If you use & operator with a register variable then compiler may give an error or warning (depending upon the compiler you are using), because when we say a variable is a register, it may be stored in a register instead of memory and accessing address of a register is invalid
+1) If you use & operator with a register variable then compiler may give an error or warning (depending upon 
+the compiler you are using), because when we say a variable is a register, it may be stored in a register 
+instead of memory and accessing address of a register is invalid
 
 int main()
 {
@@ -1364,7 +1475,8 @@ int main()
     return 0;
 }
 
-2)  register  keyword can be used with pointer variables. Obviously, a register can have address of a memory location. There would not be any problem with the below program.
+2)  register  keyword can be used with pointer variables. Obviously, a register can have address of a memory 
+location. There would not be any problem with the below program.
 
 int main()
 {
@@ -1374,7 +1486,8 @@ int main()
     getchar();
     return 0;
 }
-3) Register is a storage class, and C doesn’t allow multiple storage class specifiers for a variable. So,register  can not be used with  static  . Try below program.
+3) Register is a storage class, and C doesn’t allow multiple storage class specifiers for a variable. So,register  
+can not be used with  static  . Try below program.
 int main()
 {
     int i = 10;
@@ -1405,7 +1518,8 @@ WEIGHT  chicken, cow, horse, whale;
 #########################################################
 
 typedef vs #define
-The  typedef  interpretation is performed by the compiler where as  #define  statements are processed by the pre-processo
+The  typedef  interpretation is performed by the compiler where as  #define  statements are processed 
+by the pre-processo
 
 
 Read  variable field width in a scanf()   from danis ritchie.
@@ -1431,32 +1545,40 @@ iterations to be performed is not known in advance we use while loop.
 
 
 Near,Far and huge pointer-  
-Near, far, and huge pointers aren't part of standard C; they are/were an extension put in by several vendors to deal with segmented memory architectures
+Near, far, and huge pointers aren't part of standard C; they are/were an extension put in by 
+several vendors to deal with segmented memory architectures
 
 
 All of the stuff in this answer is relevant only to the old 8086 and 80286 segmented memory model.
 near: a 16 bit pointer that can address any byte in a 64k segment
-far: a 32 bit pointer that contains a segment and an offset. Note that because segments can overlap, two different far pointers can point to the same address.
-huge: a 32 bit pointer in which the segment is "normalised" so that no two far pointers point to the same address unless they have the same value.
+far: a 32 bit pointer that contains a segment and an offset. Note that because segments can overlap, 
+     two different far pointers can point to the same address.
+huge: a 32 bit pointer in which the segment is "normalised" so that no two far pointers point to 
+      the same address unless they have the same value.
 
 #########################################################
 
 
-Normalize pointer-  In 8086 programming (MS DOS), a far pointer is  normalized  if its  offset  part is between 0 and 15 (0xF).
+Normalize pointer-  In 8086 programming (MS DOS), a far pointer is  normalized  if its  offset  
+                    part is between 0 and 15 (0xF).
 
 #########################################################
 
 
-Red-black trees-  are self-balancing, and so can insert, delete, and search in O(log n) time. Other types of balanced trees (e.g. AVL trees) are often slower for insert and delete operations.
-In addition, the code for red-black trees tends to be simpler.
-Red Black Tree is a special type of self balancing binary search tree. This is used as Syntax Trees in major compilers and as implementations of Sorted Dictionary.
+Red-black trees-  are self-balancing, and so can insert, delete, and search in O(log n) time. 
+                  Other types of balanced trees (e.g. AVL trees) are often slower for insert and 
+                  delete operations.In addition, the code for red-black trees tends to be simpler.
+                  Red Black Tree is a special type of self balancing binary search tree. This is 
+                  used as Syntax Trees in major compilers and as implementations of Sorted Dictionary.
 Properties-
 In addition to the requirements imposed on a  binary search trees, with red–black trees:[4]
 1.	A node is either red or black.
-2.	The root is black. (This rule is sometimes omitted. Since the root can always be changed from red to black, but not necessarily vice-versa, this rule has little effect on analysis.)
+2.	The root is black. (This rule is sometimes omitted. Since the root can always be changed 
+    from red to black, but not necessarily vice-versa, this rule has little effect on analysis.)
 3.	All leaves (NIL) are black. (All leaves are same color as the root.)
 4.	Both children of every red node are black.
-5.	Every  simple path  from a given node to any of its descendant leaves contains the same number of black nodes.
+5.	Every  simple path  from a given node to any of its descendant leaves contains the same number 
+    of black nodes.
 
 #########################################################
 
@@ -1477,8 +1599,9 @@ Write  a  program  in  C  to  know  whether  a  number  is  odd  num
 
 Here is the simple program to find odd or even no using Bit wise operators::::::
 
-The Logic is:: If the given number is ODD then it ends with 1 (LSB) in Binary format i.e num = 3, binary representation is 011.
-If the given number is EVEN then it ends with 0 (LSB) in Binary format i.e num = 4, binary representation is 100.
+The Logic is:: If the given number is ODD then it ends with 1 (LSB) in Binary format i.e num = 3, 
+               binary representation is 011. If the given number is EVEN then it ends with 0 (LSB) 
+               in Binary format i.e num = 4, binary representation is 100.
 
 Program is::::
 -------------
@@ -1500,7 +1623,8 @@ printf("Entered Number is EVEN\n");
 
 #########################################################
 
-Question: You are given two numbers A and B. Write a program to count number of bits needed to be flipped to convert A to B.
+Question: You are given two numbers A and B. Write a program to count number of bits needed 
+          to be flipped to convert A to B.
 
 Solution:
 
@@ -1522,7 +1646,8 @@ Count set bits in an integer
 August 19, 2009
 Write an efficient program to count number of 1s in binary representation of an integer.
 
-1. Simple Method Loop through all bits in an integer, check if a bit is set and if it is then increment the set bit count. See below program.
+1. Simple Method Loop through all bits in an integer, check if a bit is set and if it is then increment 
+   the set bit count. See below program.
 
 
 
@@ -1554,9 +1679,14 @@ int countSetBits(unsigned int n)
 
 Understanding “register” keyword in C
 February 20, 2010
-Registers are faster than memory to access, so the variables which are most frequently used in a C program can be put in registers using register keyword. The keyword register hints to compiler that a given variable can be put in a register. It’s compiler’s choice to put it in a register or not. Generally, compilers themselves do optimizations and put the variables in register.
+Registers are faster than memory to access, so the variables which are most frequently used in a C program 
+can be put in registers using register keyword. The keyword register hints to compiler that a given variable 
+can be put in a register. It’s compiler’s choice to put it in a register or not. Generally, compilers themselves 
+do optimizations and put the variables in register.
 
-1) If you use & operator with a register variable then compiler may give an error or warning (depending upon the compiler you are using), because when we say a variable is a register, it may be stored in a register instead of memory and accessing address of a register is invalid. Try below program.
+1) If you use & operator with a register variable then compiler may give an error or warning (depending upon the compiler 
+   you are using), because when we say a variable is a register, it may be stored in a register instead of memory and 
+   accessing address of a register is invalid. Try below program.
 
 
 
@@ -1575,7 +1705,8 @@ register int i = 10;
   return 0;
 }
 
-2) register keyword can be used with pointer variables. Obviously, a register can have address of a memory location. There would not be any problem with the below program.
+2) register keyword can be used with pointer variables. Obviously, a register can have address of a memory 
+   location. There would not be any problem with the below program.
 
 
 int main()
@@ -1592,7 +1723,8 @@ int main()
   return 0;
 }
 
-3) Register is a storage class, and C doesn’t allow multiple storage class specifiers for a variable. So,register can not be used with static . Try below program.
+3) Register is a storage class, and C doesn’t allow multiple storage class specifiers for a variable. So,register 
+   can not be used with static . Try below program.
 
 int main()
 {
@@ -1609,9 +1741,11 @@ int main()
 
 }
 
-4) There is no limit on number of register variables in a C program, but the point is compiler may put some variables in register and some not.
+4) There is no limit on number of register variables in a C program, but the point is compiler may put some 
+   variables in register and some not.
 
-Please write comments if you find anything incorrect in the above article or you want to share more information about register keyword.
+Please write comments if you find anything incorrect in the above article or you want to share more information 
+about register keyword.
 
 #########################################################
 
@@ -1634,7 +1768,8 @@ The second declaration,
 
 char * const myPtr
 
-declares a constant pointer to a character. The location stored in the pointer cannot change. You cannot change where this pointer points:
+declares a constant pointer to a character. The location stored in the pointer cannot change. You cannot change 
+where this pointer points:
 
 
 char char_A = 'A';
@@ -1645,12 +1780,14 @@ char * const myPtr = &char_A;
 
 myPtr = &char_B;    // error - can't change address of myPtr
 
-The third declares a pointer to a character where both the pointer value and the value being pointed at will not change.
+The third declares a pointer to a character where both the pointer value and the value being pointed at will 
+not change.
 
 constant pointer to constant
 
 const int *const ptr;
-Above declaration is constant pointer to constant variable which means we cannot change value pointed by pointer as well as we cannot point the pointer to other variable
+Above declaration is constant pointer to constant variable which means we cannot change value pointed by pointer 
+as well as we cannot point the pointer to other variable
 
 #########################################################
 
@@ -1692,7 +1829,9 @@ Method 1 (Use length of linked list)
 2) Print the (len – n + 1)th node from the begining of the Linked List.
 
 Method 2 (Use two pointers)
-Maintain two pointers – reference pointer and main pointer. Initialize both reference and main pointers to head. First move reference pointer to n nodes from head. Now move both pointers one by one until reference pointer reaches end. Now main pointer will point to nth node from the end. Return main pointer.
+Maintain two pointers – reference pointer and main pointer. Initialize both reference and main pointers 
+to head. First move reference pointer to n nodes from head. Now move both pointers one by one until reference 
+pointer reaches end. Now main pointer will point to nth node from the end. Return main pointer.
 
 Que- Function to check if a singly linked list is palindrome
 
@@ -1701,19 +1840,31 @@ Que- Function to check if a singly linked list is palindrome
 
 Que-Write a function to get the intersection point of two Linked Lists.
 Method 1(Simply use two loops)
-Use 2 nested for loops. Outer loop will be for each node of the 1st list and inner loop will be for 2nd list. In the inner loop, check if any of nodes of 2nd list is same as the current node of first linked list. Time complexity of this method will be O(mn) where m and n are the number of nodes in two lists.
+Use 2 nested for loops. Outer loop will be for each node of the 1st list and inner loop will be for 2nd list. 
+In the inner loop, check if any of nodes of 2nd list is same as the current node of first linked list. 
+Time complexity of this method will be O(mn) where m and n are the number of nodes in two lists.
 
 Method 2 (Mark Visited Nodes)
-This solution requires modifications to basic linked list data structure. Have a visited flag with each node. Traverse the first linked list and keep marking visited nodes. Now traverse second linked list, If you see a visited node again then there is an intersection point, return the intersecting node. This solution works in O(m+n) but requires additional information with each node. A variation of this solution that doesn’t require modification to basic data structure can be implemented using hash. Traverse the first linked list and store the addresses of visited nodes in a hash. Now traverse the second linked list and if you see an address that already exists in hash then return the intersecting node.
+This solution requires modifications to basic linked list data structure. Have a visited flag with each node. 
+Traverse the first linked list and keep marking visited nodes. Now traverse second linked list, If you see a 
+visited node again then there is an intersection point, return the intersecting node. This solution works in 
+O(m+n) but requires additional information with each node. A variation of this solution that doesn’t require 
+modification to basic data structure can be implemented using hash. Traverse the first linked list and store 
+the addresses of visited nodes in a hash. Now traverse the second linked list and if you see an address that 
+already exists in hash then return the intersecting node.
 
 Method 3(Make circle in first list)
 Thanks to Saravanan Man for providing below solution.
-1. Traverse the first linked list(count the elements) and make a circular linked list. (Remember last node so that we can break the circle later on).
+1. Traverse the first linked list(count the elements) and make a circular linked list. (Remember last node so 
+   that we can break the circle later on).
 2. Now view the problem as find the loop in the second linked list. So the problem is solved.
-3. Since we already know the length of the loop(size of first linked list) we can traverse those many number of nodes in second list, and then start another pointer from the beginning of second list. we have to traverse until they are equal, and that is the required intersection point.
+3. Since we already know the length of the loop(size of first linked list) we can traverse those many number of 
+   nodes in second list, and then start another pointer from the beginning of second list. we have to traverse 
+   until they are equal, and that is the required intersection point.
 4. remove the circle from the linked list.
 
-Method 4 (Traverse both lists and compare addresses of last nodes) This method is only to detect if there is an intersection point or not. (Thanks to NeoTheSaviour for suggesting this)
+Method 4 (Traverse both lists and compare addresses of last nodes) This method is only to detect if there is an 
+  intersection point or not. (Thanks to NeoTheSaviour for suggesting this)
 
 1) Traverse the list 1, store the last node address
 2) Traverse the list 2, store the last node address.
@@ -1731,7 +1882,9 @@ Check if the 20th bit of a 32 bit integer is on or off?
 
 Write a program in C to know whether it is power of 2 or not.
 Write a program in C to know whether a number is odd number or even using bit wiseoperator.
- Write a functionsetbits(x,p,n,y)that returns x with then bits that begin at position p set to therightmost n bits of y, leaving the other bits unchanged.
+
+Write a functionsetbits(x,p,n,y)that returns x with then bits that begin at position p set to therightmost n bits 
+ of y, leaving the other bits unchanged.
 You are given two numbers A and B. Write a program to count number of bits needed to be flipped to convert A to B.
 How to reverse the bits in an interger?
 How to reverse the odd bits of an integer?
@@ -1748,16 +1901,21 @@ Strings as character arrays
 char str[4] = "GfG"; /*One extra for string terminator*/
 /*    OR    */
 char str[4] = {‘G’, ‘f’, ‘G’, '\0'}; /* '\0' is string terminator */
-When strings are declared as character arrays, they are stored like other types of arrays in C. For example, if str[] is an auto variable then string is stored in stack segment, if it’s a global or static variable then stored in data segment, etc.
+When strings are declared as character arrays, they are stored like other types of arrays in C. For example, 
+if str[] is an auto variable then string is stored in stack segment, if it’s a global or static variable 
+    then stored in data segment, etc.
 
 Strings using character pointers
 Using character pointer strings can be stored in two ways:
 
 1) Read only string in a shared segment.
-When string value is directly assigned to a pointer, in most of the compilers, it’s stored in a read only block (generally in data segment) that is shared among functions.
+When string value is directly assigned to a pointer, in most of the compilers, it’s stored in a read only block 
+(generally in data segment) that is shared among functions.
 
 char *str  =  "GfG";  
-In the above line “GfG” is stored in a shared read only location, but pointer str is stored in a read-write memory. You can change str to point something else but cannot change value at present str. So this kind of string should only be used when we don’t want to modify string at a later stage in program.
+In the above line “GfG” is stored in a shared read only location, but pointer str is stored in a read-write memory. 
+You can change str to point something else but cannot change value at present str. So this kind of string should only 
+be used when we don’t want to modify string at a later stage in program.
 
 2) Dynamically allocated in heap segment.
 Strings are stored like other dynamically allocated things in C and can be shared among functions.
@@ -1774,7 +1932,8 @@ str = (char *)malloc(sizeof(char)*size);
 Let us see some examples to better understand above ways to store strings.
 
 Example 1 (Try to modify string) 
-The below program may crash (gives segmentation fault error) because the line *(str+1) = ‘n’ tries to write a read only memory.
+The below program may crash (gives segmentation fault error) because the line *(str+1) = ‘n’ tries to write a 
+read only memory.
 
 int main()
 {
@@ -1810,7 +1969,8 @@ int main()
    return 0;
 }     
 Example 2 (Try to return string from a function)
-The below program works perfectly fine as the string is stored in a shared segment and data stored remains there even after return of getString()
+The below program works perfectly fine as the string is stored in a shared segment and data stored remains 
+there even after return of getString()
 
 char *getString()
 {
@@ -1826,7 +1986,8 @@ int main()
   getchar();
   return 0;
 }
-The below program alse works perfectly fine as the string is stored in heap segment and data stored in heap segment persists even after return of getString()
+The below program alse works perfectly fine as the string is stored in heap segment and data stored in heap 
+segment persists even after return of getString()
 
 char *getString()
 {
@@ -1846,7 +2007,8 @@ int main()
   getchar();
   return 0;
 }
-But, the below program may print some garbage data as string is stored in stack frame of function getString() and data may not be there after getString() returns.
+But, the below program may print some garbage data as string is stored in stack frame of function getString() and 
+data may not be there after getString() returns.
 
 char *getString()
 {
@@ -1891,7 +2053,10 @@ int main()
   return 0;
 }
 What would the output of the above program – ’5′ or ’10′?
-The output is undefined as the order of evaluation of f1() + f2() is not mandated by standard. The compiler is free to first call either f1() or f2(). Only when equal level precedence operators appear in an expression, the associativity comes into picture. For example, f1() + f2() + f3() will be considered as (f1() + f2()) + f3(). But among first pair, which function (the operand) evaluated first is not defined by the standard.
+The output is undefined as the order of evaluation of f1() + f2() is not mandated by standard. The compiler 
+is free to first call either f1() or f2(). Only when equal level precedence operators appear in an expression, 
+the associativity comes into picture. For example, f1() + f2() + f3() will be considered as (f1() + f2()) + f3(). 
+But among first pair, which function (the operand) evaluated first is not defined by the standard.
 
 
 #########################################################
@@ -1901,19 +2066,23 @@ August 29, 2010
 In C and C++, comma (,) can be used in two contexts:
 
 1) Comma as an operator:
-The comma operator (represented by the token ,) is a binary operator that evaluates its first operand and discards the result, it then evaluates the second operand and returns this value (and type). The comma operator has the lowest precedence of any C operator, and acts as a sequence point.
+The comma operator (represented by the token ,) is a binary operator that evaluates its first operand and discards 
+the result, it then evaluates the second operand and returns this value (and type). The comma operator has the 
+lowest precedence of any C operator, and acts as a sequence point.
 
 /* comma as an operator */
 int i = (5, 10);  /* 10 is assigned to i*/
 int j = (f1(), f2());  /* f1() is called (evaluated) first followed by f2(). 
                       The returned value of f2() is assigned to j */
 2) Comma as a separator:
-Comma acts as a separator when used with function calls and definitions, function like macros, variable declarations, enum declarations, and similar constructs.
+Comma acts as a separator when used with function calls and definitions, function like macros, variable declarations, 
+enum declarations, and similar constructs.
 
 /* comma as a separator */
 int a = 1, b = 2;
 void fun(x, y);
-The use of comma as a separator should not be confused with the use as an operator. For example, in below statement, f1() and f2() can be called in any order.
+The use of comma as a separator should not be confused with the use as an operator. For example, in below statement, 
+f1() and f2() can be called in any order.
 
 /* Comma acts as a separator here and doesn't enforce any sequence. 
     Therefore, either f1() or f2() can be called first */
@@ -1970,7 +2139,8 @@ sizeof (type-name)
 2) expression: expression can be specified with or without the parentheses.
 
 sizeof expression
-The expression is used only for getting the type of operand and not evaluated. For example, below code prints value of i as 5.
+The expression is used only for getting the type of operand and not evaluated. For example, below code 
+prints value of i as 5.
 
 #include <stdio.h>
  
@@ -1991,9 +2161,12 @@ value of i = 5
 #########################################################
 Result of comma operator as l-value in C and C++
 January 19, 2011
-Using result of comma operator as l-value is not valid in C. But in C++, result of comma operator can be used as l-value if the right operand of the comma operator is l-value.
+Using result of comma operator as l-value is not valid in C. But in C++, result of comma operator can be 
+used as l-value if the right operand of the comma operator is l-value.
 
-For example, if we compile the following program as a C++ program, then it works and prints b = 30. And if we compile the same program as C program, then it gives warning/error in compilation (Warning in Dev C++ and error in Code Blocks).
+For example, if we compile the following program as a C++ program, then it works and prints b = 30. And if 
+we compile the same program as C program, then it gives warning/error in compilation (Warning in Dev C++ 
+and error in Code Blocks).
 
 #include<stdio.h>
  
@@ -2011,22 +2184,27 @@ b = 30
 #########################################################
 What is evaluation order of function parameters in C?
 June 11, 2010
-It is compiler dependent in C. It is never safe to depend on the order of evaluation of side effects. For example, a function call like below may very well behave differently from one compiler to another:
+It is compiler dependent in C. It is never safe to depend on the order of evaluation of side effects. 
+For example, a function call like below may very well behave differently from one compiler to another:
 
 void func (int, int);
    
 int i = 2;
 func (i++, i++);
-There is no guarantee (in either the C or the C++ standard language definitions) that the increments will be evaluated in any particular order. Either increment might happen first. func might get the arguments `2, 3′, or it might get `3, 2′, or even `2, 2′.
+There is no guarantee (in either the C or the C++ standard language definitions) that the increments will 
+be evaluated in any particular order. Either increment might happen first. func might get the arguments 
+`2, 3′, or it might get `3, 2′, or even `2, 2′.
 
 #########################################################
 Order of operands for logical operators
 January 3, 2011
 The order of operands of logical operators &&, || are important in C/C++.
 
-In mathematics, logical AND, OR, EXOR, etc… operations are commutative. The result will not change even if we swap RHS and LHS of the operator.
+In mathematics, logical AND, OR, EXOR, etc… operations are commutative. The result will not change even if 
+we swap RHS and LHS of the operator.
 
-In C/C++ (may be in other languages as well)  even though these operators are commutative, their order is critical. For example see the following code,
+In C/C++ (may be in other languages as well)  even though these operators are commutative, their order is 
+critical. For example see the following code,
 
 // Traverse every alternative node
 while( pTemp && pTemp->Next )
@@ -2034,19 +2212,24 @@ while( pTemp && pTemp->Next )
    // Jump over to next node
    pTemp = pTemp->Next->Next;
 }
-The first part pTemp will be evaluated against NULL and followed by pTemp->Next. If pTemp->Next is placed first, the pointer pTemp will be dereferenced and there will be runtime error when pTemp is NULL.
+The first part pTemp will be evaluated against NULL and followed by pTemp->Next. If pTemp->Next is placed first, 
+the pointer pTemp will be dereferenced and there will be runtime error when pTemp is NULL.
 
-It is mandatory to follow the order. Infact, it helps in generating efficient code. When the pointer pTemp is NULL, the second part will not be evaluated since the outcome of AND (&&) expression is guaranteed to be 0.
+It is mandatory to follow the order. Infact, it helps in generating efficient code. When the pointer pTemp is NULL, 
+the second part will not be evaluated since the outcome of AND (&&) expression is guaranteed to be 0.
 #########################################################
 Static functions in C
 May 5, 2010
-In C, functions are global by default. The “static” keyword before a function name makes it static. For example, below function fun() is static.
+In C, functions are global by default. The “static” keyword before a function name makes it static. For example, 
+below function fun() is static.
 
 static int fun(void)
 {
   printf("I am a static function ");
 }
-Unlike global functions in C, access to static functions is restricted to the file where they are declared. Therefore, when we want to restrict access to functions, we make them static. Another reason for making functions static can be reuse of the same function name in other files.
+Unlike global functions in C, access to static functions is restricted to the file where they are declared. 
+Therefore, when we want to restrict access to functions, we make them static. Another reason for making functions 
+static can be reuse of the same function name in other files.
 
 For example, if we store following program in one file file1.c
 
@@ -2064,7 +2247,8 @@ int main(void)
   getchar();
   return 0;  
 }
-Now, if we compile the above code with command “gcc file2.c file1.c”, we get the error “undefined reference to `fun1′” . This is because fun1() is declared static in file1.c and cannot be used in file2.c.
+Now, if we compile the above code with command “gcc file2.c file1.c”, we get the error “undefined 
+reference to `fun1′” . This is because fun1() is declared static in file1.c and cannot be used in file2.c.
 
 #########################################################
 exit(), abort() and assert()
@@ -2073,13 +2257,16 @@ exit()
 
 void exit ( int status ); 
 exit() terminates the process normally. 
-status: Status value returned to the parent process. Generally, a status value of 0 or EXIT_SUCCESS indicates success, and any other value or the constant EXIT_FAILURE is used to indicate an error. exit() performs following operations.
+status: Status value returned to the parent process. Generally, a status value of 0 or EXIT_SUCCESS 
+indicates success, and any other value or the constant EXIT_FAILURE is used to indicate an error. exit() 
+performs following operations.
 * Flushes unwritten buffered data.
 * Closes all open files.
 * Removes temporary files.
 * Returns an integer exit status to the operating system.
 
-The C standard atexit() function can be used to customize exit() to perform additional actions at program termination.
+The C standard atexit() function can be used to customize exit() to perform additional actions at 
+program termination.
 
 Example use of exit.
 
@@ -2107,9 +2294,11 @@ int main ()
 abort()
 
 void abort ( void );
-Unlike exit() function, abort() may not close files that are open. It may also not delete temporary files and may not flush stream buffer. Also, it does not call functions registered with atexit().
+Unlike exit() function, abort() may not close files that are open. It may also not delete temporary 
+files and may not flush stream buffer. Also, it does not call functions registered with atexit().
 
-This function actually terminates the process by raising a SIGABRT signal, and your program can include a handler to intercept this signal (see this).
+This function actually terminates the process by raising a SIGABRT signal, and your program can 
+include a handler to intercept this signal (see this).
 
 So programs like below might not write “Geeks for Geeks” to “tempfile.txt”
 
@@ -2136,14 +2325,17 @@ int main()
   getchar();
   return 0;  
 }    
-If we want to make sure that data is written to files and/or buffers are flushed then we should either use exit() or include a signal handler for SIGABRT.
+If we want to make sure that data is written to files and/or buffers are flushed then we should either 
+use exit() or include a signal handler for SIGABRT.
 
 
 
 assert()
 
 void assert( int expression );
-If expression evaluates to 0 (false), then the expression, sourcecode filename, and line number are sent to the standard error, and then abort() function is called. If the identifier NDEBUG (“no debug”) is defined with #define NDEBUG then the macro assert does nothing.
+If expression evaluates to 0 (false), then the expression, sourcecode filename, and line number are 
+sent to the standard error, and then abort() function is called. If the identifier NDEBUG (“no debug”) 
+is defined with #define NDEBUG then the macro assert does nothing.
 
 Common error outputting is in the form:
 
