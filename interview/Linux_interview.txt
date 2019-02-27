@@ -1113,4 +1113,1053 @@ What exactly happens when I reallocate the char pointer like this ch = "name" ?
 In the above case how do you access each charecter using pointer ch ?
 Can you modify any one of the charecter by ch[ ]? if yes how? if no why ?
 
+/******************************************* Qcom Reference ******************************/ 
+
+#########################################################
+Local Variables are stored in Stack. Register variables are stored in Register. Global & static variables are stored in data segment. The memory created dynamically are stored in Heap And the C program instructions get stored in code segment and the extern variables also stored in data segment.
+constants are often left in ROM
+#########################################################
+
+Static Variable-
+There are 3 main uses for the static.
+1. If you declare within a function: It retains the value between function calls
+2.If it is declared for a function name:By default function is extern..so it will be visible from other files if the function declaration is as static..it is invisible for the outer files
+ 3. Static for global variables:
+
+By default we can use the global variables from outside files If it is static global..that variable is limited to with in the file.
+ 
+
+if static variable  declared in class-
+static variables are those variables whose values are shared among various instance of an class. For e.g. if you have a static variable "x" in class "A" and you create two instances of A i.e. a1 and a2. In that case a1 and a2 will share the common variable. This means if a2 changes the value of x than this will be changed for a1 as well.
+ 
+Class A
+{
+static int x;
+}
+
+A a1=new A();
+A a2=new A();
+a1.x=10;
+then a2.x will also become 10.
+
+** Default initial value of static integral type variables are zero.
+*If declared a static variable or function globally then its visibility will only the file in which it has declared 
+
+
+#########################################################
+
+What are the differences between structures and arrays?
+Ans: Structure is a collection of heterogeneous data type but array is a collection of homogeneous data types.
+Array  
+1-It is a collection of data items of same data type.
+2-It has declaration only
+3-.There is no keyword.
+4- array name represent the address of the starting element.
+Structure
+1-It is a collection of data items of different data type.
+2- It has declaration and definition
+3- keyword struct is used
+4-Structure name is known as tag it is the short hand notation of the declaration.
+#########################################################
+
+Union-
+A  union  is a special data type available in C that enables you to store different data types in the same memory location. You can define a union with many members, but only one member can contain a value at any given time.  
+Unions provide an efficient way of using the same memory location for multi-purpose.
+
+union Data
+{
+   int i;
+   float f;
+   char  str[20];
+} data
+
+Now a variable of  Data  type can store an integer, a floating-point number, or a string of characters. This means that a single variable ie. same memory location can be used to store multiple types of data. You can use any built-in or user defined data types inside a union based on your requirement.
+The memory occupied by a union will be large enough to hold the largest member of the union. For example, in above example Data type will occupy 20 bytes of memory space because this is the maximum space which can be occupied by character string. Following is the example which will display total memory size occupied by the above union:
+
+#include <stdio.h>
+#include <string.h>
+ 
+union Data
+{
+   int i;
+   float f;
+   char  str[20];
+};
+ 
+int main( )
+{
+   union Data data;        
+
+   data.i = 10;
+   data.f = 220.5;
+   strcpy( data.str, "C Programming");
+
+   printf( "data.i : %d\n", data.i);
+   printf( "data.f : %f\n", data.f);
+   printf( "data.str : %s\n", data.str);
+
+   return 0;
+}
+
+When the above code is compiled and executed, it produces following result:
+data.i : 1917853763
+data.f : 4122360580327794860452759994368.000000
+data.str : C Programming
+#########################################################
+
+What is a structure?
+Ans: Structure constitutes a super data type which represents several different data types in a single unit. A structure can be initialized if it is static or global
+
+#########################################################
+
+
+
+What are the differences between structures and union?
+Ans: A structure variable contains each of the named members, and its size is large enough to hold all the members. Structure elements are of same size.
+A union contains one of the named members at a given time and is large enough to hold the largest member. Union element can be of different sizes.
+#########################################################
+
+
+
+What are the differences between structures and arrays?
+Ans: Structure is a collection of heterogeneous data type but array is a collection of homogeneous data types.
+
+Array  
+1-It is a collection of data items of same data type.
+2-It has declaration only
+3-.There is no keyword.
+4- array name represent the address of the starting element.
+Structure
+1-It is a collection of data items of different data type.
+2- It has declaration and definition
+3- keyword struct is used
+4-Structure name is known as tag it is the short hand notation of the declaration.
+
+#########################################################
+
+
+
+In header files whether functions are declared or defined?
+Ans: Functions are declared within header file. That is function prototypes exist in a header file,not function bodies
+
+#########################################################
+
+
+
+
+malloc,  realloc,  calloc  and  free
+
+Malloc-  Allocates a block of  size  bytes of memory, returning a pointer to the beginning of the block.
+
+/* allocate node */
+        struct node* new_node =(struct node*) malloc(sizeof(struct node));
+
+
+Calloc-
+
+Calloc takes two arguments Calloc(b,c) where b no of object and c size of object
+
+void* calloc (size_t num, size_t size);
+#########################################################
+
+
+What are the differences between malloc () and calloc ()?
+Ans: Malloc Calloc 1-Malloc takes one argument Malloc(a);where a number of bytes 2-memory allocated contains garbage values
+1-Calloc takes two arguments Calloc(b,c) where b no of object and c size of object
+2-It initializes the contains of block of memory to zerosMalloc takes one argument, memory allocated contains garbage values.
+It allocates contiguous memory locations. Calloc takes two arguments, memory allocated contains all zeros, and the memory allocated is not contiguous.
+#########################################################
+
+
+Realloc-
+void* realloc (void* ptr, size_t size);
+
+Changes the size of the memory block pointed to by  ptr.
+ptr-Pointer to a memory block previously allocated with  malloc,  calloc  or  realloc.
+
+Alternatively, this can be a  null pointer, in which case a new block is allocated (as if  malloc  was called).
+
+size
+New size for the memory block, in bytes.
+size_t  is an unsigned integral type.
+A pointer to the reallocated memory block, which may be either the same as  ptr  or a new location.
+There are several possible outcomes with realloc():
+·	If sufficient space exists to expand the memory block pointed to by ptr, the additional memory is allocated and the function returns ptr.
+·	If sufficient space does not exist to expand the current block in its current location, a new block of the size for size is allocated, and existing data is copied from the old block to the beginning of the new block. The old block is freed, and the function returns a pointer to the new block.
+·	If the ptr argument is NULL, the function acts like malloc(), allocating a block of size bytes and returning a pointer to it.
+·	If the argument size is 0, the memory that ptr points to is freed, and the function returns NULL.
+·	If memory is insufficient for the reallocation (either expanding the old block or allocating a new one), the function returns NULL, and the original block is unchanged.
+
+#########################################################
+
+
+Free( ) -
+void free (void* ptr);
+Deallocate memory block
+A block of memory previously allocated by a call to  malloc,  calloc  or  realloc  is deallocated, making it available again for further allocations.
+
+If  ptr  does not point to a block of memory allocated with the above functions, it causes  undefined behavior.
+
+#########################################################
+
+
+
+--What are macros? What are its advantages and disadvantages?
+
+Definition:  In  C  and  C++, a Macro is a piece of text that is expanded by the  preprocessor  part of the  compiler. This is used in to expand text before compiling.
+#define VALUE 10
+Everywhere that VALUE is used the number of 10 will be used instead.
+int fred[VALUE];
+This declares an  array  of 10  ints.
+
+
+Macros are abbreviations for lengthy and frequently used statements. When a macro is called the entire code is substituted by a single line though the macro definition is of several lines.
+The advantage of macro is that it reduces the time taken for control transfer as in case of
+function.
+The disadvantage of it is here the entire code is substituted so the program becomes
+lengthy if a macro is called several times.
+
+#########################################################
+
+
+Difference between pass by reference and pass by value?
+Ans:  Pass by reference passes a pointer to the value. This allows the callee to modify the variable directly.Pass by value gives a copy of the value to the callee. This allows the callee to modify the value without modifying the variable. (In other words, the callee simply cannot modify the variable, since it lacks a reference to it.)
+
+#########################################################
+
+  Difference between arrays and linked list?
+#########################################################
+
+enumerations-  An  enumeration  is a data type consisting of a set of named values that represent integral constants, known as  enumeration constantsEg:
+enum grain { oats, wheat, barley, corn, rice };
+   /*         0      1      2      3     4         */
+
+enum grain { oats=1, wheat, barley, corn, rice };
+   /*         1        2      3      4     5       */
+
+enum grain { oats, wheat=10, barley, corn=20, rice };
+   /*          0     10        11     20       21  */
+
+#########################################################
+
+** What are register variables? What are the advantages of using register variables?
+Ans:  If a variable is declared with a register storage class,it is known as register variable.The
+register variable is stored in the cpu register instead of main memory.Frequently used variables
+are declared as register variable as it’s access time is faster.
+Registers are faster than memory to access, so the variables which are most frequently used in a C program can be put in registers using  register  keyword.  The keyword  register  hints to compiler that a given variable can be put in a register.
+It’s compiler’s choice to put it in a register or not. Generally, compilers themselves do optimizations and put the variables in register.
+
+1) If you use & operator with a register variable then compiler may give an error or warning (depending upon the compiler you are using), because when we say a variable is a register, it may be stored in a register instead of memory and accessing address of a register is invalid
+
+int main()
+{
+    register int i = 10;
+
+    int *a = &i;
+
+    printf("%d", *a);
+
+    getchar();
+
+    return 0;
+}
+
+2)  register  keyword can be used with pointer variables. Obviously, a register can have address of a memory location. There would not be any problem with the below program.
+
+int main()
+{
+    int i = 10;
+    register int *a = &i;
+    printf("%d", *a);
+    getchar();
+    return 0;
+}
+3) Register is a storage class, and C doesn’t allow multiple storage class specifiers for a variable. So,register  can not be used with  static  . Try below program.
+int main()
+{
+    int i = 10;
+    register static int *a = &i;
+    printf("%d", *a);
+    getchar();
+    return 0;
+}
+4) There is no limit on number of register variables in a C program, but the point is compiler may put  
+some variables in register and some not.
+
+
+#########################################################
+
+
+Typedef-
+
+a new name given to the existing data type may be easier to understand the code.
+typedef struct  {
+                int scruples;
+                int drams;
+                int grains;
+               } WEIGHT;
+The structure  WEIGHT  can then be used in the following declarations:
+WEIGHT  chicken, cow, horse, whale;
+
+
+#########################################################
+
+typedef vs #define
+The  typedef  interpretation is performed by the compiler where as  #define  statements are processed by the pre-processo
+
+
+Read  variable field width in a scanf()   from danis ritchie.
+            fgets() and gets()  
+
+
+#########################################################
+
+  What is recursion?
+
+
+#########################################################
+
+
+Differentiate between for loop and a while loop? What are it uses?
+Ans: For executing a set of statements fixed number of times we use for loop while when the number of
+iterations to be performed is not known in advance we use while loop.
+
+
+
+#########################################################
+
+
+
+Near,Far and huge pointer-  
+Near, far, and huge pointers aren't part of standard C; they are/were an extension put in by several vendors to deal with segmented memory architectures
+
+
+All of the stuff in this answer is relevant only to the old 8086 and 80286 segmented memory model.
+near: a 16 bit pointer that can address any byte in a 64k segment
+far: a 32 bit pointer that contains a segment and an offset. Note that because segments can overlap, two different far pointers can point to the same address.
+huge: a 32 bit pointer in which the segment is "normalised" so that no two far pointers point to the same address unless they have the same value.
+
+#########################################################
+
+
+Normalize pointer-  In 8086 programming (MS DOS), a far pointer is  normalized  if its  offset  part is between 0 and 15 (0xF).
+
+#########################################################
+
+
+Red-black trees-  are self-balancing, and so can insert, delete, and search in O(log n) time. Other types of balanced trees (e.g. AVL trees) are often slower for insert and delete operations.
+In addition, the code for red-black trees tends to be simpler.
+Red Black Tree is a special type of self balancing binary search tree. This is used as Syntax Trees in major compilers and as implementations of Sorted Dictionary.
+Properties-
+In addition to the requirements imposed on a  binary search trees, with red–black trees:[4]
+1.	A node is either red or black.
+2.	The root is black. (This rule is sometimes omitted. Since the root can always be changed from red to black, but not necessarily vice-versa, this rule has little effect on analysis.)
+3.	All leaves (NIL) are black. (All leaves are same color as the root.)
+4.	Both children of every red node are black.
+5.	Every  simple path  from a given node to any of its descendant leaves contains the same number of black nodes.
+
+#########################################################
+
+
+BITWISE OPERATOR-
+
+Question-  Write  a  program  in  C  to  know  whether  it  is  power  of  2  or  not.
+
+int isPowerOfTwo ( int x)
+{
+   return ((x != 0) && !(x & (x - 1)));
+}
+
+#########################################################
+
+
+Write  a  program  in  C  to  know  whether  a  number  is  odd  number  or  even  using  bit  wise  
+
+Here is the simple program to find odd or even no using Bit wise operators::::::
+
+The Logic is:: If the given number is ODD then it ends with 1 (LSB) in Binary format i.e num = 3, binary representation is 011.
+If the given number is EVEN then it ends with 0 (LSB) in Binary format i.e num = 4, binary representation is 100.
+
+Program is::::
+-------------
+
+main()
+{
+int num;
+
+printf("Enter the Number\n");
+scanf("%d",&num);
+
+if(num&1)
+printf("Entered Number is ODD\n");
+else
+printf("Entered Number is EVEN\n");
+}
+
+
+
+#########################################################
+
+Question: You are given two numbers A and B. Write a program to count number of bits needed to be flipped to convert A to B.
+
+Solution:
+
+  1. Calculate XOR of A and B.      
+        a_xor_b = A ^ B
+  2. Count the set bits in the above calculated XOR result.
+        countSetBits(a_xor_b)
+XOR of two number will have set bits only at those places where A differs from B.
+
+Example:
+
+   A  = 1001001
+   B  = 0010101
+   a_xor_b = 1011100
+   No of bits need to flipped = set bit count in a_xor_b i.e. 4
+
+
+Count set bits in an integer
+August 19, 2009
+Write an efficient program to count number of 1s in binary representation of an integer.
+
+1. Simple Method Loop through all bits in an integer, check if a bit is set and if it is then increment the set bit count. See below program.
+
+
+
+/* Function to get no of set bits in binary
+
+
+representation of passed binary no. */
+
+
+int countSetBits(unsigned int n)
+{
+
+  unsigned int count = 0;
+  while(n)
+  {
+    count += n & 1;
+
+    n >>= 1;
+
+ }
+
+
+  return count;
+
+}
+
+
+#########################################################
+
+Understanding “register” keyword in C
+February 20, 2010
+Registers are faster than memory to access, so the variables which are most frequently used in a C program can be put in registers using register keyword. The keyword register hints to compiler that a given variable can be put in a register. It’s compiler’s choice to put it in a register or not. Generally, compilers themselves do optimizations and put the variables in register.
+
+1) If you use & operator with a register variable then compiler may give an error or warning (depending upon the compiler you are using), because when we say a variable is a register, it may be stored in a register instead of memory and accessing address of a register is invalid. Try below program.
+
+
+
+int main()
+
+
+{
+
+register int i = 10;
+
+  int *a = &i;
+
+  printf("%d", *a);
+
+  getchar();
+  return 0;
+}
+
+2) register keyword can be used with pointer variables. Obviously, a register can have address of a memory location. There would not be any problem with the below program.
+
+
+int main()
+{
+
+  int i = 10;
+
+  register int *a = &i;
+
+  printf("%d", *a);
+
+  getchar();
+
+  return 0;
+}
+
+3) Register is a storage class, and C doesn’t allow multiple storage class specifiers for a variable. So,register can not be used with static . Try below program.
+
+int main()
+{
+
+
+  int i = 10;
+  register static int *a = &i;
+
+  printf("%d", *a);
+
+  getchar();
+
+  return 0;
+
+}
+
+4) There is no limit on number of register variables in a C program, but the point is compiler may put some variables in register and some not.
+
+Please write comments if you find anything incorrect in the above article or you want to share more information about register keyword.
+
+#########################################################
+
+
+
+The first declaration:
+
+const char * myPtr
+
+declares a pointer to a constant character. You cannot use this pointer to change the value being pointed to:
+
+char char_A = 'A';
+
+const char * myPtr = &char_A;
+
+*myPtr = 'J';    // error - can't change value of *myPtr
+
+
+The second declaration,
+
+char * const myPtr
+
+declares a constant pointer to a character. The location stored in the pointer cannot change. You cannot change where this pointer points:
+
+
+char char_A = 'A';
+
+char char_B = 'B';
+
+char * const myPtr = &char_A;
+
+myPtr = &char_B;    // error - can't change address of myPtr
+
+The third declares a pointer to a character where both the pointer value and the value being pointed at will not change.
+
+constant pointer to constant
+
+const int *const ptr;
+Above declaration is constant pointer to constant variable which means we cannot change value pointed by pointer as well as we cannot point the pointer to other variable
+
+#########################################################
+
+
+Returned values of printf() and scanf()
+For example, below program prints geeksforgeeks 13
+
+int main()
+
+{
+
+  printf(" %d", printf("%s", "geeksforgeeks"));
+
+  getchar();
+
+}  
+Irrespective of the string user enters, below program prints 1.
+
+
+
+int main()
+
+{
+
+  char a[50];  
+
+  printf(" %d", scanf("%s", a));
+
+  getchar();
+
+}  
+
+
+#########################################################
+Que- Nth node from the end of a Linked List
+
+Method 1 (Use length of linked list)
+1) Calculate the length of Linked List. Let the length be len.
+2) Print the (len – n + 1)th node from the begining of the Linked List.
+
+Method 2 (Use two pointers)
+Maintain two pointers – reference pointer and main pointer. Initialize both reference and main pointers to head. First move reference pointer to n nodes from head. Now move both pointers one by one until reference pointer reaches end. Now main pointer will point to nth node from the end. Return main pointer.
+
+Que- Function to check if a singly linked list is palindrome
+
+
+
+
+Que-Write a function to get the intersection point of two Linked Lists.
+Method 1(Simply use two loops)
+Use 2 nested for loops. Outer loop will be for each node of the 1st list and inner loop will be for 2nd list. In the inner loop, check if any of nodes of 2nd list is same as the current node of first linked list. Time complexity of this method will be O(mn) where m and n are the number of nodes in two lists.
+
+Method 2 (Mark Visited Nodes)
+This solution requires modifications to basic linked list data structure. Have a visited flag with each node. Traverse the first linked list and keep marking visited nodes. Now traverse second linked list, If you see a visited node again then there is an intersection point, return the intersecting node. This solution works in O(m+n) but requires additional information with each node. A variation of this solution that doesn’t require modification to basic data structure can be implemented using hash. Traverse the first linked list and store the addresses of visited nodes in a hash. Now traverse the second linked list and if you see an address that already exists in hash then return the intersecting node.
+
+Method 3(Make circle in first list)
+Thanks to Saravanan Man for providing below solution.
+1. Traverse the first linked list(count the elements) and make a circular linked list. (Remember last node so that we can break the circle later on).
+2. Now view the problem as find the loop in the second linked list. So the problem is solved.
+3. Since we already know the length of the loop(size of first linked list) we can traverse those many number of nodes in second list, and then start another pointer from the beginning of second list. we have to traverse until they are equal, and that is the required intersection point.
+4. remove the circle from the linked list.
+
+Method 4 (Traverse both lists and compare addresses of last nodes) This method is only to detect if there is an intersection point or not. (Thanks to NeoTheSaviour for suggesting this)
+
+1) Traverse the list 1, store the last node address
+2) Traverse the list 2, store the last node address.
+3) If nodes stored in 1 and 2 are same then they are intersecting.
+Time complexity of this method is O(m+n) and used Auxiliary space is O(1)
+
+
+
+#########################################################
+Bitwise Operators:
+http://en.wikipedia.org/wiki/Bitwise_operation
+What purpose do the bitwise AND, OR, XOR and the Shift operators serve?
+Write a C program to count the bits set (bit value 1 ) in an integer? Find out and compare different possibilities?
+Check if the 20th bit of a 32 bit integer is on or off?
+
+Write a program in C to know whether it is power of 2 or not.
+Write a program in C to know whether a number is odd number or even using bit wiseoperator.
+ Write a functionsetbits(x,p,n,y)that returns x with then bits that begin at position p set to therightmost n bits of y, leaving the other bits unchanged.
+You are given two numbers A and B. Write a program to count number of bits needed to be flipped to convert A to B.
+How to reverse the bits in an interger?
+How to reverse the odd bits of an integer?
+How would you count the number of bits set in a floating point number?
+ 
+#########################################################
+
+Storage for Strings in C
+March 3, 2010
+In C, a string can be referred either using a character pointer or as a character array.
+
+Strings as character arrays
+
+char str[4] = "GfG"; /*One extra for string terminator*/
+/*    OR    */
+char str[4] = {‘G’, ‘f’, ‘G’, '\0'}; /* '\0' is string terminator */
+When strings are declared as character arrays, they are stored like other types of arrays in C. For example, if str[] is an auto variable then string is stored in stack segment, if it’s a global or static variable then stored in data segment, etc.
+
+Strings using character pointers
+Using character pointer strings can be stored in two ways:
+
+1) Read only string in a shared segment.
+When string value is directly assigned to a pointer, in most of the compilers, it’s stored in a read only block (generally in data segment) that is shared among functions.
+
+char *str  =  "GfG";  
+In the above line “GfG” is stored in a shared read only location, but pointer str is stored in a read-write memory. You can change str to point something else but cannot change value at present str. So this kind of string should only be used when we don’t want to modify string at a later stage in program.
+
+2) Dynamically allocated in heap segment.
+Strings are stored like other dynamically allocated things in C and can be shared among functions.
+
+char *str;
+int size = 4; /*one extra for ‘\0’*/
+str = (char *)malloc(sizeof(char)*size);
+*(str+0) = 'G'; 
+*(str+1) = 'f';  
+*(str+2) = 'G';  
+*(str+3) = '\0';  
+
+
+Let us see some examples to better understand above ways to store strings.
+
+Example 1 (Try to modify string) 
+The below program may crash (gives segmentation fault error) because the line *(str+1) = ‘n’ tries to write a read only memory.
+
+int main()
+{
+ char *str; 
+ str = "GfG";     /* Stored in read only part of data segment */
+ *(str+1) = 'n'; /* Problem:  trying to modify read only memory */
+ getchar();
+ return 0;
+}
+Below program works perfectly fine as str[] is stored in writable stack segment.
+
+int main()
+{
+ char str[] = "GfG";  /* Stored in stack segment like other auto variables */
+ *(str+1) = 'n';   /* No problem: String is now GnG */
+ getchar();
+ return 0;
+}
+Below program also works perfectly fine as data at str is stored in writable heap segment.
+
+int main()
+{
+  int size = 4;
+ 
+  /* Stored in heap segment like other dynamically allocated things */
+  char *str = (char *)malloc(sizeof(char)*size);
+  *(str+0) = 'G'; 
+  *(str+1) = 'f';  
+  *(str+2) = 'G';    
+  *(str+3) = '\0';  
+  *(str+1) = 'n';  /* No problem: String is now GnG */
+   getchar();
+   return 0;
+}     
+Example 2 (Try to return string from a function)
+The below program works perfectly fine as the string is stored in a shared segment and data stored remains there even after return of getString()
+
+char *getString()
+{
+  char *str = "GfG"; /* Stored in read only part of shared segment */
+ 
+  /* No problem: remains at address str after getString() returns*/
+  return str;  
+}     
+ 
+int main()
+{
+  printf("%s", getString());  
+  getchar();
+  return 0;
+}
+The below program alse works perfectly fine as the string is stored in heap segment and data stored in heap segment persists even after return of getString()
+
+char *getString()
+{
+  int size = 4;
+  char *str = (char *)malloc(sizeof(char)*size); /*Stored in heap segment*/
+  *(str+0) = 'G'; 
+  *(str+1) = 'f';  
+  *(str+2) = 'G';
+  *(str+3) = '\0';  
+   
+  /* No problem: string remains at str after getString() returns */   
+  return str;  
+}     
+int main()
+{
+  printf("%s", getString());  
+  getchar();
+  return 0;
+}
+But, the below program may print some garbage data as string is stored in stack frame of function getString() and data may not be there after getString() returns.
+
+char *getString()
+{
+  char str[] = "GfG"; /* Stored in stack segment */
+ 
+  /* Problem: string may not be present after getSting() returns */
+  return str; 
+}     
+int main()
+{
+  printf("%s", getString());  
+  getchar();
+  return 0;
+}
+
+#########################################################
+
+Evaluation order of operands
+August 14, 2010
+Consider the below C/C++ program.
+
+#include<stdio.h>
+int x = 0;
+ 
+int f1()
+{
+  x = 5;
+  return x;
+}
+ 
+int f2()
+{
+  x = 10;
+  return x;
+}
+ 
+int main()
+{
+  int p = f1() + f2();
+  printf("%d ", x);
+  getchar();
+  return 0;
+}
+What would the output of the above program – ’5′ or ’10′?
+The output is undefined as the order of evaluation of f1() + f2() is not mandated by standard. The compiler is free to first call either f1() or f2(). Only when equal level precedence operators appear in an expression, the associativity comes into picture. For example, f1() + f2() + f3() will be considered as (f1() + f2()) + f3(). But among first pair, which function (the operand) evaluated first is not defined by the standard.
+
+
+#########################################################
+Comma in C and C++
+
+August 29, 2010
+In C and C++, comma (,) can be used in two contexts:
+
+1) Comma as an operator:
+The comma operator (represented by the token ,) is a binary operator that evaluates its first operand and discards the result, it then evaluates the second operand and returns this value (and type). The comma operator has the lowest precedence of any C operator, and acts as a sequence point.
+
+/* comma as an operator */
+int i = (5, 10);  /* 10 is assigned to i*/
+int j = (f1(), f2());  /* f1() is called (evaluated) first followed by f2(). 
+                      The returned value of f2() is assigned to j */
+2) Comma as a separator:
+Comma acts as a separator when used with function calls and definitions, function like macros, variable declarations, enum declarations, and similar constructs.
+
+/* comma as a separator */
+int a = 1, b = 2;
+void fun(x, y);
+The use of comma as a separator should not be confused with the use as an operator. For example, in below statement, f1() and f2() can be called in any order.
+
+/* Comma acts as a separator here and doesn't enforce any sequence. 
+    Therefore, either f1() or f2() can be called first */
+void fun(f1(), f2());
+See this for C vs C++ differences of using comma operator.
+
+You can try below programs to check your understanding of comma in C.
+
+// PROGRAM 1
+#include<stdio.h>
+int main()
+{
+   int x = 10;
+   int y = 15; 
+  
+   printf("%d", (x, y));
+   getchar();
+   return 0;
+}
+// PROGRAM 2:  Thanks to Shekhu for suggesting this program
+#include<stdio.h>
+int main()
+{
+   int x = 10;
+   int y = (x++, ++x);
+   printf("%d", y);
+   getchar();
+   return 0;
+}
+// PROGRAM 3:  Thanks to Venki for suggesting this program
+int main()
+{
+    int x = 10, y;
+  
+    // The following is equavalent to y = x++
+    y = (x++, printf("x = %d\n", x), ++x, printf("x = %d\n", x), x++);
+  
+    // Note that last expression is evaluated
+    // but side effect is not updated to y
+    printf("y = %d\n", y);
+    printf("x = %d\n", x);
+  
+    return 0;
+}
+
+#########################################################
+Operands for sizeof operator
+February 9, 2010
+In C, sizeof operator works on following kind of operands:
+
+1) type-name: type-name must be specified in parentheses.
+
+sizeof (type-name) 
+2) expression: expression can be specified with or without the parentheses.
+
+sizeof expression
+The expression is used only for getting the type of operand and not evaluated. For example, below code prints value of i as 5.
+
+#include <stdio.h>
+ 
+int main()
+{
+ int i = 5;
+ int int_size = sizeof(i++);
+ printf("\n size of i = %d", int_size);
+ printf("\n Value of i = %d", i);
+ 
+ getchar();
+ return 0;
+}
+Output of the above program:
+size of i = depends on compiler
+value of i = 5
+
+#########################################################
+Result of comma operator as l-value in C and C++
+January 19, 2011
+Using result of comma operator as l-value is not valid in C. But in C++, result of comma operator can be used as l-value if the right operand of the comma operator is l-value.
+
+For example, if we compile the following program as a C++ program, then it works and prints b = 30. And if we compile the same program as C program, then it gives warning/error in compilation (Warning in Dev C++ and error in Code Blocks).
+
+#include<stdio.h>
+ 
+int main()
+{
+  int a = 10, b = 20;
+  (a, b) = 30; // Since b is l-value, this statement is valid in C++, but not in C.
+  printf("b = %d", b);
+  getchar();
+  return 0;
+}
+C++ Output:
+b = 30
+
+#########################################################
+What is evaluation order of function parameters in C?
+June 11, 2010
+It is compiler dependent in C. It is never safe to depend on the order of evaluation of side effects. For example, a function call like below may very well behave differently from one compiler to another:
+
+void func (int, int);
+   
+int i = 2;
+func (i++, i++);
+There is no guarantee (in either the C or the C++ standard language definitions) that the increments will be evaluated in any particular order. Either increment might happen first. func might get the arguments `2, 3′, or it might get `3, 2′, or even `2, 2′.
+
+#########################################################
+Order of operands for logical operators
+January 3, 2011
+The order of operands of logical operators &&, || are important in C/C++.
+
+In mathematics, logical AND, OR, EXOR, etc… operations are commutative. The result will not change even if we swap RHS and LHS of the operator.
+
+In C/C++ (may be in other languages as well)  even though these operators are commutative, their order is critical. For example see the following code,
+
+// Traverse every alternative node
+while( pTemp && pTemp->Next )
+{
+   // Jump over to next node
+   pTemp = pTemp->Next->Next;
+}
+The first part pTemp will be evaluated against NULL and followed by pTemp->Next. If pTemp->Next is placed first, the pointer pTemp will be dereferenced and there will be runtime error when pTemp is NULL.
+
+It is mandatory to follow the order. Infact, it helps in generating efficient code. When the pointer pTemp is NULL, the second part will not be evaluated since the outcome of AND (&&) expression is guaranteed to be 0.
+#########################################################
+Static functions in C
+May 5, 2010
+In C, functions are global by default. The “static” keyword before a function name makes it static. For example, below function fun() is static.
+
+static int fun(void)
+{
+  printf("I am a static function ");
+}
+Unlike global functions in C, access to static functions is restricted to the file where they are declared. Therefore, when we want to restrict access to functions, we make them static. Another reason for making functions static can be reuse of the same function name in other files.
+
+For example, if we store following program in one file file1.c
+
+/* Inside file1.c */
+static void fun1(void)
+{
+  puts("fun1 called");
+}
+And store following program in another file file2.c
+
+/* Iinside file2.c  */
+int main(void)
+{
+  fun1(); 
+  getchar();
+  return 0;  
+}
+Now, if we compile the above code with command “gcc file2.c file1.c”, we get the error “undefined reference to `fun1′” . This is because fun1() is declared static in file1.c and cannot be used in file2.c.
+
+#########################################################
+exit(), abort() and assert()
+July 9, 2010
+exit()
+
+void exit ( int status ); 
+exit() terminates the process normally. 
+status: Status value returned to the parent process. Generally, a status value of 0 or EXIT_SUCCESS indicates success, and any other value or the constant EXIT_FAILURE is used to indicate an error. exit() performs following operations.
+* Flushes unwritten buffered data.
+* Closes all open files.
+* Removes temporary files.
+* Returns an integer exit status to the operating system.
+
+The C standard atexit() function can be used to customize exit() to perform additional actions at program termination.
+
+Example use of exit.
+
+/* exit example */
+#include <stdio.h>
+#include <stdlib.h>
+  
+int main ()
+{
+  FILE * pFile;
+  pFile = fopen ("myfile.txt", "r");
+  if (pFile == NULL)
+  {
+    printf ("Error opening file");
+    exit (1);
+  }
+  else
+  {
+    /* file operations here */
+  }
+  return 0;
+}
+
+
+abort()
+
+void abort ( void );
+Unlike exit() function, abort() may not close files that are open. It may also not delete temporary files and may not flush stream buffer. Also, it does not call functions registered with atexit().
+
+This function actually terminates the process by raising a SIGABRT signal, and your program can include a handler to intercept this signal (see this).
+
+So programs like below might not write “Geeks for Geeks” to “tempfile.txt”
+
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+  FILE *fp = fopen("C:\\myfile.txt", "w");
+   
+  if(fp == NULL)
+  {
+    printf("\n could not open file ");
+    getchar();
+    exit(1);
+  }  
+   
+  fprintf(fp, "%s", "Geeks for Geeks");
+   
+  /* ....... */
+  /* ....... */
+  /* Something went wrong so terminate here */ 
+  abort();
+   
+  getchar();
+  return 0;  
+}    
+If we want to make sure that data is written to files and/or buffers are flushed then we should either use exit() or include a signal handler for SIGABRT.
+
+
+
+assert()
+
+void assert( int expression );
+If expression evaluates to 0 (false), then the expression, sourcecode filename, and line number are sent to the standard error, and then abort() function is called. If the identifier NDEBUG (“no debug”) is defined with #define NDEBUG then the macro assert does nothing.
+
+Common error outputting is in the form:
+
+Assertion failed: expression, file filename, line line-number
+
+#include<assert.h>
+ 
+void open_record(char *record_name)
+{
+    assert(record_name != NULL);
+    /* Rest of code */
+}
+ 
+int main(void)
+{
+   open_record(NULL);
+}
+#########################################################
 
