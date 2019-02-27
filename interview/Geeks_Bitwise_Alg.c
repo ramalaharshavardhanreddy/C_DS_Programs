@@ -53,4 +53,5 @@ int main()
     return 0; 
 }
 
-/** Q2 :- 
+/** Q2 :- Find the element that appears once */ 
+
