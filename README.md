@@ -1,3 +1,3 @@
 # C_DS_Programs
-c and DS programs from c indepth 
-interview related Questions also
+1. c and DS programs from c indepth 
+2. interview related Questions also.
