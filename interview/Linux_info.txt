@@ -1,0 +1,584 @@
+/************ GNU Tools *****************/
+gnu tools :-
+1) rpf file helps to install rpm files .
+2) kernel.org for linux kernel .s
+3) tar -xvf linux.tar.gz
+4) driver , arch , net ,ipc , are different directories .
+5) make utility is used for compiling large amount of software .
+6) gcc mymain.c one.c two.c -o APP --> all files are  compiled and gves the executable .
+7) Makefile ,, when make is pressed to search for Makefile and build the executanle .
+8) make file basically contains 5 .
+	1) rules -->  explicit rules
+		 --> implicit rules .
+	2) variable
+	3) dirctives
+	4) cimments .
+
+1) rules : -
+	explicit rule rules target , when and how modify .
+App:--> what should be build
+
+App: mymain.c one.o two.o -->  object file , or relocatable files .
+make have the capablity to take the decession , which file need to be recompiled .
+Implicit rules can be done based on the file names ,
+make compare the time stamp aganist the pre requisit .
+
+in a singe make file we may contains more than one applicaton  target .
+make clean --> for clean up the directory .
+make take as a every target is a  file it self .
+
+.PHONY: clean install --> increases the readabilty of make utility .
+
+2) variable is similar to macro --> CC=gcc --> $(CC) --> value of the variable in CC .
+
+in kernel senariao our software which contains lot of directives for this we can use directive feature in make utility .
+
+for every directory we make a local make file .
+dir1=./m1
+dir2=./m2
+$(MAKE) ====> equal to make of bash
+a1.o:
+	$(MAKE) -C ./m1
+	@ --> for suppress all  the information on terminal .
+	MAKEFLAGS += --no-print-directory  for hiding the additional printfs int the terminal .
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Autocall :-
+
+	Makefile.in  -> @CC@ used for generic make file .
+		     -> man autoconf --> generate configuration scripts ..
+		     -> configure.in is shell independent script
+			dnl is comment
+			AC_INIT(mymain.c)  ->  for initilizing the main file .
+			AC_PROG_CC macro for knowing wether gcc is availabe on your pc or not .
+			AC_LANG_C  used for used for knowing wether c supported by matchine .
+			AC_PROG_MAKE_SET  used for knowing the ake is available for our PC or not .
+			AC_HEADER_STDC --> used for checking the standed header files are available or not .
+			VERSION="0.0.1" --> used for checking the version .
+			AC_SUBSI(VERSION) --> for setting the version of the compiler .
+			AC_OUTPUT(Makefile) --> after checking the all the above conditions only generate make file .
+
+--> autoconf take the configure.in  and generate configure use of m4catche ,
+
+sh stands for a shell .
+./configure is used wether my code working on your flatform or not .
+
+finally it will create .1) /config.status
+			2) Makefile
+			3) config.log
+ after creating all this files the Makefile is compatable for my PC .ie @CC@ -> is replaced with gcc .
+
+--> MAINERS is also contais in the open source code which is the information about the maintainers of different modules of the open source .
+--> REPORTING.BUGS is contains the list of bugs associated with that software .
+--> Documentation is use for lots of information that we need to know for knowing the software .
+
+stps to build the linux kernel :-
+
+1) make menuconfig --> will pull up configuration files .
+* or M are the select or not .
+2) make takes the previous configure files the
+3)  make modules_install  for linking the components to kernel
+4) make install --> after rebooting the new kernel  is avalable for you  for 2.6 family .
+
+
+1st step :-
+	./configure
+	make
+	make install for smaller applications .
+
+gutomake is used for generate make files .
+
+---------------------------------------------------------------------------
+
+1)  allocation of variable will reside in the function 
+2)  static life is through out the life of the program , drawback is availability of memory of the 
+    variable through out the program .
+3)  if we are allocating 4 bytes and use 5 bytes are buggy function ,
+		gcc overrun.c -o overrun 
+4)  memory ovrrun is happens when you write more data . 
+    memory underun over ride the memory of below the allocated memory .
+5)  libc.so.6 is used for allocated the memory for malloc .
+6) electricfence is used for malloc debuggers , electicfence is used to allocate memory in VM and identify 
+   the under run and over run conditions 
+7) alocating from pool of memory proved by OS . 
+8) when the memory is allocated in runtime that memory is also added for the present process adress space . 
+9) in acssable memory is placed before and after the allocated memory throug lefence . 
+10) lefecence will works with some variables that are used to detect the hardware generated segentation violations . 
+   gcc overrun.c -o overrun -lefence  --> added the lefence library .
+ 
+11) once we compiled with lefence library we can the any segmentation faults .
+ 	in over run conditions EF_PROTECT_BELOW = 0  is environment variable we can change the value through 
+		export EF_PROTECT_BELOW=1   for checking under run condition .
+
+12)  memleak.c for memory leak because the dynamically allocated memory need to be free , because we allocate it in run 
+    time because the kernel does not know the allocated memory .
+13)  if your allocated memory is not free then the kernel feels the allocated memory is still used by the Application but 
+    the application is not in the memory .
+14)  memory leak is dangerous in server side applications .
+15)  for checking the memory leackages we use valgring tool .
+	valgrind ./memleak .
+16) Memcheck is check the allocate memory throug pid .
+		valgrind --leak-check=full ./memleak 
+17)  example bug was (vg_replace_malloc.c:195) it is the offset value of allocated malloc memorh .
+18)  gnu debugger is one of the debugger (GDB). 
+19)  - start of program 
+     - break points .
+     - we can change the value of the variable for correctig the buggy values . 
+
+
+20) step 1 :- gcc -g overrun.c -o overrun -lefence
+	      gdb ./overrun  --> load to memory and get pid and execute .
+in normal senario when an application is run then the shell will becoms the parent and our application will becoms the child of it . 
+but when we enabling the debugger it will becoms the parent insted of the shell . 
+	      gdb is acquire the pid ready for executing overrun but overrun doen't having pid at present .
+  	      symbol is basically contains functions and variables , private and public symbols are present .  
+
+	      gdb list (or) l  --> for listing the symbols  . 
+stack frame contains the return adress for every function call will contains lots of data about the function , stack frame is bigger 
+than stack which is allocated for all local variables .
+break points used to stop the execution at any point  .
+
+ 	      gdb break (or) b 
+			will take 
+				1) line number as an argument ,
+				2) function name as an argument ,
+				3) offset adress of hexadecial , initially starting break point  is main , 
+index point of break point main is set at offset adress of main . 
+The position of the function is considored only from  starting position of first executable statement of the program .
+			b main
+for beginging of application is done after givind r 
+			(gdb) r -> press enter then only ./overrun get pid with parent as gdb . 
+			 
+every cpu provides some exception for intel software exception is trap exception when it occur then kernel run debugger exception handler .
+for read only memory break  debugging points we are not able to modify the value , so this type of break points are called as hardware break points .
+when hardware assisted break points the offset of the brak point is copyed on to the dedicated cpu debugging registers done by hbrak for 
+cpying read only memory based break points . 
+gdb will maintained a table for break pints  
+			info break  will gives the no of brak points  .
+
+huge difference between the enabling a break point , and disabling a break point , deleting a break point  , if we delete the break ponint 
+the break point entry is parmenently disabled from the table .
+
+special break points are :- 
+			1) watch point :-
+						it is a special break point stops the program when value of the program is changed .
+				for setting watch point por the variable first need to allocate the memory other wise it is not possible to set watch point . 
+				
+		
+
+			2) catch point :- 
+				when ever an event (Ex :- generating a symbol,generation of child process)  
+					 
+Temporory break point is only allowed at one time only 
+			3) tbreak buggyfunction .
+vvimp :- ))  declarations are never part of execution 
+		
+	step --> for single step execution .
+	info frame --> tells the info present stack frame .
+	backtrace   ---> shows the current stack info .
+	main stack frame no = 0 , when main call buggyfunc frame no = 0 , them main framrme number 1 ..
+	set backtrace past-main on 
+	backtrace 
+	main is called by __libc_start_main  function is invoke by _start() . 
+	info locals ---> for info about local variable . 
+	watch i --> program will stop when i value is change .  
+	rwatch i --> stops execution when ever i value is tryes  to red form the program .
+	awatch i --> stops when read or write . 
+
+for continue the remaining execution use  cobe entinue  command for resume the execution and step is used for executing single statement . 
+next will goes to next instruction to curren stack frame 
+finish  will take the allow you to finish the caller stack frame and put the contol to next executable instruction in caller stack , 
+it will takes you to the next meatchine cycle  .
+
+	print i
+	print i=4  for setting the new vale . 
+
+	set var i=5 
+	print i      --> for setting the value of i .  
+
+
+for faulty application running throug gdb will raise the signal  SIGSEGV .
+
+	ulimit -a  --> for showing the memory limits . 
+	core file is used for gdb for finding the fault in application . 
+ 
+				linux kernel internals 
+************************************************************************************
+1) one of the way to tuch the kernel code is to modify the existing kernel code for most of the Embadded platform .
+2) Add an additional modules for the existing kernel .
+
+	kernel code is written in 2 ways :
+		static appending 
+		dynamic approtch (modules) prefered most of the driver developper's 
+possible to add a module by the developper , 
+
+Basics of module :- kernel-prog/modules in corce ware 
+1) modules means a adding new services to kernel . 
+2) the code that treated as a module is placed in ring 0 , and it does not have any user level api's , and any user level code .
+3) kernel space code does not allow any standed c library functional call .
+4) include files must be kernel header files , the user space librarys are include in /usr/include/ 
+5) the kernel headers are present in /lib/modules/
+		we know the current kerel version by typing uname -r  ,  then we moved to that version generic directory ex :- 2.6.31-14-generic 
+	so over present working directory is /lib/modules/2.6.31-14-generic/ 
+	after that we find build/inclide/
+so present we are at 
+			/lib/modules/2.6.31-14-generic/build/include/ here we find the kernel header files . 
+
+1) <linux/module.h>   // kmod interface  .
+2) <linux/version.h>  // kernel version stamp
+3) <linux/kernel.h>   // resolve kernel symbol calls 
+4) <linux/init.h>
+
+	These are the four main header files that we need to include for every module programing . 
+-->  kmod subsystem is responsible for clean up modules , maintained the modules , modules are entitys that insert a pice of code into 
+     the kernel code .
+-->  module.h contains kmod .
+     kernel.h is used for finding the symbolic tables , 
+     init.h contains the inline functions that are used for registring and unregistering the modules . 
+     every module contains the initilizer , and clen up module . 
+    
+
+1) module_init(init_mod)  // macro for initizing the module . 
+2) module_exit(cleanup_mod) // macro for initilizing the exit routine . 
+3) module_author("team harsha ");
+4) module_description("first module ");
+5) module_license(""GPL); it is a open licience . (GPL, free licience .)
+
+module is inted to add a code or a value to the kernel code . 
+
+kernel scripts consist in /usr/src/scripts/ folder .
+
+the kernel scripts create a target of 2 types 
+	1) obj -y statically into kernel image . 
+ 	2) obj -m build that into a module , not an application . 
+
+
+insmod mod.ko insert the module into the kernel image , 
+lsmod to show the list of inserted modules  , another way is cat/proc/module 
+rmmod mod to remove the module from the kerntel  . 
+dmesg shows  the kernel buffer . 
+
+scope of the variable or function remain visible to that module only , so rest of kernel code does not know .
+for making the scope of the function is global for all the modules we can export through 
+		EXPORT_SYMBOL(func); // export func function which is added to kernel symbolic table . 
+
+__init is attribute for gnuc which indicates init routine .
+
+__exit is attribute for gnuc which indicates exit routine  .
+
+IMP : - 
+		as long as the use counter of the module is grater than one , we can't able to remove the module . 
+
+EXPORT_SYMBOL_GPL(func) :- 
+		
+		caller module for the function func must be a GPL licenced module , other modules can't acess this exported functions . 
+
+
+If we can register a variable to the module we can include 
+		#include <linux/moduleparam.h>
+
+module_param(val,int,S_IRUGO) ; // read only 
+	here 
+
+		val = variable the intended to insert ,
+		int = type of variable 
+		S_IRUGO = permision that is read only 
+		S_IWUSR = permision for writing to that variable .
+ 
+MODULE_PARAM_DESC(val,"description about the variable ");
+
+when loading the module we can assing the value 
+
+		ex : - insmod mod3.ko val = 200 
+another way of assingning the value is through file system  
+
+		cd /sys/module/mod3/   
+	
+				Linux device drivers 
+************************************************************************************************
+
+1)  Drivers are services which can be inserted throug modules . 
+2)  Drivers are virtuvalized services for user space application to access the device files  . 
+3)  Drivers are in present in kernel space , applicatios are present in user space throug a specific interface 
+    we can access the hardware through drivers . 
+
+	Device Drivers :- 
+
+		1) user interaction code (kernel specific ) ,  for monolithc kernel interface throug IPC , but in micro 
+           kernel this will hapen through system call .
+		2) hardware specific (Device or bus specific ) . how the physical hardware is connected to the processor . 
+ 
+In linux kernel device drivers can be implemented in 3 different ways 
+
+		1) char driver  -->  synchronous devices . 
+		2) block driver --> storage devices .
+		3) Network drivers --> connecting devices .
+
+
+1) Char driver :- 
+		for all the devices that transfer the data synchronously ( Ex :- mouse , keyboard not a bulk data ) .
+		the driver is register with vfs layer as a device file .
+
+we can find in ddex/char/part1 
+		
+		
+		Steps for implement and test char drivers 
+---------------------------------------------------------------------
+
+1)  create a device node (file) .
+2)  implement the driver operations and regster with vfs layer  .
+3)  insert the driver using the kernel module . 
+4)  write an application theat initiates operations on our driver thru common file api . 
+	
+	 mknod for creating device file . 
+  mknode /dev/veda_cdrv  c --> for character driver .
+	device id is identifyed as unique . 
+	cat /proc/devices --> current list of device ids in use  . 
+
+	mknod /dev/veda_cdrv c 300 0 --> here the 300 is major number , and 0 is a minor number .
+	ls -l /dev/veda_cdrv --> shows the propertys of device file . 
+	
+	vfs considor this as a device file .
+
+struct 	file_operation {} --> contains function pinters used for registerinng the functions with vfs . present 
+in /usr/src/linux-2.6.30/include/linux/fs.h 
+
+.owner = THIS_MODULE --> owner is current module . 
+
+
+ steps involved in registering the functions with vfs throug init routine is 
+
+	1) dev_t mydev = MKDEV(MALORNO,MINIORNO);  // for assigning the major and minior numbers .  Encoded this nubers 
+        into 32 bit values becaue dev_t is a  32 bit value . 20 bit major and 12 bits for minior number .
+	2) register_chardev_region(mydev,count.CHAR_DEV_NAME);
+	3) veda_cdev = cdev_alloc(); --> aquire new cdev instance adress .
+	4) cdev_init(veda_cdev,&char_dev_fops); fill the cdev with our driver information .
+ 	5) ret = cdev_add(veda_cdev,mydev,count); register the cdev with vfs layer .
+		count = how many minior numbers to be used . 
+
+For un regitering the driver we use 
+	
+	1) cdev_del(veda_cdev);   // for unregistering  the cdev instance with vfs layer .
+	2) unregister_chardev(mydev,1); // for releasing the major and minor numbers .
+
+we can verify the driver registration with vfs throug 
+		cat /proc/devices | more  
+
+		Driver Registration procedure
+******************************************************************************************
+1) when we create a device file  through mknode it will create a inode structure ,
+   it will contain a structure pointer ie -- struct file_operations *fops ; , it will pointing to the particular device file 
+   in the device list .
+2) cdev is an obeject , throuh which the driver can register with vfs layer . 
+3) all the char , block device cdev objects are stored in sequential list , and these are called major numbers , 
+4) mkdev /dev/veda_cdev C indicates the device file is placed in char drivers vector table . 
+5) acquring major number is dynamical , it is better for poring the driver from one matchine to other  , 
+5) for dynamic allocation of major number , inserting the module and probing through the list and acquire the major number . 
+6) chardriver_dynamic.c 
+7)  if the major number is known then we use 
+		register_chardev_region(mydev,count,CHAR_DEV_NAME) ; 
+    if the major number is need to assign dynamically then we use 
+	 	alloc_chardev_region(&mydev,0,count,CHAR_DEV_NAME) ; which is run through the device list and acquire a free slot and 
+        assigned as a major number . 
+	
+8)  second number is minior number  , it is the identification for the files . 
+    major number is is the cdev instance . 
+
+9)  all the logical partions of the hard disk will contain supparate device files ie 
+		/dev/sda1
+		/dev/sda2
+		/dev/sda3 are the partitions of same hard disk ,  but the applications was not aware of this . 
+
+    Applications was treated these are seperate physical devices . 
+
+10)  the minor number is stored in 12 bits so that a mojor nuber will support 2pow12 minor numbers .
+11)  " devfs "  is used for creating a device file dynamically , so that the driver developer will no need to create a device 
+    file through mknode  . 
+12)  " udev " is replaced with " devfs " in later versions . 
+13)  we can find " udev " demonstration code in /ddex/char/part2 
+
+14)      veda_class = class_create(THIS_MODULE , "VIRTUAL");
+	device_create(veda_class,NULL,mydev,NULL,"%s","veda_cdrv"); 
+
+15)  device_destory(veda_class , mydev);
+     class_destory(veda_class);
+     cdv_del(veda_cdev);
+     unregister_chardev_region(mydev,1);
+  
+16) lshal --> is used for list of inserted device list . 
+17) hotplug is a kernel thread which monitor the kernel device list . 
+18) when ever haldeman is modifed then udev will indicates that change to user space progeram . 
+19) an applications can register with /etc/dev.d/ throug which the 3 rd partey application can notify the change in haldeman data base . 
+20) /sys/ is a device tree maintained by hal .
+21) ls /sys/class/ is a list of classes  .
+22) sys is also a logical file system like fs  . 
+23) /linux/dev.h is list of apis for checking the interfaces . 
+
+
+vfs maintain 2 device list 
+	1) char device list 
+	2) block device list   
+
+			List of Memory Debug Tools
+---------------------------------------------------------------------- 
+
+Boehm-Weiser Conservative Garbage Collector 
+valgrind
+ccmalloc, by Armin Biere (ETH) 
+Centerline TestCenter 
+Centerline ObjectCenter 
+dbmalloc, by Connor Cahill 
+Debug Malloc Library, by Gray Watson  
+Electric Fence, by Bruce Perens 
+Geodesic Systems Great Circle  
+MemCheck, by StratosWare 
+Memdebug, by Rene Schmit  
+mpatrol by Graeme Roy 
+Mprof, by Ben Zorn  
+ParaSoft Insure++  
+Purify, by Pure Software, Inc.  
+QC, by Onyx Technology  
+Sentinel 1.5, by AIB Software Corporation 
+Sentinel II, by AIB Software Corporation 
+SmartHeap by MicroQuill 
+Spotlight, by Onyx Technology 
+ZeroFault, by The Kernel Group 
+
+			Interrupts :- 
+*************************************************************
+1) hardware interrupts are the signals triggerd on the processor by the hardware .
+2) interrupt controller , the line is called irq(line) .
+3) x86 architecture contains 16 interrupt lines , present architecutures we have 256 interrupt lines . 
+4) driver developpers are the responsibele to know the interrupt line before writting the code . 
+5) kernel contains the data structor irq_desc[NR_IRQS]  --> where NR_IRQS is denotes the no of interrupts . 
+						
+		where each irq_desc -- >  contains two pointers 
+				1) struct hw_interrupt_type -->  shutdown() ; 
+							    -->  enable() ; 
+							    --> disable() ; 
+							    --> ack()  .....etc ,
+				2) struct irqaction 	 --> handler() = registered interrupt handler function 
+							 --> flags 
+							 --> mask 
+							---> name 
+							 --> dev_id 
+							-->  next = it will pointed to the next struct irqaction . 
+6) there is a posiblity of registering more than one ISR to the one interrupt line , the order of executing this IRQ'S are serials , 
+   and it is in the order of registerig the isr . 
+7) cat /proc/interrupts --> is a file dumps the interrupt descriptor table  . 
+8) lspci -v know the details of pci device . 
+9) Network cards trigger the interrupt when ever a packet is received or send . 
+10) request_irq(irq,my_interrupt,IRQF_SHARED,"my_interrupt",&my_dev_id) -- > is a kernel routine allows to create an irq action .
+
+		where 
+			irq  = irq line number ,
+			my_interrupt = interrupt service routine ,
+			IRQF_SHARED  = priority flags ,
+			"my_interrupt"  =  driver name ,
+			my_dev_id  = uniq constant identify the ISR .
+11) free_irq() --> release the isr routine  . 
+12)  when ever the key is pressed from the keyboard it will raises the interrupt in line number 1 . 
+14) the network card  will register the interrupt in line nuber 19 . 
+15) do_irq responsible to handling the interrupt , in interrupt.h is used to check the flags  , 
+    IRQF_DISABLE --> high priority isr . 
+    IRQF_SHARED  --> for shard interrupt line . 
+16) no single process is dedicated to handling the inerrupt in multicore cpu system . 
+17) when ever the interrupt is raised it looks for interrupt vector table whose base adress in is initilized at the boot time . 
+18) IVT contains the descriptors of different registered interrupts  . 
+		0 -19 (0x0-0x13) -- > non maskable interrupts and exceptions , 
+		 20-31 (0x14-0x1f) --> intel reserved interrupts like page fault .. etc 
+		32-127(0x20-0x7f)  --> externel interrupts (IRQs)
+		128(0x80)  --> system calls exception
+		129-238(0x81-0xee)  --> externel interrupts (IRQs)
+		239(0Xef)  --> local APIC timer interrupt 
+		240(0xf0)  --> local APIC thermal intrrupt 
+		241-250(0Xf1-0xfa) --> reserved for feature use 
+		251-253 (0Xfb-0Xfd) --> interprocess interrupts
+		254 (0Xfe) --> local APIC error interrupts 
+		255(0Xff)  --> local APIC spurious interrupt . 
+
+19) from 32-127 irqs response routine is do_irq() default handler ; 
+20) do_irq is a routen to process 0 , do_irq is responsible for allocating the interrupt stack . 
+21)  linux kernel configure do_irq routine as a default response function for all irqs .
+22) process 0 is responsible for allocation of interrupt stack and invoking corresponding ISR .
+23) if kernel is configuerd to use 8k stack , supparate stack is not required for interrupt , it uses the process stack itself . 
+24) if the kernel is configuere to use 4k stack , do_irq will allocate a fresh 4k stack , we have performance problem , default 
+    always is 8k stack , but we have a choice in embaded flatform . 
+
+the fallowing are steps foe do_irq () ;  
+1) find the interrupt request line on which the interrupt signal was triggered . 
+2) lookup irq descriptor table for adresses of registed interrupt service rotines  , 
+3) invoke registered_isrs 
+4) enable irq line 
+5) execute other priority work , 
+6) invoke the process sheduler ..
+
+25) interrupt latency is the amount of time required to serve that interrupt ,, if this is high impact on application , 
+    if one application trigger the interrupt frequently other may not chance to trigger the interrupt if the interrupt latency is high . 
+26) factors impacting on interrupt latency is os specific 
+		--> (hardware latency) ammount of time the processor is acknowledge the signal and jump into a interrupt vector table . 
+		--> (kernel latency ) how much time process 0 takes to execute isr   . 
+		-->  isr (interrupt handler )latency .  
+		-->  soft interrupts or bottom halfs .
+		-->  when ever we can make a call to sheduler the fallowing 3 steps may occure 
+					--> check in run que is there any gihg priority process is waiting for CPU , 
+					--> calling signal handlers if those process .
+					--> takes one task and give the cpu to that  process . 
+		--> sheduler latency .
+27) rtos have fixed interrupt latency , gpos have differnt latency time . 
+
+
+Designing interrut service routine : - 
+
+for designing the interrupt for network devices 
+	
+	1) allocate the buffer for holding the the data from the packet . 
+	2) process the physical hadder before giving to upper protocal stack ;
+
+	ISR
+	{	1 . Allocate buffer .
+		2 . copy packet from hardware .
+		3 . process physical header .
+		4 . queue packet for protocal layers . 
+	}
+28)  ISR latency time is vary because 
+
+	--> malloc allocation call is varable in time  , 
+    	--> copy operations is not fixed in time . 
+	--> queing to upper layer  .
+29)  list of donts in writing an ISR' s 
+		--> while implementing ISR the fallowing issues are consior 
+				--> avoid calling dynamic memory allocation routines ,
+				--> avoid transferring the data between two buffer blocks synchronously 
+				--> avoid contending for global data structurs  , 
+				--> avoid operations on user space application adress space  , 
+				--> avoid call to sheduler , 
+				 --> avoid calls to operations which is not atomic , 		
+	list of doe's 
+				-->  use pre allocated buffers , use skbuff in network 
+				-->  considoe using  dma when ever data transfered from the device and the memory . 
+				-->  considor using percpu data when ever we need (for multiple process present ). 
+				-->  identify non critical work and use appropriate routine to execute them when system is ideal  . 
+30) taking to hardware is critical sectiion and any other work is not a critical , so interrupts can't disable in this non 
+    critical sections corresponding to interrupt .
+31) soft irq --> interrupt is enable , but present in interrupt context  .  
+    work_ques -> run when cpu in process context .
+			
+	 		
+
+			
+		
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
