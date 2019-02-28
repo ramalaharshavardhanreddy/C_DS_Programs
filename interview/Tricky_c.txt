@@ -133,6 +133,86 @@ OP:- Value of g = 0
      Value of sg = 0
      Value of s = 0
 
+/******************** Extern Keyword *********/ 
+1. extern keyword extends the visibility of the C variables and C functions.
+2. By default, the declaration and definition of a C function have “extern” 
+   prepended with them. 
+3. extern int var; 
+    - Here, an integer type variable called var has been declared (remember no 
+    definition i.e. no memory allocation for var so far). 
+    - declaration can be done any number of times.
+
+Q1:- 
+
+Q1.1:-
+
+int var; /* var is defined (and declared implicitly) globally.*/
+int main(void) 
+{ 
+  var = 10; 
+  return 0; 
+} 
+
+Q1.2:-
+
+extern int var; /* Here var is declared only. Notice var is never used so no problems arise. */
+int main(void) 
+{ 
+      return 0; 
+} 
+
+Q1.3:- 
+
+extern int var; 
+int main(void) 
+{ 
+      var = 10;   /* error: var is declared but not defined anywhere. */ 
+      return 0; 
+} 
+
+Q1.4:- 
+
+#include "somefile.h" /* if somefile.h has the definition of var, Then it compile otherwise through Error */ 
+extern int var; 
+int main(void) 
+{ 
+     var = 10; 
+      return 0; 
+} 
+
+Q1.5:-
+- if a variable is only declared and an initializer is also provided with that declaration,
+  then the memory for that variable will be allocated i.e: the variable will be considered as defined.
+
+extern int var = 0; /* Both declaration and defination */ 
+int main(void) 
+{ 
+    var = 10; 
+    return 0; 
+} 
+
+Q1.6:-
+int main(int argc,char* argv[])                                                 
+{
+    extern int i=0;  /* Error: _i_ has both _extern_ and initializer */                                                              
+}
+
+Q1.7:- 
+int main()
+{
+    extern int i;
+    int i=0;      /* Multiple declarations of i */  
+}
+
+Q1.8:- 
+
+extern int i; 
+int i=0;
+i=25;            /* Compilation Error could not assign Globally  */ 
+int main()
+{
+    printf("\n %d\n",i);
+}
 
 
  
