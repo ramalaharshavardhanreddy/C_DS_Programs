@@ -318,7 +318,7 @@ compile :-
    optimizations that compiler can make. 
 3. When we use restrict with a pointer ptr, it tells the compiler that ptr is the only way to 
    access the object pointed by it and compiler doesn’t need to add any additional checks. 
-4. If a programmer uses restrict keyword and violate the above condition, result is undefined behavior. 
+4. If a programmer uses restrict keyword and volatile the above condition, result is undefined behavior. 
 
 Q1:- 
 
