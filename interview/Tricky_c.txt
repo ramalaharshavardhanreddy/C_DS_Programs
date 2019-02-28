@@ -1,0 +1,141 @@
+/******************** C multiple increment operators inside printf *****/
+i++ =  At the time of execution we will be using older value of i = 1
+++i =  At the time of execution we will be increment value already modified 
+       after step 1 i.e i = 3.
+i   =  At the time of execution we will be using value of i modified in step.
+#include<stdio.h>
+void main() {
+       int i = 1;
+       printf("%d %d %d", i, ++i, i++); 
+}
+o/p :- 3 3 1 
+/******************* Static variable ************/ 
+1. A static int variable remains in memory while the program is running. 
+2. Static variables are allocated memory in data segment, not stack segment.
+3. Static variables (like global variables) are initialized as 0 if not 
+   initialized explicitly.
+4. In C, static variables can only be initialized using constant literals.
+5. static variables get created even before the main function or any function 
+   is called.
+
+Q1:-
+#include<stdio.h> 
+int fun() 
+{
+    static int count = 0; 
+    count++; 
+    return count; 
+}
+int main() 
+{ 
+  printf("%d ", fun()); 
+  printf("%d ", fun()); 
+  return 0; 
+}  
+OP:- 1 2 
+
+Q2:- 
+#include <stdio.h> 
+int main() 
+{ 
+    static int x; 
+    int y; 
+    printf("%d \n %d", x, y); 
+}
+OP:- 
+    0
+    some Garbage value 
+
+Q3:- 
+#include<stdio.h> 
+int initializer(void) 
+{ 
+    return 50; 
+}
+int main() 
+{ 
+    static int i = initializer(); 
+    printf(" value of i = %d", i); 
+    getchar(); 
+    return 0; 
+} 
+OP:- 
+    Error : initializer element is not constant 
+
+Q4:- 
+ --- if you have a static int in a header file and include it from two separate 
+     .c files, you will have two discrete copies of that int, which is most likely 
+     not at all what you want.
+
+/**** q7a.h ***/
+static int err_code = 3;
+void printErrCode(void);
+
+/*** q7a.c ***/
+#include <stdio.h>
+#include "q7a.h"
+void printErrCode(void)
+{
+   printf ("%d\n", err_code);   // OP:- 3 
+}
+
+/***q7main.c:***/
+#include "q7a.h"
+err_code =5;  /*** Error:- data definition has no type or storage class */  
+int main(void)
+{
+  err_code = 5;
+  printErrCode();
+  return 0;
+}
+
+Static Functions:-
+    1. Unlike global functions in C, access to static functions is restricted to 
+       the file where they are declared.
+    2. static can be reuse of the same function name in other files.
+Q1:-
+
+/* Inside file1.c */ 
+static void fun1(void) 
+{ 
+      puts("fun1 called"); 
+}
+/* Iinside file2.c  */ 
+int main(void) 
+{ 
+      fun1();  
+        getchar(); 
+          return 0;   
+}
+OP:-
+    Error:- Undefined reference to `fun1'.   
+
+Default vales of static variable:- 
+    1. if it has pointer type, it is initialized to a NULL pointer.
+    2. if it has arithmetic type, it is initialized to (positive or unsigned) 
+       zero.
+       
+Q1:- 
+
+#include<stdio.h> 
+int g;  //g = 0, global objects have static storage duration 
+static int gs; //gs = 0, global static objects have static storage duration 
+int main() 
+{ 
+      static int s; //s = 0, static objects have static storage duration 
+      printf("Value of g = %d", g); 
+      printf("\nValue of gs = %d", gs); 
+      printf("\nValue of s = %d", s); 
+      getchar(); 
+      return 0; 
+} 
+OP:- Value of g = 0
+     Value of sg = 0
+     Value of s = 0
+
+
+
+ 
+
+
+
