@@ -1,0 +1,86 @@
+Links :- http://www.yolinux.com/TUTORIALS/GDB-Commands.html
+
+
+
+
+To enable the debug symbols in the executable we can use -ggdb.
+    Ex:- gcc <input.c> -ggdb -o <exe-name>
+To run the executable with the gdb
+    Ex:- gdb ./<Executable-name>
+
+/******************* < 'list' command usage > *************/ 
+To print lines from a source file, use the list command (abbreviated l). By default, 
+ten lines are printed. There are several ways to specify what part of the file you 
+want to print.
+
+Here are the forms of the list command most commonly used:
+
+list linenum
+    Print lines centered around line number linenum in the current source file.
+list function
+    Print lines centered around the beginning of function function.
+list
+    Print more lines. If the last lines printed were printed with a list command, 
+    this prints lines following the last lines printed; however, if the last line 
+    printed was a solitary line printed as part of displaying a stack frame.
+list -
+    Print lines just before the lines last printed.
+    By default, GDB prints ten source lines with any of these forms of the list 
+    command. You can change this using set listsize:
+
+set listsize count
+    Make the list command display count source lines (unless the list argument explicitly 
+    specifies some other number).
+show listsize
+    Display the number of lines that list prints.
+    Repeating a list command with RET discards the argument, so it is equivalent to 
+    typing just list. This is more useful than listing the same lines again. 
+    An exception is made for an argument of `-'; that argument is preserved in 
+    repetition so that each repetition moves up in the source file.
+
+In general, the list command expects you to supply zero, one or two linespecs. Linespecs specify source lines; 
+there are several ways of writing them, but the effect is always to specify some source line. 
+Here is a complete description of the possible arguments for list:
+
+list linespec
+    Print lines centered around the line specified by linespec.
+list first,last
+    Print lines from first to last. Both arguments are linespecs.
+list ,last
+    Print lines ending with last.
+list first,
+    Print lines starting with first.
+list +
+    Print lines just after the lines last printed.
+list -
+    Print lines just before the lines last printed.
+
+IMPORTENT :- 
+    List command is useful only when source code is exists, if you rename the source code and try to run the 
+    souce code with gdb, where the list command gives Error.  
+
+/************************** < 'info' command usage > ***********************/ 
+To list all the features supported by info , we can use "(gbd) info <ENTER>"
+info functions 
+    list all the functions, both debug and non debug functions.  
+info sources 
+   Source files for which symbols will be read in on demand:
+info variables 
+   It does not print any local variables, It prints global and static variables only.  
+info scope <double-tab> 
+    List all the available scopes. 
+    
+-- To Extract only debug symbols from Executable, 
+        Ex:- objcopy --only-keep-debug <rip from binary> <output debug file> 
+
+-- To strip the debugging symbols from Executables 
+        Ex :  strip --strip-debug <Executable-file>
+              strip --strip-debug --strip-unnamed <Executable-file>
+                    strip everything which is not required to run the binary. 
+
+Adding Debug Symbols to Binary :-
+    2 ways :-
+        1. Load the symbol file within GDB 
+              - symbol-file file_name
+        2. Add it in the Binay itself 
+              - objcopy --add-gnu-debuglink=debug_symbolfile exeBinaryFile    
