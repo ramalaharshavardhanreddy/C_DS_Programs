@@ -144,4 +144,47 @@ Attaching to a Running Process:-
     
 Statistics on Syscalls:-  
     1. strace -c exe-to-trace arguments 
+    
+
+/************* Brakpoints, Examining Registers and memory *************/
+Breakpoint :-
+1. Technique used to "Pause" the program during execution based on certain criteria. 
+2. Criteria can be "about to execute an instruction" (which you want to examine). 
+3. Debugger allows you to inspect/ modify CPU Regiters,Memory, Data etc. 
+ 
+Examine memory :- 
+1. To examine memory the commnad is x, to get more info CMD: help x. 
+2. To get the adress of argv[1] use CMD:- print argv[1]
+                                    o/p:- $2 = 0xbffff7e5 "value-passed through cmdline arg"
+3. x/formate 
+       The formate consist of 3 things,
+        1. repeat count :-  the no of such items that you want to examine that beginning with the adress.
+        2. format letter:-  how do you want go ahed and display all of this (Ex: oct,hex,string)
+        3. size letter  
+4. eip is pointing to the instruction that will execute next .(CMD: info registers)
+5. To disassemble the specific function CMD:-(gdb) disassemble <function-name>   
+
+Steps :- 
+          1.  gcc file_name.c -ggdb -o file_exe_debug 
+          2.  gdb ./file_exe_debug 
+                    To execute the code with gdb 
+          3.  run [arglist]
+                   Start your program (with arglist, if specified). 
+          4.  break [file:]function
+                   Set a breakpoint at function (in file). 
+          5.  info registers
+                   Displays the contents of general-purpose processor registers.
+          6.  info breakpoints 
+                   Gives the list of break points set in the gdb. 
+          7.  disable <breakpoint No>  
+                   To disable the particular breakpoint. 
+          8.  enable <breakpoint No>
+                   To enable the particular breakpoint. 
+          9.  delete <breakpoint No>
+                   To delete the particular breakpoint. 
+         10.  x/<no>i <instruction address output from disassemble cmd>
+                   To disassemble <no> of machine instructions starting from the 
+                   Adress given as an input.  (Ex:- (gdb) x/1xw $esp) 
+                    
+/************* Modifying Registes and Memory **********************/
 
