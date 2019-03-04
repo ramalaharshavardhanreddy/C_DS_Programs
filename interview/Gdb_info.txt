@@ -82,5 +82,66 @@ Adding Debug Symbols to Binary :-
     2 ways :-
         1. Load the symbol file within GDB 
               - symbol-file file_name
-        2. Add it in the Binay itself 
+        2. Add it in the Binay itself
               - objcopy --add-gnu-debuglink=debug_symbolfile exeBinaryFile    
+         
+/***************** Inspecting Symbols with  NM ****************************/
+
+nm :-
+     nm displays the symbol table associated with an object, archive library of objects, 
+     or executable file. nm recognizes several different file types that may contain symbol tables:
+     
+         -- object files ending in .obj. These files may be Intel OMF (Object Module Format) files or
+            COFF (Common Object File Format) files.
+         -- library files, which normally end in .lib and contain one or more OMF or COFF files.
+         -- Windows executable files, which normally end in .exe, that contain a symbol table compatible 
+            with those produced by PLINK86, the Microsoft Linker, the Watcom Linker, or the Borland Linker.
+         -- A symbol table may be created from a .map file (such as those produced by Microsoft link) by using 
+            unstrip to create a symbol table compatible with PLINK86.
+                     
+Note that nm does not list entry points in a DLL, unless there is a symbol table associated with it.  
+
+The output of nm of an executable is given below 
+            Ex :- nm ./oput-debug-exe 
+                  -Virtual Adress   -Symmbol Type    -Symbol Name  
+            ex :-       08049f24           d            SubtractNumbers   
+
+Different symbol types :- 
+        1. A      --> Absolute Symbol
+        2. B      --> In the uninitialized Data Section (BSS)
+        3. D      --> In the initialized Data Section 
+        4. N      --> Debugging Symbol 
+        5. T      --> In the text section
+        6. U      --> Symbol Undefined rightknow 
+
+         output is mix of both lower and upper case symbols, the lower case is local symbols. 
+                                                           , the upper case is External Symbols.
+ 
+NM Usage :-
+            NM -A ... | grep function_name 
+            NM -n .. ( Display in Sorted order)
+            NM -g (External Symbols)
+            NM -s (Display size)
+
+/************************** System call tracing with strace ******************/ 
+1. Helper tool to understand how your program interacts with th os.  
+2. Trace all system calls made by the program. 
+3. Tells us about arguments passed and has great filtering capabilities. 
+
+Execute a binary using strace :- starce <Exe-File-Name> 
+
+Tracing an Execution:-  
+    1. strace exe_to_trace arguments
+      "-o" output_file 
+      "-t" for timestamp 
+      "-r" for relative timestamping 
+
+Trace by Specific Syscall:-
+    1. strace -e open,connect,recv exe-to-trace arguments 
+           
+Attaching to a Running Process:-  
+    1. strace -p process_id 
+    
+Statistics on Syscalls:-  
+    1. strace -c exe-to-trace arguments 
+
