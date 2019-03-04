@@ -187,4 +187,31 @@ Steps :-
                    Adress given as an input.  (Ex:- (gdb) x/1xw $esp) 
                     
 /************* Modifying Registes and Memory **********************/
+To change the value which present at the memory adress x , we can use 
+                  cmd   type    Adress-get-from print     value
+      Ex:-  (gdb) set   {char}  <x-addr>0xbffff7e6     =   'B' 
+
+To change the value present in cpu registers, use
+        -- info registers        -> To check the values present in cpu registers.
+        -- set $eax = <value> 
+        -- set $eip = <next instruction adress need to exe> 
+
+/************* convenience Variables and calling Routines ********/ 
+Convenience Variables:- 
+    1. You can create variables in GDB to hold data. 
+        Ex:-  set $i = 10; 
+              set $dyn = (char *)malloc(15);
+              $demo = "Harsha vardhan"
+              set argv[1] = $demo 
+    
+    2. You can use all the c library functions in gdb also while code is running, 
+          Ex:- to copy string "harsha" to the memory $dyn we can use below cmd 
+                CMD:-  call strcpy($dyn, "harsha")   
+    
+    3. You can use "call" function to call any function which is present in the 
+       executable or in libraries. 
+                CMD:- call function_name(arguments....)
+
+/************* Cracking a Simple Binary with DEBUG Symbols **************/ 
+
 
