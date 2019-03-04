@@ -75,7 +75,7 @@ info scope <double-tab>
 
 -- To strip the debugging symbols from Executables 
         Ex :  strip --strip-debug <Executable-file>
-              strip --strip-debug --strip-unnamed <Executable-file>
+              strip --strip-debug --strip-unneeded <Executable-file>
                     strip everything which is not required to run the binary. 
 
 Adding Debug Symbols to Binary :-
