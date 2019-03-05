@@ -213,6 +213,45 @@ Convenience Variables:-
        executable or in libraries. 
                 CMD:- call function_name(arguments....)
 
-/************* Cracking a Simple Binary with DEBUG Symbols **************/ 
+/************* Disassembling and Cracking a Simple Binary with DEBUG Symbols *********/ 
+Strings :- 
+        1.  Display strings in the program , Ex:- strings ./debug_exe  
+        2.  Poorly coded ones may reveal private/ scret information.
+        3.  Secret can be eaisly hidden by encryption / encoding.  
+        
+Runtime Analysis:-  
+        1.  Debug symbols make things eaiser.
+        2.  info functions 
+        3.  info variables
+        4.  info scope function_name good point to start 
+        5.  Breakpoints and checking input / outputs functions.  
+
+Disassemble:- 
+    Usage :- (gdb) disassemble <function-name>
+
+        1. we have 2 types of disassembling 
+                    1.  Intel  
+                    2.  AT&T (by default the linux disassembler)
+        2. To change the disassembler formate use 
+                    (gdb) set disassembly-flavor intel(or)att 
+
+/************ Conditional  breakpoints using Variables and Registers *********/ 
+    1. Break only if condition is met.  
+    2. Handy in cases where there are loops.
+    3. Conditions can be simple or complex.  
+     
+    In GDB you can specify a condition in the programming language you are debugging and 
+    apply it to any breakpoint. Let’s stop a loop at the 99th iteration (I’m debugging C/C++,
+    so my conditions are written in C/C++):
+            
+            Ex:- (gdb) b Message.cpp:112 if i == 99 
+
+    You can also specify a condition on an existing breakpoint by using the breakpoint number 
+    as a reference:
+            EX:- (gdb) cond 3 i == 99
+
+    And remove a condition from a breakpoint using:
+           Ex:-  (gdb) cond 3
+                 Breakpoint 3 now unconditional.
 
 
