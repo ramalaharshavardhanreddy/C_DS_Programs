@@ -1,7 +1,6 @@
 Links :- http://www.yolinux.com/TUTORIALS/GDB-Commands.html
          https://www-zeuthen.desy.de/unix/unixguide/infohtml/gdb/Set-Breaks.html
-
-
+         https://en.wikipedia.org/wiki/Calling_convention#ARM
 
 
 To enable the debug symbols in the executable we can use -ggdb.
@@ -253,5 +252,27 @@ Disassemble:-
     And remove a condition from a breakpoint using:
            Ex:-  (gdb) cond 3
                  Breakpoint 3 now unconditional.
+                 
+
+/********** Installing Debian ARMEL in QEMU ***********/ 
+Download and install  QEMU:-
+        1. apt-get build-dep qemu 
+        2. wget http://wiki.qemu.org/download/qemu-1.2.0.tar.bz2 
+        3. ./configure --target-list=arm-softmm 
+        4. make  
+        5  make  install 
+
+Download Debian ARMEL images:- 
+        1. http://people.debian.org/~aurel32/qemu/armel/ 
+
+ARM Calling conventions:-  
+        1. r0-r3  function arguments and return values.
+        2. r4-r11 local variables.
+        3. r13 stack pointer.
+        4. r15 program counter. 
+
+IMP:- All the function arguments are there in stack in x86, but in ARM funcion arguments
+      are theere in cpu registers.  
+
 
 
