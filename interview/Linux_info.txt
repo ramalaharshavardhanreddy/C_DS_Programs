@@ -161,11 +161,7 @@ the break point entry is parmenently disabled from the table .
 
 special break points are :- 
 			1) watch point :-
-						it is a special break point stops the program when value of the program is changed .
-				for setting watch point por the variable first need to allocate the memory other wise it is not possible to set watch point . 
-				
-		
-
+				it is a special break point stops the program when value of the program is changed .for setting 				watch point for the variable first need to allocate the memory other wise it is not possible to 				set watch point . 
 			2) catch point :- 
 				when ever an event (Ex :- generating a symbol,generation of child process)  
 					 
