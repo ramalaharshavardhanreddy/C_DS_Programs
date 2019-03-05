@@ -4,3 +4,37 @@ CPU:- The cpu contains the fallowing main blocks
             2. Execution Unit     :- Actual execution of instructions happens here. 
             3. Registers          :- Internal memory locations used as "Variables".
             4. Flags              :- Used to indicate various "event" when execution is happening.
+           
+CPU Registers:-
+            There are 4 types of CPU Registers, 
+             1. General Purpose Registers
+                    EAX EBX ECX EDX ESI EDI ESP EBP 
+             2. Segment Registers 
+                    CS DS SS ES FS GS 
+             3. Instruction Pointer Register 
+                    EIP  
+             4. Control Registers 
+                    CR0 CR1 CR2 CR3 CR4 
+
+1. General Purpose Registers :- 
+        EAX :- Accumulator Register - used to storing operands and result data. 
+        EBX :- Base register - Pointer to data. 
+        ECX :- Counter register - Loop operations. 
+        EDX :- Data Register - i/o Pointer.  
+        ESI - EDI :- Data Pointer Registers for memory operations.
+        ESP :- Stack Pointer Register, points to top of stack. 
+        EBP :- Stack Data Pointer Register.  
+
+Virtual Memory Model:-  
+    1.  Every process is laid out in the same virtual memory space - regardless of the 
+        actual physical memory location.  
+    
+    2.  Every process feels that it is in the system alone and enjoys all the memory and 
+        that no other processes exist. 
+
+    3.  The OS and CPU together help maintain this abstraction. 
+ 
+IMP:- If you run the same code multiple times, the starting adress of segments are  different 
+      every time, this is due to the "randomize_va_space" feature in kernel,
+          
+             CMD:-  cat /proc/sys/kernel/randomize_va_space 
