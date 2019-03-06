@@ -99,6 +99,8 @@ Example of exit() in Assembly:-
 creation and compilation:-
            1. vim file-name.s 
            2. as -o file-name.o file-name.s   // Assembler 
+                        (or)
+              as -gstabs -o file-name.o file-name.s  // For enabling gdb symbols 
            3. ld -o file-name file-name.o     // Linker 
            4. ./file-name 
 
