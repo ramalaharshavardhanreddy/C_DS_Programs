@@ -113,4 +113,76 @@ Example of Hello world:-
       5. Fd = 1 for STDOUT (store in EBX)
       6. Buf =  pointer to memory location containing "Hello World" string (in ECX)
       7. Count = string length (store in EDX) 
+      
+/*************** Data Types in .DATA *********************/ 
+    .byte = 1 byte
+    .ascii = string 
+    .asciz = Null terminated string 
+    .int = 32 bit integer  
+    .short = 16 bit integer 
+    .float = Single precision floating point number 
+    .double = Double precision floating point number 
+   
+   IMP :- Space reserved at Compile Time.
+
+/************** Data Types in .BSS ***********************/
+    .comm - declares common memory area 
+    .lcomm - declares local common area 
+        
+   IMP :- Space created at Runtime
+
+/************** Basic instructions - MOVx ****************/ 
+
+    1. Mov is probably one of the most frequently used instruction in assembly. 
+    2. Usage format: MOVx source, destination 
+            -- movl = moves a 32 bit value 
+                movl %eax,%ebx 
+            -- movw = moves a 16 bit value
+                movw %ax,%bx 
+            -- movb = moves a 8 bit value 
+                movb %ah,%bh 
+
+Moving Data:-
+    1. Between Registers: 
+          movl %eax, %ebx 
+          
+    2. Between Registers and Memory:
+          location: 
+                    .int 10
+                    
+          movl %eax, location 
+          movl location, %ebx 
+         
+    3. Immediate value into Register:
+         movl $10,%ebx 
+         
+    4. Immediate value into memory location 
+            location:
+                     .byte 0  
+                     
+            movb $10, location 
+          
+    5. Moving Data into an indexed Memory Location 
+            IntegerArray:
+                .int 10,20,30,40,50 
+            
+            Selecting the  3rd ineger "30" 
+            BaseAdress(offset, index, Size) = 
+            IntegerArray(0,2,4) 
+            
+          ie: movl %eax,IntegerArray(0,2,4)  
+          
+/**************** Indirect Adressing using Registers *********************/ 
+
+1. Placing the "$" sign before a label name ==> take the memory adress of the variable 
+   and not the value. 
+   
+2. movl $location, %edi 
+
+3. movl $9, (%edi) ==> place value "9" in memory location pointed to by EDI. 
+
+4. movl $9,4(%edi) ==> place value "9" in memory location pointed by (EDI+4). 
+
+5. movl $9, -2(%edi) ==> place value "9" in memory location pointed by (EDI-2). 
+
 
