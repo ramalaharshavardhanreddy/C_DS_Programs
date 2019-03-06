@@ -185,4 +185,76 @@ Moving Data:-
 
 5. movl $9, -2(%edi) ==> place value "9" in memory location pointed by (EDI-2). 
 
+/*************** Working with strings in Assembly ***********************/ 
+
+1. Moving String from one memory location to another 
+    MOVSx:
+            MOVSB - Move a byte (8 bits)
+            MOVSW - Move a Word (16 bits)
+            MOVSL - Move a double Word (32 bits)
+    
+    Source - ESI points to memory location
+    Destination - EDi points to  memory location 
+
+The DF Flag:-  
+    1. Direection Flag (DF) (part of EFLAGS Registers)
+    2. Decides wether to increment / decrement ESI,EDI registers after a MOVSx instruction.  
+        - If DF is set, ie. "1" ==> ESI,EDI registers are decremented 
+        - If DF is cleared, ie. "0" ==> ESI,EDI are incremented 
+
+    3. You can set DF using the STD instruction 
+       You can clear DF using the CLD instruction 
+
+REP instruction:- 
+    1.  Is used to repeat a string instruction over and over again till the ECX register 
+        has a value > 0 . 
+        
+        Sample use: 
+                -- Load the ECX register with the string length  
+                -- Use the REP MOVSx instruction to copy the string from source to dest.
+                 
+Loading Strings from Memory into Registers:-
+    1. Loading Strings 
+           - Loads into the EAX register 
+           - String source pointed to by ESI 
+
+    2. LODSx 
+            - LODSB => Load a byte from memory location into AL 
+            - LODSW => Load a word from memory into AX 
+            - LODSL => Load a double word from memory into EAX 
+
+    3. ESI is automatically incremented / decremented  based on DF flag after the LODSx 
+       instruction executes. 
+       
+   IMP:- leal :- 
+            LEA (load effective address) just computes the address of the operand, it does not 
+            actually dereference it. Most of the time, it's just doing a calculation like a 
+            combined multiply-and-add for, say, array indexing 
+
+Storing Strings from Registers into Memory:- 
+
+    1. Storing Strings  
+        -- Stores into memory from EAX 
+        -- EDI points to destination memory 
+        
+    2. STOSx:
+            - STOSB => store AL to memory 
+            - STOSW => Store AX to memory 
+            - STOSL => Store EAX to memory 
+
+   3. EDI is incremented / decremented based on the DF flag after every STOSx instruction is 
+      executed. 
+
+Comparing Strings:-  
+    
+    -- ESI contains Source string, EDI the Destination string 
+    -- DF flag decides whether ESI/EDI are incremented / Decremented. 
+    
+    1. CMPSx:
+             - CMPSB => compares byte value 
+             - CMPSW => compares word value 
+             - CMPSL => compares double word value 
+             
+    2. CMSPx subtracts the destination string from the source string and sets the 
+       EFLAGS register appropriately.  
 
