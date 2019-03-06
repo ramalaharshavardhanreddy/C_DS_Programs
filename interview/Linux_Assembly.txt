@@ -40,3 +40,75 @@ IMP:- If you run the same code multiple times, the starting adress of segments a
       every time, this is due to the "randomize_va_space" feature in kernel,
           
              CMD:-  cat /proc/sys/kernel/randomize_va_space 
+             
+/**************** Structure of an Assembly Program ******************/ 
+1. In Assembly Programming, we divided the Entire code into different segments
+   .data 
+         All Initialized data.
+   .bss 
+         All Uninitialized data. 
+   .text 
+                Program instructions.  
+       .globl _start  
+                    Externally callable routines 
+       _start:
+              Main() routine   
+       
+Linux System Calls:-
+ 
+    1. "library" which the kernel exposed to get various tasks done.
+    2. List of system calls available in /usr/include/asm/unistd.h 
+    3. E.g:- is exit(), read(), write() etc. which you must have used extensively while     
+       Programming in c. 
+    4. System calls are invoked by processes usig a software interrupt - INT 0x80 
+
+How do we pass arguments to syscall:- 
+    
+    EAX -- System Call Number 
+    EBX -- first argument 
+    ECX -- second argument 
+    EDX -- third argument   
+    ESI -- fourth argument 
+    EDI -- fifth argument  
+
+Example of exit() in Assembly:-  
+   1. Calling exit(0) to exit a program 
+   2. Function defination 
+        void _exit(int status); 
+
+        Procedure:-
+           1a. Sys call number for exit() is 1, so load EAX with 1 
+                movl $1,%eax 
+
+           1b. "status" is lets say "0" -EBX must be loaded with "0"
+                movl $0,%ebx 
+
+           1c. Raise the software interrupt 0x80 
+                int 0x80 
+        
+        Sample code for exit:- 
+            .text 
+                
+                .globl_start 
+
+                _start:
+                        movl $1,%eax
+                        movl $0,%ebx
+                        int 0x80 
+
+creation and compilation:-
+           1. vim file-name.s 
+           2. as -o file-name.o file-name.s   // Assembler 
+           3. ld -o file-name file-name.o     // Linker 
+           4. ./file-name 
+
+Example of Hello world:-  
+      1. We will use the write() syscall to print the "hello world" message. 
+      2. Then use exit() to reacefully exit the program.
+      3. Write() Syscall description:
+            ssize_t write(int fd,const void* buf, size_t count); 
+      4. Syscall number for write() is 4 (store in EAX) 
+      5. Fd = 1 for STDOUT (store in EBX)
+      6. Buf =  pointer to memory location containing "Hello World" string (in ECX)
+      7. Count = string length (store in EDX) 
+
