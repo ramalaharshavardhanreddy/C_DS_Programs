@@ -304,5 +304,28 @@ LOOP Instruction:-
 Conditional LOOPS:- 
 
     1. LOOPZ - loop until ECX is not Zero or the zero flag(ZF) is not set. 
-    2. LOOPNZ - loop until ECX is not Zero or the zero flag (ZF) is set.    
+    2. LOOPNZ - loop until ECX is not Zero or the zero flag (ZF) is set. 
+    
+/*************** Functions in Assembly *********/ 
+
+    1. Defining a function in Assembly: 
+        .type MyFunction, @function 
+
+        MyFunction:
+            <code>
+            <code>
+            ret 
+    2. Function can be invoked usig " call MyFunction"
+
+Passing arguments and returning value:- 
+
+    1. Passing Arguments to function 
+        - Registers 
+        - Global Memory Locations 
+        - Stack 
+
+    2. Returning Value from function 
+        - Registers 
+        - Global Memory Locations 
+
 
