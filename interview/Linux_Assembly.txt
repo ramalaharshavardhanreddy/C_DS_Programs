@@ -257,4 +257,52 @@ Comparing Strings:-
              
     2. CMSPx subtracts the destination string from the source string and sets the 
        EFLAGS register appropriately.  
+       
+/********************** Program Execution Flow *********/ 
+Unconditional Branching:-  
+    
+    1. JMP:
+           1. Compare it with GOTO:statement in C 
+           2. Syntax -- JMP Label  
+           3. Short  : +- 128 bytes from the curent location in instruction region  
+              Near   : between both of them (short & Far)
+              Far    : used to jump to different segment    
+              
+    2. Call:
+           1. Just like call function in c 
+           2. Syntax - Call location 
+           3. There is an associated "RET" statement with every call 
+               1. compare it with return statement in c.  
+           4. Using "Call" Pushes the next instruction adress onto the stack 
+           
+Conditional Branching:- 
+   
+   1. JXX- JA, JAE, JE, JG, JZ, JNZ ... etc  
+   2. Dictated by the state of the 
+        - Zero flag    (ZF)
+        - Parity flag  (PF)
+        - Overflow flag(OF)
+        - Sign flag    (SF)
+        - Carry flag   (CF)
+   3. In order to use conditional Jumps you must have an operation which sets the 
+      EFLAGS register appropriately
+   4. In conditional jumps - only Short and Near jumps are supported. Far jumps 
+      are not supported.  
+      
+LOOP Instruction:- 
+
+    1. Used to loop through a set of instructions a pre determined # of times 
+    2. # of times is stored in ECX 
+        - LOOP automatically decrements ECX after every run 
+    3. Sample usage:
+           <code>
+                movl $10, %ECX --> 10 is the no of times to loop 
+                LoopThis:
+                        <code>
+                        <code>
+                      
+Conditional LOOPS:- 
+
+    1. LOOPZ - loop until ECX is not Zero or the zero flag(ZF) is not set. 
+    2. LOOPNZ - loop until ECX is not Zero or the zero flag (ZF) is set.    
 
