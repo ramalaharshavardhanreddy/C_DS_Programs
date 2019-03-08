@@ -29,3 +29,8 @@
 
 #define GENMASK_ULL(h, l) \
     (((~0ULL) << (l)) & (~0ULL >> (BITS_PER_LONG_LONG - 1 - (h))))
+  
+/* 
+* Our own sizeof 
+*/ 
+#define my_sizeof(type) (char *)(&type+1)-(char*)(&type)
