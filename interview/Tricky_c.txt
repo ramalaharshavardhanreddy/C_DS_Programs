@@ -1,3 +1,7 @@
+Links :- 
+       1. c tutorial   ----- https://www.studytonight.com/c/
+
+
 /******************** C multiple increment operators inside printf *****/
 i++ =  At the time of execution we will be using older value of i = 1
 ++i =  At the time of execution we will be increment value already modified 
