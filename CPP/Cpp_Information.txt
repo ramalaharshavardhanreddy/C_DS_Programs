@@ -88,7 +88,204 @@ C/C++ Preprocessors :-
                     #include"filename" 
                     
     - Conditional Compilation :- 
+        -  which helps to compile a specific portion of the program or to skip compilation of some specific part of the program based 
+            on some conditions.  
+            Syntax :- 
+                      #ifdef macro_name
+                          statement1;
+                          statement2;
+                          statement3;
+                          .
+                          .
+                          .
+                          statementN;
+                      #endif
+                      
     - Other directives :- 
+        1.  #undef Directive :- 
+            - The #undef directive is used to undefine an existing macro.   
+                    Ex:- #undef Macro_Name 
+                    
+        2.  #pragma Directive :-   
+            - it is used to turn on or off some features. 
+            - This type of directives are compiler-specific. 
+            - #pragma startup and #pragma exit: 
+                - These directives helps us to specify the functions that are needed to run before program startup( before the control
+                  passes to main()) and just before program exit (just before the control returns from main()).
+                  
+                  Ex:-   1.  void __attribute__((constructor)) func_name();  calls before  main() call  
+                         2.  void __attribute__((destructor)) func_name();   calls  before main() return. 
+                         
+            #pragma warn Directive :- 
+                - This directive is used to hide the warning message which are displayed during compilation.
+                     1. #pragma warn -rvl :-  raised when a function which is supposed to return a value does not returns a value.
+                     2. #pragma warn -par :-  raised when a function does not uses the parameters passed to it.
+                     3. #pragma warn -rch :-   raised when a code is unreachable like  code after return in function.  
+            
+Operators in C/C++ :- 
+    1.  Arithmetic Operators :- 
+            These are the operators used to perform arithmetic/mathematical operations on operands. 
+             a.  Unary Operators            :-    ++ , -- 
+             b.  Binary Operators           :-    + , - , * , / 
+    2.  Relational Operators       :-    ==, >= , <= 
+    3.  Logical Operators          :-    && , || , ! 
+    4.  Bitwise Operators          :-    & , | , << , >> , ~ , ^ 
+    5.  Assignment Operators       :-    = , += , -= , *= , %= , /=
+    6.  Other Operators :- 
+            a.  sizeof operator 
+            b.  Comma Operator 
+            c.  Conditional Operator  :- Expression1 ? Expression2 : Expression3
+            
+Decision Making in C / C++ :- 
+    - if statement
+            Syntax :- 
+                  if(condition) 
+                  {
+                    // Statements to execute if
+                   // condition is true
+                  }
+    - if..else statements
+            Syntax :-  
+                  if (condition)
+                  {
+                      // Executes this block if
+                      // condition is true
+                  }
+                  else
+                  {
+                      // Executes this block if
+                      // condition is false
+                  }     
+    - nested if statements
+            Syntax :-
+                  if (condition1) 
+                  {
+                      // Executes when condition1 is true
+                      if (condition2) 
+                      {
+                          // Executes when condition2 is true
+                      }
+                  }
+                  
+    - if-else-if ladder
+            Syntax :-  
+                  if (condition)
+                      statement;
+                  else if (condition)
+                       statement;
+                       .
+                       .
+                  else
+                      statement;
+    - switch statements
+            Syntax :- 
+                  switch (Exp (or) constant)     Valid Exp :-  switch(1+2+23) , switch(1*2+3%4) Invalid :- switch(ab+cd) , switch(a+b+c)
+                  {
+                        case constant1: // code to be executed if n = 1;
+                            break;
+                        case constant2: // code to be executed if n = 2;
+                             break;
+                             .
+                             .
+                             .
+                        default: // code to be executed if n doesn't match any cases
+                  }
+    
+ compile 32-bit program on 64-bit gcc :-  
+    -  gcc -v  gives  current gcc version ib PC. 
+     - gcc -m32 file_name.c -o file_name    to compile with 32-bit gcc. 
+        IMP :- if you get any error then install below packages 
+                  For C language:
+                      sudo apt-get install gcc-multilib
+                  For C++ language:
+                      sudo apt-get install g++-multilib
+     - size_t = size 8  for 64 bit 
+              = size 4  for 32 bit  
+              
+              
+What is vector in C++ :-  
+  Vector in C++ is a class in STL that represents an array. The advantages of vector over normal arrays are, 
+      - We do not need pass size as an extra parameter when we pass vector.
+      - Vectors have many in-built function like, erasing an element, etc.
+      - Vectors support dynamic sizes, we do not have to initially specify size of a vector. We can also resize a vector. 
+                      
+              
+References in C++ :-  
+  - When a variable is declared as reference, it becomes an alternative name for an existing variable. 
+    A variable can be declared as reference by putting ‘&’ in the declaration.
+  - A pointer can be declared as void but a reference can never be void 
+            int a = 10;
+            void* aa = &a;. //it is valid
+            void &ar = a; // it is not valid 
+            
+  1) Once a reference is created, it cannot be later made to reference another object; it cannot be reseated. 
+     This is often done with pointers.
+  2) References cannot be NULL. Pointers are often made NULL to indicate that they are not pointing to any valid thing.
+  3) A reference must be initialized when declared. There is no such restriction with pointers
+        - Due to the above limitations, references in C++ cannot be used for implementing data structures like Linked List, Tree, etc.             In Java, references don’t have above restrictions, and can be used to implement all data structures. References being more               powerful in Java, is the main reason Java doesn’t need pointers.
+
+References are safer and easier to use :-
+  1) Safer:-  Since references must be initialized, wild references like wild pointers are unlikely to exist. It is still possible to
+     have references that don’t refer to a valid location. 
+ 2) Easier to use :-  References don’t need dereferencing operator to access the value. They can be used like normal variables. ‘&’ 
+     operator is needed only at the time of declaration. Also, members of an object reference can be accessed with dot operator (‘.’),
+     unlike pointers where arrow operator (->) is needed to access members.
+
+ - Together with the above reasons, there are few places like copy constructor argument where pointer cannot be used. Reference must be
+    used pass the argument in copy constructor. Similarly references must be used for overloading some operators like ++.
+
+Basic Concepts of Object Oriented Programming using C++ :- 
+  - The main aim of OOP is to bind together the data and the functions that operates on them so that no other part of code can 
+     access this data except that function.
+   
+   1) Object :- 
+        - Objects are basic run-time entities in an object oriented system, objects are instances of a class these are defined user
+          defined data types.
+          
+   2) Class :- 
+        - Class is a blueprint of data and functions or methods. Class does not take any space. 
+              Syntax for class :- 
+                    class class_name 
+                    { 
+                        private: 
+                                  //data members and member functions declarations 
+                        public: 
+                                 //data members and member functions declarations 
+                        protected: 
+                                 //data members and member functions declarations 
+                    };
+                    
+            IMP :-  By default class variables are private.  
+            
+ Encapsulation and Data abstraction :- 
+    - Wrapping up(combing) of data and functions into a single unit is known as encapsulation. 
+    - The data is not accessible to the outside world and only those functions which are wrapping in the class can access it. 
+    - Data abstraction refers to, providing only needed information to the outside world and hiding implementation details. 
+    
+ Inheritance :- 
+    - inheritance is the process by which objects of one class acquire the properties of objects of another class. It supports the
+       concept of hierarchical classification. Inheritance provides re usability.
+    
+ Polymorphism :- 
+    - polymorphism means ability to take more than one form. An operation may exhibit different behaviors in different instances. The
+      behavior depends upon the types of data used in the operation. 
+    - C++ supports operator overloading and function overloading.  
+         - The process of making an operator to exhibit different behaviors in different instances is known as operator overloading.  
+         - Function overloading is using a single function name to perform different types of tasks. 
+         
+Dynamic Binding :- 
+    - In dynamic binding, the code to be executed in response to function call is decided at runtime. C++ has virtual functions to
+      support this. 
+      
+Message Passing :- 
+    - Objects communicate with one another by sending and receiving information to each other. A message for an object is a request for
+      execution of a procedure and therefore will invoke a function in the receiving object that generates the desired results. 
+      Message passing involves specifying the name of the object, the name of the function and the information to be sent.
+    
+    
+            
+     
+      
   
                 
                 
