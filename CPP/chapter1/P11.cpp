@@ -102,4 +102,75 @@ int main()
 // Correct Statement is :-  int &ptr1 = *ptr; 
 } 
   
+//P7
+//Reference to Pointer
+#include<iostream> 
+using namespace std; 
 
+int g_n = 42;
+void func_ref_to_ptr(int*&);
+int main()
+{
+    int n = 23;
+    int* pn = &n;
+
+    std::cout << "example_ref_to_ptr()" << std::endl;
+
+    std::cout << "Before :" << *pn << std::endl; // display 23
+
+    func_ref_to_ptr(pn);
+
+    std::cout << "After :" << *pn << std::endl; // display 42
+}
+
+void func_ref_to_ptr(int*& pp)
+{
+    pp = &g_n;
+}
+
+//P8
+//Returning Reference 
+
+#include<iostream> 
+using namespace std; 
+
+int g_n = 42;
+int main()
+{
+    int n = 23;
+    int* pn = &n;
+
+    std::cout << "example_ret_ref()" << std::endl;
+
+    std::cout << "Before :" << *pn << std::endl; // display 23
+
+    pn = &func_ret_ref();
+
+    std::cout << "After :" << *pn << std::endl; // display 42
+}
+
+int& func_ret_ref()
+{
+    return g_n;
+}
+
+
+//P9
+
+#include<iostream> 
+using namespace std; 
+
+int main()
+{
+    int n = 23;
+    int* pn = &n;
+
+    std::cout << "example_ref_to_ptr type testing " << std::endl;
+    test(pn);
+}
+void test(int*& rpInt)
+{
+  std::cout << "type of *&rpInt: " << typeid(rpInt).name() 
+    << std::endl;//will show int *
+
+}
