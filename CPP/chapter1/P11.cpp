@@ -135,6 +135,8 @@ void func_ref_to_ptr(int*& pp)
 using namespace std; 
 
 int g_n = 42;
+
+int& func_ret_ref(); 
 int main()
 {
     int n = 23;
@@ -157,9 +159,11 @@ int& func_ret_ref()
 
 //P9
 
-#include<iostream> 
+#include<iostream>
+#include<typeinfo>
 using namespace std; 
 
+void test(int*&);
 int main()
 {
     int n = 23;
