@@ -233,6 +233,20 @@ References are safer and easier to use :-
 
  - Together with the above reasons, there are few places like copy constructor argument where pointer cannot be used. Reference must be
     used pass the argument in copy constructor. Similarly references must be used for overloading some operators like ++.
+    
+   Reference to Pointer :-
+            int g_n=10; 
+            int main(void)
+            {
+                int n = 23;
+                int* pn = &n
+                func_ref_to_ptr(pn);    // caller
+            }
+            void func_ref_to_ptr(int*& pp)  // We can modify pp in this funtion but func_ref_to_ptr(int* pp) we can not modify PP in fum
+            {
+              pp = &g_n;
+            }
+
 
 Basic Concepts of Object Oriented Programming using C++ :- 
   - The main aim of OOP is to bind together the data and the functions that operates on them so that no other part of code can 
