@@ -295,6 +295,61 @@ Message Passing :-
     - Objects communicate with one another by sending and receiving information to each other. A message for an object is a request for
       execution of a procedure and therefore will invoke a function in the receiving object that generates the desired results. 
       Message passing involves specifying the name of the object, the name of the function and the information to be sent.
+      
+Name Mangling and extern “C” in C++ :- 
+  -  C++ supports function overloading, i.e., there can be more than one functions with same name and differences in parameters.
+  - it changes names by adding information about arguments. This technique of adding additional information to function names is called 
+     Name Mangling.
+        Ex :-  
+              int  f (void) { return 1; } 
+              c++ compiler manages  like   " int  __f_v (void) { return 1; } "  
+              
+How to handle C symbols when linking from C++ :- 
+  - When some code is put in extern “C” block, the C++ compiler ensures that the function names are unmangled – that the compiler emits
+     a binary file with their names unchanged, as a C compiler would do.
+  
+  -  all C style header files (stdio.h, string.h, .. etc) have their declarations in extern “C” block.
+              #ifdef __cplusplus  
+                extern "C" { 
+              #endif 
+              /* Declarations of this file */
+               #ifdef __cplusplus 
+                 } 
+              #endif 
+              
+ Difference between C structures and C++ structures :- 
+    Some important differences between the C and C++ structures :- 
+          1. Member functions inside structure :- 
+              - Structures in C cannot have member functions inside structure but Structures in C++ can have member functions along with
+                data members.
+          
+          2. Direct Initialization :- 
+              -  We cannot directly initialize structure data members in C but we can do it in C++.
+              
+          3. Using struct keyword :-  
+              - In C, we need to use struct to declare a struct variable. In C++, struct is not necessary. For example, let there be a
+                structure for Record. In C, we must use “struct Record” for Record variables. In C++, we need not use struct and using
+                ‘Record‘ only would work.
+          
+          4. Static Members :-
+              - C structures cannot have static members but is allowed in C++.
+              
+          5. Constructor creation in structure :-  
+              - Structures in C cannot have constructor inside structure but Structures in C++ can have Constructor creation.
+              
+          6. sizeof operator :- 
+              - This operator will generate 0 for an empty structure in C whereas 1 for an empty structure in C++.
+              
+           7 Data Hiding :- 
+              - C structures do not allow concept of Data hiding but is permitted in C++ as C++ is an object oriented language whereas C
+                  is not.
+
+           8 Access Modifiers :-  
+              - C structures do not have access modifiers as these modifiers are not supported by the language. C++ structures can have
+                  this concept as it is inbuilt in the language.
+              
+              
+              
     
     
             
