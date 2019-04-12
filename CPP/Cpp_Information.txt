@@ -234,6 +234,14 @@ References are safer and easier to use :-
  - Together with the above reasons, there are few places like copy constructor argument where pointer cannot be used. Reference must be
     used pass the argument in copy constructor. Similarly references must be used for overloading some operators like ++.
     
+Difference in Reference variable and pointer variable :- 
+     -  A pointer can be re-assigned while reference cannot, and must be assigned at initialization only.
+     -  Pointer can be assigned NULL directly, whereas reference cannot.
+     -  Pointers can iterate over an array, we can use ++ to go to the next item that a pointer is pointing to.
+     -  A pointer is a variable that holds a memory address. A reference has the same memory address as the item it references.
+     -  A pointer to a class/struct uses ‘->'(arrow operator) to access it’s members whereas a reference uses a ‘.'(dot operator)
+     -  A pointer needs to be dereferenced with * to access the memory location it points to, whereas a reference can be used directly.
+    
    Reference to Pointer :-
             int g_n=10; 
             int main(void)
@@ -246,6 +254,21 @@ References are safer and easier to use :-
             {
               pp = &g_n;
             }
+            
+ Some invalid  Reference examples :- 
+    1.  Reference to value at uninitialized pointer :-  
+             int *ptr; 
+             int &ref = *ptr;  // Reference to value at some random memory location
+             
+    2.  Reference to a local variable is returned :- 
+          - Once fun() returns, the space allocated to it on stack frame will be taken back. So the reference to a local variable will
+              not be valid. 
+              
+             int& fun() 
+             { 
+                int a = 10; 
+                return a; 
+              }  
 
 
 Basic Concepts of Object Oriented Programming using C++ :- 
@@ -350,8 +373,198 @@ How to handle C symbols when linking from C++ :-
               
               
               
+***************************************************************************************************************************************
+                                          Pointers and References 
+***************************************************************************************************************************************
+
+What is Array Decay :-  
+    - The loss of type and dimensions of an array is known as decay of an array. 
+    - This generally occurs when we pass the array into function by value or pointer. What it does is, it sends first address to the 
+      array which is a pointer, hence the size of array is not the original one, but the one occupied by the pointer in the memory.
+      
+ How to prevent Array Decay :- 
+    - A typical solution to handle decay is to pass size of array also as a parameter and not use sizeof on array parameters. 
+    - Another way to prevent array decay is to send the array into functions by reference. This prevents conversion of array into a
+      pointer, hence prevents the decay.
+ 
+
+What is an opaque pointer :-  
+    -   Opaque pointer is a pointer which points to a data structure whose contents are not exposed at the time of its definition. 
+                Ex :-  struct STest* pSTest;  
+                
+When do we pass arguments by reference or pointer :- 
+    1.  To modify local variables of the caller function  
+    2.  For passing large sized arguments  
+    3.  To avoid Object Slicing :-   
+            -  If we pass an object of subclass to a function that expects an object of superclass then the passed object is sliced if 
+                it is pass by value.  
+    4.  To achieve Run Time Polymorphism in a function. 
     
+ Use of explicit keyword :- 
+    - It avoids  implicit call to the constructor.  
     
+‘this’ pointer in C++ :- 
+    - Meaning each object gets its own copy of data members and all objects share single copy of member functions.
+    - Compiler supplies an implicit pointer along with the functions names as ‘this’.
+    - The ‘this’ pointer is passed as a hidden argument to all nonstatic member function calls and is available as a local variable
+      within the body of all nonstatic functions. 
+    - ‘this’ pointer is a constant pointer that holds the memory address of the current object. ‘this’ pointer is not available in 
+       static member functions as static member functions can be called without any object (with class name).
+    
+  Following are the situations where ‘this’ pointer is used :- 
+      1.  When local variable’s name is same as member’s name 
+      2.  To return reference to the calling object  
+
+delete this” in C++ :-   
+    - delete operator works only for objects allocated using operator new .  
+    - Once delete this is done, any member of the deleted object should not be accessed after deletion.
+    
+  
+auto_ptr, unique_ptr, shared_ptr and weak_ptr :-  
+    1. auto_ptr :- 
+          - auto_ptr is a smart pointer that manages an object obtained via new expression and deletes that object when auto_ptr itself
+             is destroyed. 
+          - An object when described using auto_ptr class it stores a pointer to a single allocated object which ensures that when it 
+            goes out of scope, the object it points to must get automatically destroyed. 
+          - The copy constructor and the assignment operator of auto_ptr do not actually copy the stored pointer instead they transfer
+             it, leaving the first auto_ptr object empty. 
+          - This was one way to implement strict ownership, so that only one auto_ptr object can own the pointer at any given time 
+             i.e. auto_ptr should not be used where copy semantics are needed.
+             
+    2. unique_ptr :- 
+          - It is a container for raw pointers. It explicitly prevents copying of its contained pointer as would happen with normal 
+             assignment i.e. it allows exactly one owner of the underlying pointer.
+          - when using unique_ptr there can only be at most one unique_ptr at any one resource and when that unique_ptr is destroyed,
+            the resource is automatically claimed. 
+          - any attempt to make a copy of unique_ptr will cause a compile time error.  
+                      
+                      unique_ptr<A> ptr1 (new A);
+                      // Error: can't copy unique_ptr
+                      unique_ptr<A> ptr2 = ptr1;  
+          
+          - But, unique_ptr can be moved using the new move semantics i.e. using std::move() function to transfer ownership of the 
+            contained pointer to another unique_ptr.
+            
+                    // Works, resource now stored in ptr2
+                       unique_ptr<A> ptr2 = move(ptr1); 
+         
+         When to use unique_ptr? :- 
+            - Use unique_ptr when you want to have single ownership(Exclusive) of resource. Only one unique_ptr can point to one
+               resource. Since there can be one unique_ptr for single resource its not possible to copy one unique_ptr to another. 
+            
+  
+    3. shared_ptr :- 
+        -  It is a reference counting ownership model i.e. it maintains the reference count of its contained pointer in cooperation with
+            all copies of the shared_ptr. 
+       
+       Reference Counting :-  
+         - It is a technique of storing the number of references, pointers or handles to a resource such as an object, block of memory,
+            disk space or other resources.
+         - An object referenced by the contained raw pointer will not be destroyed until reference count is greater than zero i.e. until
+           all copies of shared_ptr have been deleted.
+         - So, we should use shared_ptr when we want to assign one raw pointer to multiple owners.
+         
+   4. weak_ptr :-  
+       - A weak_ptr is created as a copy of shared_ptr. It provides access to an object that is owned by one or more shared_ptr 
+         instances, but does not participate in reference counting.
+      When to use weak_ptr? :- 
+       -  When you do want to refer to your object from multiple places – for those references for which it’s ok to ignore and
+          deallocate (so they’ll just note the object is gone when you try to dereference).
+          
+          IMP :- If compile time Error Use (g++ -std=c++0x -pedantic  file_name.cpp)
+                  https://en.cppreference.com/book/intro/smart_pointers
+          
+ Dangling, Void , Null and Wild Pointers :-  
+    
+    1. Dangling Pointer :- 
+        - A pointer pointing to a memory location that has been deleted (or freed) is called dangling pointer.  
+         
+        3 ways of causing Dangling Pointer :-   
+            1.  De-allocation of memory
+            2.  Function Call 
+            3.  Variable goes out of scope
+            
+   2.  Void pointer :- 
+        -  void * – a pointer that points to some data location in storage, which doesn’t have any specific type.  
+        Important Points :- 
+          - void pointers cannot be dereferenced. It can however be done using typecasting the void pointer.
+          - Pointer arithmetic is not possible on pointers of void due to lack of concrete value and thus size.
+          
+   3. NULL Pointer :-  
+        - NULL Pointer is a pointer which is pointing to nothing. In case, if we don’t have address to be assigned to a pointer, then we
+          can simply use NULL.
+          
+        Important Points :- 
+          - NULL vs Uninitialized pointer :- 
+              - An uninitialized pointer stores an undefined value. A null pointer stores a defined value, but one that is defined by
+                the environment to not be a valid address for any member or object.
+          - NULL vs Void Pointer :– 
+              - Null pointer is a value, while void pointer is a type. 
+   
+   4. Wild pointer :- 
+        - A pointer which has not been initialized to anything (not even NULL) is known as wild pointer.
+
+          
+ ***************************************************************************************************************************************
+                                          Dynamic memory allocation 
+***************************************************************************************************************************************
+      -  C++ supports these functions and also has two operators new and delete that perform the task of allocating and freeing the
+          memory in a better and easier way.
+          
+      1) new :-
+                syntax :- 
+                            pointer-variable = new data-type;  
+                            Ex :-  int *p = new int; 
+        Initialize memory :- 
+                syntax :- 
+                            pointer-variable = new data-type(value); 
+                            Ex :- 
+                                  int *p = new int(25);  
+       Allocate block of memory :- 
+                syntax :- 
+                          pointer-variable = new data-type[size];
+                          Ex :- 
+                                int *p = new int[10]  
+         - If enough memory is not available in the heap to allocate, the new request indicates failure by throwing an exception of type
+            std::bad_alloc. 
+            
+        2) delete operator  :- 
+              - Since it is programmer’s responsibility to deallocate dynamically allocated memory. 
+                  
+                  // Release memory pointed by pointer-variable
+                    delete pointer-variable;  
+                    
+                 // Release block of memory 
+                 // pointed by pointer-variable
+                    delete[] pointer-variable;  
+
+            Example:
+                       // It will free the entire array
+                       // pointed by p.
+                          delete[] p;
+         
+  std::get_temporary_buffer in C++ :-  
+      - Get a block of temporary memory. In C++ STL library, there is a function get_temporary_buffer which is mostly used to get a 
+         temporary block.
+      - Once the the memory block which is assigned is not needed anymore it shall be released by calling return_temporary_buffer .
+      
+      
+      - pair(int*, ptrdiff_t) p = get_temporary_buffer(int)(required size)
+          parameters :
+                  n : Number of elements of type T for which 
+                  temporary memory is allocated.
+                  ptrdiff_t  : it is an integral type.
+          Return:
+                      The function return the pair of objects first and second.
+                      When memory is allocated the first contain the pointer to 
+                      the first element in the block and the second contains the size .
+                      if the memory block is not allocated then  in pair 
+                      first contain null pointer and second 
+                      contain zero
+                      
+***************************************************************************************************************************************
+                                          Object Oriented Programming(OOP)
+***************************************************************************************************************************************
             
      
       
