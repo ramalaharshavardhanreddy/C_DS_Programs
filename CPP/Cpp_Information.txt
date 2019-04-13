@@ -566,10 +566,65 @@ auto_ptr, unique_ptr, shared_ptr and weak_ptr :-
                                           Object Oriented Programming(OOP)
 ***************************************************************************************************************************************
             
-     
+                                        Machine Languages 
+                                                | 
+                                        Assembly Languages 
+                                                |
+                                        Structured Programming Language  
+                                                | 
+                                        Procedural Programming Language 
+                                                | 
+                                        Object Oriented Programming  
+                                        
+  What Are Class & Objt :-  
+      -  It is an abstract and user-defined data type. The primary purpose of the class is to store data and information. 
+      -  A class is the blueprint of the object, but also, we can say the implementation of the class is the object. 
       
-  
+ Encapsulation :- 
+      - It describes the idea of wrapping data and the methods that work on data within one unit, e.g., a class 
+      
+Inheritance :- 
+      - Inheritance is the ability of one class to inherit capabilities or properties of another class, called the parent class. 
+        
+        Types  :- 
+            1.  Single Inheritance 
+            2.  Multiple Inheritance  
+            3.  Multilevel Inheritance
+            4.  Hierarchical Inheritance 
+            5.  hybrid class Inheritance  
+            
+ Polymorphism  :- 
+    - Polymorphism is the ability for data to be processed in more than one form. 
+      Types of Polymorphism :- 
+          1. Compile Time
+                a.  Function OverLoading 
+                b.  Operator OverLoading 
+          2. Runtime  
+                a. Virtual  Functions  
                 
+Accessing data members and member functions :- 
+    - The data members and member functions of class can be accessed using the dot(‘.’) operator with the object. 
+    
+    There are 2 ways to define a member function :- 
+        1.  Inside class definition
+        2.  Outside class definition
+              - To define a member function outside the class definition we have to use the scope resolution :: operator along with 
+                class name and function name.
+  Note :- 
+    - Note that all the member functions defined inside the class definition are by default inline, 
+    - Declaring a friend function is a way to give private access to a non-member function.  
+    
+Constructors :- 
+  - Constructors are special class members which are called by the compiler every time an object of that class is instantiated.  
+  - Constructors have the same name as the class and may be defined inside or outside the class definition.
+
+  There are 3 types of constructors :- 
+                            1. Default constructors
+                            2. Parametrized constructors
+                            3. Copy constructors
+ Destructors :- 
+    - Destructor is another special member function that is called by the compiler when the scope of the object ends.  
+    
                 
                 
                 
