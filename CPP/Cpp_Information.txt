@@ -630,7 +630,20 @@ Constructors :-
                 
                 
                 
-                
+    
+**********************************************************************************************************************************
+                                   Type Casting operators in c++ 
+*********************************************************************************************************************************
+4 types of casting operators :-  
+1: const_cast :- 
+      const_cast is used to cast away the constness of variables. 
+      Note :- 
+         The Expression const_cast<T>(v) can  be  used to change the constant  or volatile qualifiers of pointers or references.  
+         Where T must be a pointer, reference, or pointer-to-member type. 
+         Const_cast Can  be used  only  when the actual refered object/variable is  not const
+   
+ 2:static_cast :-  
+       
       
         
         
