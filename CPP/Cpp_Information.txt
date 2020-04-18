@@ -671,7 +671,8 @@ Constructors :-
   
           1.   Base b;
 	             Derived d;
-               Base *pb = dynamic_cast<Base*>(&d;);      	// #1 is ok because dynamic_cast is always successful when we cast a class to                                                                one of its base classes
+               Base *pb = dynamic_cast<Base*>(&d;);      	 // #1 is ok because dynamic_cast is always successful when we cast 
+	                                                               class to one of its base classes.
 	             Derived *pd = dynamic_cast<Derived*>(&b;); // #2 error C2683: 'dynamic_cast' : 'Base' is not a polymorphic type 
         
         
