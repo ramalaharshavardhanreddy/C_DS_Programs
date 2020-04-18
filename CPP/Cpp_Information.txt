@@ -635,20 +635,44 @@ Constructors :-
                                    Type Casting operators in c++ 
 *********************************************************************************************************************************
 4 types of casting operators :-  
-1: const_cast :- 
+1:  const_cast :- 
       const_cast is used to cast away the constness of variables. 
       Note :- 
          The Expression const_cast<T>(v) can  be  used to change the constant  or volatile qualifiers of pointers or references.  
          Where T must be a pointer, reference, or pointer-to-member type. 
          Const_cast Can  be used  only  when the actual refered object/variable is  not const
    
- 2:static_cast :-  
-       
+ 2: static_cast :-  
+       This is the simplest type of cast which can be used. It is a compile time cast.It does things like implicit conversions 
+       between types (such as int to float, or pointer to void*), and it can also call explicit conversion functions (or implicit ones).
       
+      1.   int a = f; // this is how you do in C 
+           int b = static_cast<int>(f);  
+           
+      2.   // pass at compile time, may fail at run time 
+            int* q = (int*)&char;  
+            int* p = static_cast<int*>(&char);
+            
+      3.  class Derived : private Base { // Inherited private/protected not public }
+          Base* b1 = (Base*)(&d1); // allowed 
+          Base* b2 = static_cast<Base*>(&d1); //[Error] 'Base' is an inaccessible base of 'Derived'
+          
+  3: reinterpret_cast :-  
+       1. It is used to convert one pointer of another pointer of any type, no matter either the class is related to each other or not.
+       2. It does not check if the pointer type and data pointed by the pointer is same or not.
+         Syntax :-  
+                    data_type *var_name = 
+                        reinterpret_cast <data_type *>(pointer_variable);
         
+          1. int* p = new int(65); 
+             char* ch = reinterpret_cast<char*>(p);
         
-        
-        
+  4: dynamic_cast :- 
+  
+          1.   Base b;
+	             Derived d;
+               Base *pb = dynamic_cast<Base*>(&d;);      	// #1 is ok because dynamic_cast is always successful when we cast a class to                                                                one of its base classes
+	             Derived *pd = dynamic_cast<Derived*>(&b;); // #2 error C2683: 'dynamic_cast' : 'Base' is not a polymorphic type 
         
         
         
