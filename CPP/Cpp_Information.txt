@@ -676,9 +676,38 @@ Constructors :-
 	             Derived *pd = dynamic_cast<Derived*>(&b;); // #2 error C2683: 'dynamic_cast' : 'Base' is not a polymorphic type 
         
         
-        
-        
-        
+****************************************************************************************************************************************
+                                              STL (Standerd Template Library)
+****************************************************************************************************************************************
+
+STL: standard Template Library
+It consts of 3 components :-  
+    a.  Container 
+    b.  Iterator 
+    c.  Algorithm  
+
+A. Containerds :-  
+   Topic :-  std::array 
+      1. std::array is a container that encapsulates fixed size arrays. 
+      2. array size is need at compile time.
+      3. Assign by value is actually by value. 
+      4. Access Elements:
+         a. at()
+	 b. []
+	 c. front()
+	 d. back()
+	 e. data() // gives access to the underlying array
+   	
+  Topic :- std::vector 
+      1. std::vector is a sequence container and also knows as Dynamic Array or Array List.
+      2. Its size can grow and shrink dynamically, and no need to provide size at compile time. 
+      
+   Element access :-  
+      at(), [], front(), back(), data()
+    
+   Modifiers :- 
+      insert(), emplace(), push_back(), pop_back(), resize(), swap(), erase(), clear()
+      
         
         
         
