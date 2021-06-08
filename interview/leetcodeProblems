@@ -1,0 +1,89 @@
+*******************  Bitwise operations    https://leetcode.com/tag/bit-manipulation/   ********************
+Note :-
+     Xor :-   x  y  x^y 
+              0  0   0 
+              0  1   1 
+              1  0   1 
+              1  1   0 
+   
+   XOR and 0: x ^ 0 = x
+   XOR on the same argument: x ^ x = 0
+   Commutativity: x ^ y = y ^ x
+   
+   Commutativity allows us to re-order the applications of XOR so that the duplicated elements are next to each other. Since x ^ x = 0 and a ^ 0 = a, 
+   each pair of duplicated values has no effect on the outcome . 
+                        a ^ b ^ c ^ a ^ b    #Commutativity  
+                      = a ^ a ^ b ^ B ^ c    #Using x ^ x = 0 
+                      = 0 ^ 0 ^ c            #Using x ^ 0 = x and Commutativity
+                      = c  
+                      
+ Application 1 :-  inplace swaping  x and y  
+                       x ^= y                (x ^ y, y)
+                       y ^= x                (x ^ y, y ^ x ^ y = x)
+                       x ^= y                ( x ^ y ^ x, x)   == (y, x)
+ 
+ 
+ LProb 136 :- Single Number 
+                i/p :- [2,2,1]   o/p :- 1  
+ 
+ int singleNumber(int* nums, int numsSize){
+    int singleNum = 0 , i ;
+    for(i=0; i< numsSize; i++)
+       singleNum ^=  nums[i];
+    return singleNum; 
+
+}
+
+
+
+
+
+*******************************************  Strings *************************
+
+Lprob 3 :- Longest Substring Without Repeating Characters
+                 Input: s = "abcabcbb"
+                 Output: 3
+                 Explanation: The answer is "abc", with the length of 3.
+              
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+
+  
+        //Using the concept of optimized sliding window. 
+        //we take two pointers, left and right. 
+        //Using a map<char, int> we will store the character and its index
+        //everytime, we face a duplicate, we will move left pointer to the last occurace + 1
+        
+        //map 
+        map<char, int> map; 
+        int left = 0; 
+        int right = 0; 
+        int length = 0; 
+        
+        while(right < s.length())
+        {
+			      //it is important to make sure the new pointer is not less than old left and exists in the map.
+            if(map.find(s[right]) != map.end() && map[s[right]] >= left)
+            {
+                //we have dupilcate, update left
+                left = map[s[right]] + 1; 
+            }
+            
+            //update map 
+            map[s[right]] = right; 
+            length = max(length, right - left + 1);
+            right++;            
+        }
+
+        return length; 
+    }
+ 
+};
+
+
+
+
+
+
+
