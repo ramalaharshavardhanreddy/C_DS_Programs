@@ -35,7 +35,31 @@ Note :-
 }
 
 
-
+Lprob  :-  Given an array nums of size n, return the majority element. The majority element is the element that appears more than ⌊n / 2⌋ times
+           Input: nums = [3,2,3]
+           Output: 3
+	   
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int N = nums.size(); 
+        int limit = N/2; 
+        int answer; 
+        
+        
+        map <int, int> hashmap;  
+        
+        for(int i=0; i<N; i++)
+          hashmap[nums[i]]++ ;
+                  
+       for(auto h:hashmap) {
+            if(h.second>limit) {
+                answer = h.first;
+            }
+        }
+       return answer; 
+    }
+};
 
 
 *******************************************  Strings *************************
